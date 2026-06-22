@@ -502,6 +502,9 @@ export default function ProductPage() {
       </main>
       <Footer />
       
+      {/* Spacer to prevent sticky bar from covering footer */}
+      <div className="h-[80px] w-full" />
+      
       {/* Sticky Bottom Bar */}
       <div 
         className={`fixed bottom-0 left-0 right-0 bg-white shadow-[0_-4px_25px_rgba(0,0,0,0.1)] border-t border-gray-100 z-50 transition-transform duration-300 transform ${showStickyBar ? 'translate-y-0' : 'translate-y-full'}`}

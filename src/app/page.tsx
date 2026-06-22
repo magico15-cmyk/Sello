@@ -114,40 +114,25 @@ export default function HomeStorePage() {
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
-            {products.map(product => (
-              <div 
-                key={product.id} 
-                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col cursor-pointer hover:shadow-md transition-shadow relative"
-                onClick={() => {
-                  if (product.link !== '#') router.push(product.link);
-                }}
-              >
-                {/* Product Image Box */}
-                <div className="aspect-square w-full bg-gray-50 relative overflow-hidden">
-                  <img src={product.image} alt={product.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  
-                  {/* Save Badge */}
-                  <div className="absolute bottom-2 left-2 bg-[#f899a2] text-white text-xs sm:text-sm font-bold px-2 py-1 rounded shadow flex items-center gap-1">
-                    <span className="text-white">🏷</span> SAVE {product.save}%
+            {products.map((product, idx) => (
+              <div key={idx} className="bg-white rounded-2xl overflow-hidden flex flex-col relative cursor-pointer group" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+                {/* Product Image area */}
+                <div className="relative aspect-[4/5] w-full bg-gray-100 overflow-hidden">
+                  <img src={product.image} alt={product.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  {/* Discount Badge */}
+                  <div className="absolute bottom-3 left-3 bg-[#f899a2] text-white text-[11px] sm:text-[12px] font-bold px-2.5 py-1 rounded flex items-center gap-1 shadow-sm">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M17.707 9.293l-5-5A1 1 0 0012 4H5a1 1 0 00-1 1v7a1 1 0 00.293.707l5 5a1 1 0 001.414 0l5-5a1 1 0 000-1.414z" /><path d="M7 9a2 2 0 110-4 2 2 0 010 4z" /></svg>
+                    SAVE {product.save}%
                   </div>
                 </div>
-
-                {/* Product Info */}
-                <div className="p-3 sm:p-4 flex flex-col flex-grow items-center text-center">
-                  <h3 className="text-[13px] sm:text-[15px] font-bold text-gray-900 leading-tight mb-1 flex-grow">
-                    {product.title}
-                  </h3>
-                  <p className="text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest font-semibold mb-2">
-                    {product.brand}
-                  </p>
-                  
-                  <div className="flex flex-col items-center">
-                    <span className="text-[#f899a2] font-black text-[17px] sm:text-[20px]">
-                      ${product.price}
-                    </span>
-                    <span className="text-gray-400 text-[12px] sm:text-[14px] line-through font-medium">
-                      ${product.oldPrice}
-                    </span>
+                
+                {/* Content area */}
+                <div className="p-4 sm:p-5 flex flex-col flex-grow text-center items-center justify-between">
+                  <h3 className="font-extrabold text-black text-[14px] sm:text-[16px] leading-[1.3] line-clamp-4">{product.title}</h3>
+                  <p className="text-[10px] sm:text-[11px] text-gray-500 font-medium tracking-widest uppercase mt-3 mb-2">{product.brand}</p>
+                  <div className="flex flex-col items-center gap-0.5">
+                    <span className="font-extrabold text-[#f899a2] text-[16px] sm:text-[18px] tracking-wide">${product.price}</span>
+                    <span className="text-[#111827] text-[12px] sm:text-[14px] font-bold line-through decoration-[#111827] decoration-2">${product.oldPrice}</span>
                   </div>
                 </div>
               </div>

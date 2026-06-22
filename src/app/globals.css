@@ -1143,21 +1143,5 @@ h1, h2, h3, h4 { font-weight: 600; }
     font-weight: 700;
 }
 
-/* Compact footer on laptop/desktop */
-@media (min-width: 768px) {
-    .site-footer {
-        padding-top: 40px;
-    }
-    .footer-content {
-        padding: 0 40px 30px;
-    }
-    .footer-subscribe {
-        margin: 0 auto 30px;
-    }
-    .footer-divider {
-        margin: 25px 0;
-    }
-    .footer-bottom-grid {
-        gap: 30px;
-    }
-}
+
+

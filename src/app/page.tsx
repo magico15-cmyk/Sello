@@ -111,7 +111,7 @@ export default function HomeStorePage() {
         <section className="w-full" style={{ background: '#ffffff', padding: '56px 16px 64px' }}>
           
           {/* Section Header */}
-          <div className="max-w-4xl mx-auto text-center" style={{ marginBottom: '40px' }}>
+          <div className="w-full text-center" style={{ marginBottom: '40px' }}>
             <p className="text-[#f899a2] text-[12px] font-bold tracking-[0.3em] uppercase" style={{ marginBottom: '8px' }}>
               ✦ CURATED FOR YOU ✦
             </p>

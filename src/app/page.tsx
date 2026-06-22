@@ -27,7 +27,7 @@ export default function HomeStorePage() {
       price: '25.00',
       oldPrice: '35.00',
       save: '28',
-      image: 'https://images.unsplash.com/photo-1577401239170-897942555fb3?auto=format&fit=crop&w=400&q=80',
+      image: '/assets/bundle.png',
       link: '#'
     },
     {
@@ -37,7 +37,7 @@ export default function HomeStorePage() {
       price: '30.00',
       oldPrice: '50.00',
       save: '40',
-      image: 'https://images.unsplash.com/photo-1550572017-edb98bc91823?auto=format&fit=crop&w=400&q=80',
+      image: '/assets/bottle.png',
       link: '#'
     },
     {
@@ -47,7 +47,7 @@ export default function HomeStorePage() {
       price: '28.00',
       oldPrice: '45.00',
       save: '37',
-      image: 'https://images.unsplash.com/photo-1584308666744-24d5e4a8b792?auto=format&fit=crop&w=400&q=80',
+      image: '/assets/bundle.png',
       link: '#'
     }
   ];
@@ -61,16 +61,8 @@ export default function HomeStorePage() {
         
         {/* Hero Banner Area */}
         <section className="relative w-full overflow-hidden bg-[#f899a2]">
-          {/* Background image overlay */}
-          <div className="absolute inset-0 opacity-20">
-            <img 
-              src="https://images.unsplash.com/photo-1611241893603-3c359704e0df?auto=format&fit=crop&w=1200&q=80" 
-              alt="Background" 
-              className="w-full h-full object-cover"
-            />
-          </div>
           
-          <div className="relative z-10 w-full max-w-4xl mx-auto px-4 py-16 sm:py-24 text-center">
+          <div className="relative z-10 w-full max-w-4xl mx-auto px-4 py-12 sm:py-20 text-center">
             <h1 className="text-4xl sm:text-6xl font-extrabold text-white mb-4 leading-tight drop-shadow-lg">
               Wellness & <span className="text-[#ffe0e3]">Vitality</span>
             </h1>
@@ -80,7 +72,7 @@ export default function HomeStorePage() {
             <div className="text-center mt-6">
               <p className="text-white text-sm sm:text-base mb-4 font-medium">Profitez des meilleures offres de la semaine avec des réductions incroyables !</p>
               <button 
-                className="bg-white text-[#f899a2] hover:bg-gray-50 font-bold py-3 px-8 rounded-md uppercase tracking-wide transition-all shadow-md"
+                className="bg-white text-[#f899a2] hover:bg-gray-50 font-extrabold py-3 px-8 rounded-full uppercase tracking-wide transition-all shadow-md"
                 onClick={() => {
                   window.scrollTo({ top: 500, behavior: 'smooth' });
                 }}

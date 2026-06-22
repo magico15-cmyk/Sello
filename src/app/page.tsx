@@ -486,9 +486,9 @@ export default function ProductPage() {
         <div 
           className={`fixed bottom-0 left-0 right-0 bg-white shadow-[0_-4px_15px_rgba(0,0,0,0.08)] border-t border-gray-100 z-50 transition-transform duration-300 transform ${showStickyBar ? 'translate-y-0' : 'translate-y-[120%]'}`}
         >
-          <div className="max-w-[1200px] mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
-            <div className="flex flex-col pr-2">
-              <span className="font-bold text-[13px] sm:text-[16px] text-[#222] leading-tight line-clamp-1 sm:line-clamp-none">
+          <div className="max-w-[1200px] mx-auto px-6 sm:px-8 py-3 sm:py-4 flex items-center justify-between">
+            <div className="flex flex-col pr-2 min-w-0">
+              <span className="font-bold text-[13px] sm:text-[16px] text-[#222] leading-tight truncate sm:whitespace-normal">
                 Enhanced Bioactive Turmeric - {packages.find(p => p.id === selectedPackage)?.title}
               </span>
               <div className="flex items-baseline gap-2 mt-0.5">

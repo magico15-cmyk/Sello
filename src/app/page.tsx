@@ -107,9 +107,9 @@ export default function HomeStorePage() {
           </div>
         </div>
 
-        {/* Product Grid Section */}
-        <section className="w-full max-w-5xl mx-auto px-4 pt-10 pb-16" style={{ paddingLeft: '20px', paddingRight: '20px' }}>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 mb-8">
+        {/* Products Grid Section */}
+        <section className="w-full max-w-4xl mx-auto bg-slate-50" style={{ padding: '48px 16px' }}>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-black" style={{ marginBottom: '32px' }}>
             Best Selling Products
           </h2>
 

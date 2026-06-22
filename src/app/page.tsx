@@ -129,11 +129,11 @@ export default function HomeStorePage() {
                 </div>
                 
                 {/* Content area */}
-                <div className="p-4 sm:p-5 flex flex-col flex-grow text-center items-center justify-between">
+                <div className="p-4 sm:p-5 flex flex-col flex-grow text-center items-center">
                   <h3 className="font-extrabold text-black text-[14px] sm:text-[16px] leading-[1.3] line-clamp-4">{product.title}</h3>
-                  <p className="text-[10px] sm:text-[11px] text-gray-500 font-medium tracking-widest uppercase mt-3 mb-2">{product.brand}</p>
-                  <div className="flex flex-col items-center gap-0.5">
-                    <span className="font-extrabold text-[#f899a2] text-[16px] sm:text-[18px] tracking-wide">${product.price}</span>
+                  <p className="text-[10px] sm:text-[11px] text-gray-500 font-medium tracking-widest uppercase mt-2 mb-3">{product.brand}</p>
+                  <div className="flex flex-col items-center mt-auto">
+                    <span className="font-extrabold text-[#f899a2] text-[16px] sm:text-[18px] tracking-wide mb-1">${product.price}</span>
                     <span className="text-[#111827] text-[12px] sm:text-[14px] font-bold line-through decoration-[#111827] decoration-2">${product.oldPrice}</span>
                   </div>
                 </div>

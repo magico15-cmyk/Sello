@@ -161,8 +161,8 @@ export default function HomeStorePage() {
                       className="absolute flex items-center"
                       style={{ 
                         top: '12px', left: '12px',
-                        background: '#111',
-                        color: 'white', fontSize: '11px', fontWeight: '700',
+                        background: '#f899a2',
+                        color: 'white', fontSize: '11px', fontWeight: '800',
                         padding: '5px 10px', borderRadius: '4px',
                         letterSpacing: '0.02em'
                       }}
@@ -194,19 +194,15 @@ export default function HomeStorePage() {
                       <button 
                         className="w-full font-bold transition-all duration-300"
                         style={{ 
-                          background: 'transparent', color: '#111', border: '1px solid #e0e0e0', 
+                          background: '#f899a2', color: '#ffffff', border: 'none', 
                           padding: '10px 0', borderRadius: '8px', fontSize: '13px',
                           textTransform: 'uppercase', letterSpacing: '0.05em'
                         }}
                         onMouseEnter={(e) => { 
-                          e.currentTarget.style.background = '#f899a2'; 
-                          e.currentTarget.style.color = '#fff';
-                          e.currentTarget.style.borderColor = '#f899a2';
+                          e.currentTarget.style.background = '#f6818d'; 
                         }}
                         onMouseLeave={(e) => { 
-                          e.currentTarget.style.background = 'transparent'; 
-                          e.currentTarget.style.color = '#111';
-                          e.currentTarget.style.borderColor = '#e0e0e0';
+                          e.currentTarget.style.background = '#f899a2'; 
                         }}
                         onClick={(e) => {
                           e.stopPropagation();

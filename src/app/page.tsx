@@ -504,15 +504,16 @@ export default function ProductPage() {
       
       {/* Sticky Bottom Bar */}
       <div 
-        className={`fixed bottom-0 left-0 right-0 bg-white shadow-[0_-4px_15px_rgba(0,0,0,0.08)] border-t border-gray-100 z-50 transition-transform duration-300 transform ${showStickyBar ? 'translate-y-0' : 'translate-y-full'}`}
+        className={`fixed bottom-0 left-0 right-0 bg-white shadow-[0_-4px_25px_rgba(0,0,0,0.1)] border-t border-gray-100 z-50 transition-transform duration-300 transform ${showStickyBar ? 'translate-y-0' : 'translate-y-full'}`}
       >
-        <div className="w-full mx-auto max-w-[1200px] flex items-center justify-between py-12 sm:py-8" style={{ paddingLeft: '25px', paddingRight: '25px', boxSizing: 'border-box' }}>
-          <div className="flex flex-col pr-3 min-w-0 flex-1">
-            <span className="font-bold text-[14px] sm:text-[18px] text-[#222] leading-tight truncate">Enhanced Bioactive Turmeric</span>
-            <span className="text-[16px] sm:text-[22px] font-extrabold text-[#e26343] mt-1">{currentPrice}</span>
+        <div className="w-full mx-auto max-w-[1200px] flex items-center justify-between" style={{ height: '90px', paddingLeft: '20px', paddingRight: '20px', boxSizing: 'border-box' }}>
+          <div className="flex flex-col pr-3 min-w-0 flex-1 justify-center">
+            <span className="font-bold text-[14px] sm:text-[16px] text-[#222] leading-tight truncate">Enhanced Bioactive Turmeric</span>
+            <span className="text-[17px] sm:text-[20px] font-extrabold text-[#e26343] mt-0.5">{currentPrice}</span>
           </div>
           <button 
-            className="bg-[#f899a2] hover:bg-[#f6808b] text-white font-bold py-4 sm:py-5 px-10 sm:px-14 rounded-[35px] text-[16px] sm:text-[20px] transition-colors shadow-sm whitespace-nowrap ml-2 flex-shrink-0"
+            className="bg-[#f899a2] hover:bg-[#f6808b] text-white font-bold rounded-[30px] text-[15px] sm:text-[18px] transition-colors shadow-sm whitespace-nowrap ml-2 flex-shrink-0 flex items-center justify-center"
+            style={{ padding: '0 35px', height: '54px' }}
             onClick={() => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}

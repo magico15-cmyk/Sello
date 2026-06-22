@@ -512,7 +512,7 @@ export default function ProductPage() {
             <span className="text-[16px] sm:text-[22px] font-extrabold text-[#e26343] mt-1">{currentPrice}</span>
           </div>
           <button 
-            className="bg-[#f899a2] hover:bg-[#f6808b] text-white font-bold py-4 sm:py-5 px-8 sm:px-14 rounded-[35px] text-[16px] sm:text-[20px] transition-colors shadow-sm whitespace-nowrap ml-2"
+            className="bg-[#f899a2] hover:bg-[#f6808b] text-white font-bold py-4 sm:py-5 px-10 sm:px-14 rounded-[35px] text-[16px] sm:text-[20px] transition-colors shadow-sm whitespace-nowrap ml-2 flex-shrink-0"
             onClick={() => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}

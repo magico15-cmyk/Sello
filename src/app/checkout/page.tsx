@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { X, CheckCircle2 } from 'lucide-react';
+import { X, CheckCircle2, User, Phone, MapPin } from 'lucide-react';
 import Link from 'next/link';
 
 const packages = [
@@ -122,71 +122,64 @@ export default function CheckoutPage() {
           </div>
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div>
-              <label htmlFor="fullName" className="block font-bold text-gray-900" style={{ fontSize: '13px', marginBottom: '6px' }}>
-                Full name <span className="text-red-500" style={{ color: '#ef4444' }}>*</span>
-              </label>
+            
+            <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #d1d5db', borderRadius: '6px', overflow: 'hidden' }}>
+              <div style={{ width: '45px', backgroundColor: '#e5e7eb', display: 'flex', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', borderRight: '1px solid #d1d5db' }}>
+                <User size={18} color="#4b5563" />
+              </div>
               <input 
                 type="text" 
-                id="fullName" 
                 name="fullName" 
                 required
                 value={formData.fullName}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 transition-colors bg-white shadow-sm"
-                style={{ padding: '10px 14px', fontSize: '15px', width: '100%', boxSizing: 'border-box' }}
-                placeholder="Example: John Smith"
+                style={{ flex: 1, padding: '12px 14px', fontSize: '15px', border: 'none', outline: 'none' }}
+                placeholder="Full name"
               />
             </div>
 
-            <div>
-              <label htmlFor="phoneNumber" className="block font-bold text-gray-900" style={{ fontSize: '13px', marginBottom: '6px' }}>
-                Phone number <span className="text-red-500" style={{ color: '#ef4444' }}>*</span>
-              </label>
+            <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #d1d5db', borderRadius: '6px', overflow: 'hidden' }}>
+              <div style={{ width: '45px', backgroundColor: '#e5e7eb', display: 'flex', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', borderRight: '1px solid #d1d5db' }}>
+                <Phone size={18} color="#4b5563" />
+              </div>
               <input 
                 type="tel" 
-                id="phoneNumber" 
                 name="phoneNumber" 
                 required
                 value={formData.phoneNumber}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 transition-colors bg-white shadow-sm"
-                style={{ padding: '10px 14px', fontSize: '15px', width: '100%', boxSizing: 'border-box' }}
-                placeholder="Phone number for delivery"
+                style={{ flex: 1, padding: '12px 14px', fontSize: '15px', border: 'none', outline: 'none' }}
+                placeholder="Phone number"
               />
             </div>
 
-            <div>
-              <label htmlFor="city" className="block font-bold text-gray-900" style={{ fontSize: '13px', marginBottom: '6px' }}>
-                City <span className="text-red-500" style={{ color: '#ef4444' }}>*</span>
-              </label>
+            <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #d1d5db', borderRadius: '6px', overflow: 'hidden' }}>
+              <div style={{ width: '45px', backgroundColor: '#e5e7eb', display: 'flex', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', borderRight: '1px solid #d1d5db' }}>
+                <MapPin size={18} color="#4b5563" />
+              </div>
               <input 
                 type="text" 
-                id="city" 
                 name="city" 
                 required
                 value={formData.city}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 transition-colors bg-white shadow-sm"
-                style={{ padding: '10px 14px', fontSize: '15px', width: '100%', boxSizing: 'border-box' }}
-                placeholder="Example: New York"
+                style={{ flex: 1, padding: '12px 14px', fontSize: '15px', border: 'none', outline: 'none' }}
+                placeholder="City"
               />
             </div>
 
-            <div>
-              <label htmlFor="address" className="block font-bold text-gray-900" style={{ fontSize: '13px', marginBottom: '6px' }}>
-                Address (Road, House number) <span className="text-red-500" style={{ color: '#ef4444' }}>*</span>
-              </label>
+            <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #d1d5db', borderRadius: '6px', overflow: 'hidden' }}>
+              <div style={{ width: '45px', backgroundColor: '#e5e7eb', display: 'flex', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', borderRight: '1px solid #d1d5db' }}>
+                <MapPin size={18} color="#4b5563" />
+              </div>
               <input 
                 type="text" 
-                id="address" 
                 name="address" 
                 required
                 value={formData.address}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 transition-colors bg-white shadow-sm"
-                style={{ padding: '10px 14px', fontSize: '15px', width: '100%', boxSizing: 'border-box' }}
-                placeholder="Example: Minx Road 505 c/b"
+                style={{ flex: 1, padding: '12px 14px', fontSize: '15px', border: 'none', outline: 'none' }}
+                placeholder="Address (Road, House number)"
               />
             </div>
 

@@ -461,7 +461,7 @@ export default function ProductPage() {
                 console.log("Added to cart");
               }}>
                 <button className="add-to-cart text-[28px] sm:text-[32px] py-4">
-                  ADD TO CART
+                  ORDER NOW
                 </button>
                 <div className="returns-info">
                   <ShieldCheck size={16} className="shield-icon" />
@@ -526,7 +526,7 @@ export default function ProductPage() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            ADD TO CART
+            ORDER NOW
           </button>
         </div>
       </div>

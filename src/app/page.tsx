@@ -15,48 +15,22 @@ const FedExLogo = ({ className }: { className?: string }) => (
 export default function HomeStorePage() {
   const router = useRouter();
 
-  const products = [
-    {
-      id: 'turmeric',
-      title: 'Enhanced Bioactive Turmeric',
-      brand: 'YU.',
-      price: '45.00',
-      oldPrice: '50.00',
-      save: '10',
-      image: '/assets/bottle.png',
-      link: '/product/turmeric'
-    },
-    {
-      id: 'vitamin-c',
-      title: 'Daily Vitamin C Gummies',
-      brand: 'YU.',
-      price: '25.00',
-      oldPrice: '35.00',
-      save: '28',
-      image: '/assets/bundle.png',
-      link: '#'
-    },
-    {
-      id: 'omega',
-      title: 'Omega-3 Fish Oil',
-      brand: 'YU.',
-      price: '30.00',
-      oldPrice: '50.00',
-      save: '40',
-      image: '/assets/bottle.png',
-      link: '#'
-    },
-    {
-      id: 'sleep',
-      title: 'Sleep Support Blend',
-      brand: 'YU.',
-      price: '28.00',
-      oldPrice: '45.00',
-      save: '37',
-      image: '/assets/bundle.png',
-      link: '#'
+  const [products, setProducts] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    async function fetchProducts() {
+      const { supabase } = await import('../lib/supabase');
+      const { data } = await supabase.from('products').select('*').order('created_at', { ascending: true });
+      if (data) {
+        const formattedData = data.map(p => ({
+          ...p,
+          oldPrice: p.old_price
+        }));
+        setProducts(formattedData);
+      }
     }
-  ];
+    fetchProducts();
+  }, []);
 
   return (
     <>

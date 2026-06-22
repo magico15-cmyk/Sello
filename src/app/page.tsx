@@ -181,7 +181,7 @@ export default function HomeStorePage() {
                       {product.title}
                     </h3>
                     
-                    <div className="flex items-center gap-2 mb-6">
+                    <div className="flex items-center" style={{ gap: '8px', marginBottom: '16px' }}>
                       <span style={{ fontSize: '16px', fontWeight: '800', color: '#f899a2' }}>
                         ${product.price}
                       </span>

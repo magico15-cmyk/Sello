@@ -61,9 +61,9 @@ export default function CheckoutPage() {
       <header className="header">
         <button className="menu-btn" aria-label="Menu"><Menu size={26} /></button>
         <Link href="/" className="logo"><div className="logo-circle">Yu.</div></Link>
-        <button className="cart-btn" aria-label="Cart">
+        <button className="cart-btn" aria-label="Cart" style={{ position: 'relative' }}>
           <ShoppingBag size={26} />
-          <span className="cart-badge">1</span>
+          <span style={{ position: 'absolute', top: '-4px', right: '-6px', backgroundColor: '#f899a2', color: 'white', fontSize: '11px', fontWeight: 'bold', width: '18px', height: '18px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>1</span>
         </button>
       </header>
 

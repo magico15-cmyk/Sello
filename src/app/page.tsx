@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Menu, ShoppingBag, ChevronLeft, ChevronRight, Smile, Activity, Wind, ShieldCheck, Star, Flame, HandCoins, ChevronDown, ChevronUp } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const CustomCheck = ({ className }: { className?: string }) => (
   <svg className={className} width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -253,6 +254,7 @@ const Footer = () => {
 };
 
 export default function ProductPage() {
+  const router = useRouter();
   const [selectedPackage, setSelectedPackage] = useState(2);
   const [purchaseType, setPurchaseType] = useState('subscribe');
   const [openAccordion, setOpenAccordion] = useState(0);
@@ -457,8 +459,7 @@ export default function ProductPage() {
             {/* Action Area */}
             <div className="action-area" ref={addToCartRef}>
               <div className="add-to-cart-container" onClick={() => {
-                // Trigger ADD TO CART action
-                console.log("Added to cart");
+                router.push(`/checkout?package=${selectedPackage}`);
               }}>
                 <button className="add-to-cart text-[28px] sm:text-[32px] py-4">
                   ORDER NOW
@@ -523,7 +524,7 @@ export default function ProductPage() {
             className="bg-[#f899a2] hover:bg-[#f6808b] text-white font-extrabold rounded-[30px] text-[17px] sm:text-[20px] transition-colors shadow-sm whitespace-nowrap ml-2 flex-shrink-0 flex items-center justify-center tracking-wide"
             style={{ padding: '0 18px', height: '48px' }}
             onClick={() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              router.push(`/checkout?package=${selectedPackage}`);
             }}
           >
             ORDER NOW

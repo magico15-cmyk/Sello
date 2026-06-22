@@ -62,7 +62,7 @@ export default function HomeStorePage() {
         {/* Hero Banner Area */}
         <section className="relative w-full overflow-hidden bg-[#f899a2]">
           
-          <div className="relative z-10 w-full max-w-4xl mx-auto px-4 py-12 sm:py-20 text-center">
+          <div className="relative z-10 w-full max-w-4xl mx-auto px-4 py-12 sm:py-20 text-center" style={{ paddingLeft: '20px', paddingRight: '20px' }}>
             <h1 className="text-4xl sm:text-6xl font-extrabold text-white mb-4 leading-tight drop-shadow-lg">
               Wellness & <span className="text-[#ffe0e3]">Vitality</span>
             </h1>
@@ -99,12 +99,12 @@ export default function HomeStorePage() {
         </div>
 
         {/* Product Grid Section */}
-        <section className="w-full max-w-5xl mx-auto px-4 pt-10 pb-16">
+        <section className="w-full max-w-5xl mx-auto px-4 pt-10 pb-16" style={{ paddingLeft: '20px', paddingRight: '20px' }}>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 mb-8">
             Best Selling Products
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
             {products.map(product => (
               <div 
                 key={product.id} 

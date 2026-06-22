@@ -131,9 +131,8 @@ export default function HomeStorePage() {
                 style={{ perspective: '1000px' }}
               >
                 <div 
-                  className="rounded-[20px] overflow-hidden flex flex-col relative transition-all duration-500"
+                  className="rounded-[20px] overflow-hidden flex flex-col relative transition-all duration-500 bg-white"
                   style={{ 
-                    background: '#fef7f8',
                     boxShadow: '0 4px 24px rgba(0,0,0,0.08)', 
                     border: '1px solid #f2dfe1',
                     transition: 'transform 0.4s ease, box-shadow 0.4s ease'

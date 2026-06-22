@@ -397,12 +397,12 @@ export default function ProductPage() {
               ))}
             </div>
 
+            <BeforeAfterSlider />
+            <StatisticsSection />
+
           </div>
         </div>
       </main>
-
-      <BeforeAfterSlider />
-      <StatisticsSection />
       <Footer />
 
       {/* Sticky Bottom Bar */}

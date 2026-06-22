@@ -68,15 +68,6 @@ export default function HomeStorePage() {
               alt="Hero Banner" 
               className="w-full h-auto object-cover sm:max-h-[500px]"
             />
-            {/* Overlay Text */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-black/20">
-              <h1 className="text-[34px] sm:text-6xl font-extrabold text-white mb-2 leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] text-center">
-                Wellness & <span className="text-[#ffe0e3]">Vitality</span>
-              </h1>
-              <p className="text-[15px] sm:text-xl text-white font-extrabold drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] text-center uppercase tracking-wide">
-                LES RÉDUCTIONS DE PRIX VOUS ATTENDENT
-              </p>
-            </div>
           </div>
           
           {/* White Info Section with Button */}

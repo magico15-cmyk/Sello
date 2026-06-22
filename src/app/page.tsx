@@ -94,17 +94,20 @@ export default function HomeStorePage() {
         </section>
 
         {/* Brand/Shipping Ticker */}
-        <div className="w-full bg-[#0b381a] text-white flex items-center justify-between text-lg sm:text-xl font-bold uppercase tracking-widest overflow-hidden whitespace-nowrap" style={{ padding: '12px 16px' }}>
-          <div className="flex animate-marquee gap-8 items-center min-w-full justify-around">
-            <FedExLogo className="h-5 w-auto" />
-            <span className="font-serif tracking-normal text-2xl lowercase flex items-center gap-2">
-              <span className="text-white">❈</span> Yu.
-            </span>
-            <FedExLogo className="h-5 w-auto" />
-            <span className="font-serif tracking-normal text-2xl lowercase flex items-center gap-2 hidden sm:flex">
-              <span className="text-white">❈</span> Yu.
-            </span>
-            <FedExLogo className="h-5 w-auto hidden sm:block" />
+        <div className="w-full bg-[#0b381a] text-white flex items-center overflow-hidden whitespace-nowrap" style={{ padding: '12px 0' }}>
+          <div className="flex animate-marquee items-center w-max">
+            {[...Array(12)].map((_, i) => (
+              <React.Fragment key={i}>
+                <div className="flex items-center justify-center px-6 sm:px-10">
+                  <FedExLogo className="h-5 w-auto" />
+                </div>
+                <div className="flex items-center justify-center px-6 sm:px-10">
+                  <span className="font-serif tracking-normal text-2xl lowercase flex items-center gap-2">
+                    <span className="text-white">❈</span> Yu.
+                  </span>
+                </div>
+              </React.Fragment>
+            ))}
           </div>
         </div>
 

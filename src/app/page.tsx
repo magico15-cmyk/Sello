@@ -72,11 +72,11 @@ export default function HomeStorePage() {
           
           {/* White Info Section with Button */}
           <div className="w-full bg-white px-4 py-8 sm:py-10 text-center flex flex-col items-center">
-            <p className="text-gray-700 text-[15px] sm:text-[16px] font-bold max-w-sm mx-auto mb-6 leading-relaxed">
+            <p className="text-[#4b5563] text-[15px] sm:text-[16px] font-medium max-w-sm mx-auto mb-6 leading-relaxed">
               Profitez des meilleures offres de la semaine avec des réductions incroyables !
             </p>
             <button 
-              className="bg-[#0b381a] hover:bg-black text-white font-bold py-3 px-10 rounded-md text-[17px] tracking-wide transition-all shadow-md"
+              className="bg-[#0f4a22] hover:bg-[#0b381a] text-white font-bold py-3.5 px-12 rounded-md text-[16px] transition-all shadow-sm"
               onClick={() => {
                 window.scrollTo({ top: 500, behavior: 'smooth' });
               }}

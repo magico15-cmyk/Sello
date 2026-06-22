@@ -76,7 +76,8 @@ export default function HomeStorePage() {
               Profitez des meilleures offres de la semaine avec des réductions incroyables !
             </p>
             <button 
-              className="bg-[#0f4a22] hover:bg-[#0b381a] text-white font-bold py-3.5 px-12 rounded-md text-[16px] transition-all shadow-sm"
+              className="bg-[#0f4a22] hover:bg-[#0b381a] text-white font-bold rounded-md text-[16px] transition-all shadow-sm"
+              style={{ padding: '14px 48px' }}
               onClick={() => {
                 window.scrollTo({ top: 500, behavior: 'smooth' });
               }}

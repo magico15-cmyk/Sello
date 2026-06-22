@@ -501,7 +501,7 @@ export default function ProductPage() {
               </div>
             </div>
             <button 
-              className="bg-[#0a2e5c] text-white font-bold text-[14px] sm:text-[18px] px-6 py-2.5 sm:px-8 sm:py-3 rounded-full hover:bg-[#072145] transition-colors whitespace-nowrap shrink-0 ml-auto"
+              className="bg-[#0a2e5c] text-white font-bold text-[16px] sm:text-[20px] px-8 py-3.5 sm:px-10 sm:py-4 rounded-full hover:bg-[#072145] transition-colors whitespace-nowrap shrink-0 ml-auto"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               Add to cart

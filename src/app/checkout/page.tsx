@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Truck, ShieldCheck, CheckCircle2 } from 'lucide-react';
-import Image from 'next/image';
 
 const packages = [
   { id: 1, title: "1 Bottle", originalPrice: "$50.00", price: "$40.00", image: "https://fitabic.com/cdn/shop/files/Turmeric1_2e630cc6-d184-4d8e-ba6a-360e5a9539d9.png" },
@@ -159,12 +158,10 @@ export default function CheckoutPage() {
             
             <div className="flex items-center gap-4 pb-6 border-b border-gray-100">
               <div className="w-[80px] h-[80px] bg-gray-50 rounded-lg flex items-center justify-center p-2 border border-gray-100 flex-shrink-0">
-                <Image 
+                <img 
                   src={selectedPkg.image} 
                   alt={selectedPkg.title} 
-                  width={60} 
-                  height={60} 
-                  className="object-contain"
+                  style={{ width: '60px', height: '60px', objectFit: 'contain' }}
                 />
               </div>
               <div className="flex-1 min-w-0">

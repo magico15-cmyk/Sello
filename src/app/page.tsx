@@ -131,29 +131,28 @@ export default function HomeStorePage() {
                 style={{ perspective: '1000px' }}
               >
                 <div 
-                  className="rounded-[20px] overflow-hidden flex flex-col relative transition-all duration-500 bg-white"
+                  className="rounded-[16px] overflow-hidden flex flex-col relative bg-white transition-all duration-400"
                   style={{ 
-                    boxShadow: '0 4px 24px rgba(0,0,0,0.08)', 
-                    border: '1px solid #f2dfe1',
-                    transition: 'transform 0.4s ease, box-shadow 0.4s ease'
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.04)', 
+                    border: '1px solid #f0f0f0'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-8px)';
-                    e.currentTarget.style.boxShadow = '0 20px 40px rgba(248,153,162,0.25)';
+                    e.currentTarget.style.transform = 'translateY(-6px)';
+                    e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.08)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.04)';
                   }}
                 >
                   {/* Image Container */}
-                  <div className="relative w-full overflow-hidden" style={{ aspectRatio: '3/4', background: 'linear-gradient(135deg, #fef7f8, #f5f5f5)' }}>
+                  <div className="relative w-full overflow-hidden" style={{ aspectRatio: '3/4', backgroundColor: '#fcfcfc' }}>
                     <img 
                       src={product.image} 
                       alt={product.title} 
                       className="w-full h-full object-cover transition-transform duration-700"
-                      style={{ transition: 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)' }}
-                      onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.08)'; }}
+                      style={{ transition: 'transform 0.7s ease' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.06)'; }}
                       onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
                     />
                     
@@ -161,45 +160,54 @@ export default function HomeStorePage() {
                     <div 
                       className="absolute flex items-center"
                       style={{ 
-                        bottom: '12px', left: '12px',
-                        background: 'linear-gradient(135deg, #f899a2 0%, #e8707c 100%)',
-                        color: 'white', fontSize: '11px', fontWeight: '800',
-                        padding: '6px 10px', borderRadius: '20px',
-                        boxShadow: '0 4px 12px rgba(248,153,162,0.35)',
-                        gap: '4px', letterSpacing: '0.02em'
+                        top: '12px', left: '12px',
+                        background: '#111',
+                        color: 'white', fontSize: '11px', fontWeight: '700',
+                        padding: '5px 10px', borderRadius: '4px',
+                        letterSpacing: '0.02em'
                       }}
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style={{ width: '12px', height: '12px' }}>
-                        <path fillRule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z" clipRule="evenodd" />
-                      </svg>
                       Save {product.save}%
                     </div>
                   </div>
                   
                   {/* Product Info */}
-                  <div className="flex flex-col flex-grow items-center text-center" style={{ padding: '16px 12px 20px' }}>
+                  <div className="flex flex-col flex-grow text-left" style={{ padding: '20px 16px' }}>
                     <h3 style={{ 
-                      fontSize: '14px', fontWeight: '800', color: '#111', 
-                      lineHeight: '1.3', marginBottom: '6px',
+                      fontSize: '15px', fontWeight: '600', color: '#111', 
+                      lineHeight: '1.4', marginBottom: '8px',
                       display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden'
                     }}>
                       {product.title}
                     </h3>
-                    <p style={{ fontSize: '9px', color: '#b0b0b0', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '10px' }}>
-                      {product.brand}
-                    </p>
-                    <div className="flex flex-col items-center" style={{ marginTop: 'auto' }}>
-                      <span style={{ fontSize: '20px', fontWeight: '900', color: '#f899a2', letterSpacing: '-0.01em' }}>
+                    
+                    <div className="flex items-center gap-2 mb-6">
+                      <span style={{ fontSize: '16px', fontWeight: '800', color: '#f899a2' }}>
                         ${product.price}
                       </span>
-                      <span style={{ fontSize: '13px', fontWeight: '700', color: '#ccc', textDecoration: 'line-through', marginTop: '2px', marginBottom: '16px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: '500', color: '#a0a0a0', textDecoration: 'line-through' }}>
                         ${product.oldPrice}
                       </span>
+                    </div>
+
+                    <div style={{ marginTop: 'auto' }}>
                       <button 
-                        className="w-full text-white font-bold transition-all"
-                        style={{ background: '#f899a2', padding: '10px 0', borderRadius: '12px', fontSize: '14px' }}
-                        onMouseEnter={(e) => { e.currentTarget.style.background = '#f6818d'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.background = '#f899a2'; }}
+                        className="w-full font-bold transition-all duration-300"
+                        style={{ 
+                          background: 'transparent', color: '#111', border: '1px solid #e0e0e0', 
+                          padding: '10px 0', borderRadius: '8px', fontSize: '13px',
+                          textTransform: 'uppercase', letterSpacing: '0.05em'
+                        }}
+                        onMouseEnter={(e) => { 
+                          e.currentTarget.style.background = '#f899a2'; 
+                          e.currentTarget.style.color = '#fff';
+                          e.currentTarget.style.borderColor = '#f899a2';
+                        }}
+                        onMouseLeave={(e) => { 
+                          e.currentTarget.style.background = 'transparent'; 
+                          e.currentTarget.style.color = '#111';
+                          e.currentTarget.style.borderColor = '#e0e0e0';
+                        }}
                         onClick={(e) => {
                           e.stopPropagation();
                           if (product.link !== '#') router.push(product.link);

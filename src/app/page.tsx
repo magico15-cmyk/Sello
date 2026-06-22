@@ -71,7 +71,7 @@ export default function HomeStorePage() {
           </div>
           
           {/* White Info Section with Button */}
-          <div className="w-full bg-white px-4 py-8 sm:py-10 text-center flex flex-col items-center">
+          <div className="w-full bg-white text-center flex flex-col items-center" style={{ padding: '32px 16px' }}>
             <p className="text-[#4b5563] text-[15px] sm:text-[16px] font-medium max-w-sm mx-auto mb-6 leading-relaxed">
               Profitez des meilleures offres de la semaine avec des réductions incroyables !
             </p>
@@ -88,7 +88,7 @@ export default function HomeStorePage() {
         </section>
 
         {/* Brand/Shipping Ticker */}
-        <div className="w-full bg-[#0b381a] text-white py-3 flex items-center justify-between px-4 sm:px-12 text-lg sm:text-xl font-bold uppercase tracking-widest overflow-hidden whitespace-nowrap">
+        <div className="w-full bg-[#0b381a] text-white flex items-center justify-between text-lg sm:text-xl font-bold uppercase tracking-widest overflow-hidden whitespace-nowrap" style={{ padding: '12px 16px' }}>
           <div className="flex animate-marquee gap-8 items-center min-w-full justify-around">
             <span className="flex items-center gap-2">FedEx<span className="text-xs align-super">®</span></span>
             <span className="font-serif tracking-normal text-2xl lowercase flex items-center gap-2">

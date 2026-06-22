@@ -60,7 +60,7 @@ const TestimonialCarousel = () => {
   return (
     <div className="testimonial-box relative pb-8 overflow-hidden" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <div 
-        className="flex transition-transform duration-500 ease-in-out"
+        className="flex transition-transform duration-500 ease-in-out w-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {testimonialsData.map((t, idx) => (

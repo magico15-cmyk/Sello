@@ -64,12 +64,20 @@ export default function Sidebar() {
     }
   }, []);
 
+  useEffect(() => {
+    if (pathname?.startsWith("/admin/orders")) {
+      setActiveItem("Orders");
+    } else if (pathname?.startsWith("/admin/products") || pathname === "/admin") {
+      setActiveItem("Product");
+    }
+  }, [pathname]);
+
   let activeChild = "";
   if (pathname === "/admin/products/new") {
     activeChild = "New product";
   } else if (pathname === "/admin/categories") {
     activeChild = "Categories";
-  } else if (pathname?.startsWith("/admin")) {
+  } else if (pathname === "/admin") {
     activeChild = "All products";
   }
 
@@ -80,6 +88,19 @@ export default function Sidebar() {
       router.push("/admin");
     } else if (child === "Categories") {
       // router.push("/admin/categories");
+    }
+  };
+
+  const handleParentClick = (label: string, hasChildren: boolean) => {
+    setActiveItem(label);
+    if (hasChildren) {
+      setExpandedItem(expandedItem === label ? null : label);
+    } else {
+      if (label === "Orders") {
+        router.push("/admin/orders");
+      } else if (label === "Overview") {
+        router.push("/admin");
+      }
     }
   };
 
@@ -117,12 +138,7 @@ export default function Sidebar() {
             return (
               <li key={item.label}>
                 <button
-                  onClick={() => {
-                    setActiveItem(item.label);
-                    if (item.children) {
-                      setExpandedItem(isExpanded ? null : item.label);
-                    }
-                  }}
+                  onClick={() => handleParentClick(item.label, !!item.children)}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 ${
                     isActive
                       ? "text-gray-900 bg-gray-50"

@@ -508,13 +508,13 @@ export default function ProductClient({ initialProduct }: { initialProduct: any 
             </div>
 
             {/* Trust Marquee */}
-            <div className="w-full overflow-hidden bg-black py-3 mb-8 rounded-lg relative" style={{ contain: 'content', maxWidth: '100%' }}>
-              <div className="scroll-track" style={{ animationDuration: '20s' }}>
+            <div className="w-full bg-black mb-8 rounded-lg relative overflow-hidden" style={{ height: '44px' }}>
+              <div className="absolute top-0 left-0 h-full flex items-center scroll-track" style={{ animationDuration: '20s', width: 'max-content' }}>
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="scroll-content">
-                    <span className="scroll-item font-extrabold tracking-widest text-[13px] sm:text-[14px]">30-DAY MONEY BACK GUARANTEE</span>
+                  <div key={i} className="scroll-content flex items-center h-full">
+                    <span className="scroll-item font-extrabold tracking-widest text-[13px] sm:text-[14px] whitespace-nowrap">30-DAY MONEY BACK GUARANTEE</span>
                     <span className="scroll-item text-[16px]">😊</span>
-                    <span className="scroll-item font-extrabold tracking-widest text-[13px] sm:text-[14px]">800,000+ HAPPY CUSTOMERS</span>
+                    <span className="scroll-item font-extrabold tracking-widest text-[13px] sm:text-[14px] whitespace-nowrap">800,000+ HAPPY CUSTOMERS</span>
                     <span className="scroll-item text-[16px]">😊</span>
                   </div>
                 ))}

@@ -203,7 +203,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
             className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
           >
             Search filters
-            <span className="w-5 h-5 bg-teal-500 rounded-full flex items-center justify-center">
+            <span className="w-5 h-5 bg-brand-500 rounded-full flex items-center justify-center">
               <AdjustmentsHorizontalIcon className="w-3 h-3 text-white" />
             </span>
             <ChevronUpDownIcon className="w-4 h-4 text-gray-400" />
@@ -213,7 +213,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
         {/* Table / Loader */}
         {loading ? (
           <div className="flex-1 flex items-center justify-center py-20">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-500"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-500"></div>
           </div>
         ) : (
           <div className="overflow-x-auto flex-1">
@@ -227,7 +227,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                       type="checkbox"
                       checked={allSelected}
                       onChange={toggleAll}
-                      className="peer appearance-none w-full h-full border-2 border-gray-300 rounded focus:ring-2 focus:ring-teal-500 focus:ring-offset-1 checked:bg-teal-500 checked:border-teal-500 cursor-pointer transition-all duration-200"
+                      className="peer appearance-none w-full h-full border-2 border-gray-300 rounded focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 checked:bg-brand-500 checked:border-brand-500 cursor-pointer transition-all duration-200"
                     />
                     <svg className="absolute w-2.5 h-2.5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12"></polyline>
@@ -290,7 +290,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                         type="checkbox"
                         checked={selectedIds.has(product.id)}
                         onChange={() => toggleOne(product.id)}
-                        className="peer appearance-none w-full h-full border-2 border-gray-300 rounded focus:ring-2 focus:ring-teal-500 focus:ring-offset-1 checked:bg-teal-500 checked:border-teal-500 cursor-pointer transition-all duration-200"
+                        className="peer appearance-none w-full h-full border-2 border-gray-300 rounded focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 checked:bg-brand-500 checked:border-brand-500 cursor-pointer transition-all duration-200"
                       />
                       <svg className="absolute w-2.5 h-2.5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12"></polyline>
@@ -330,7 +330,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                       className={`text-sm ${
                         product.inventory === "Tracked"
                           ? "text-gray-700 font-medium"
-                          : "text-teal-600"
+                          : "text-brand-600"
                       }`}
                     >
                       {product.inventory}
@@ -447,7 +447,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                       onClick={() => setCurrentPage(pageNumber)}
                       className={`w-8 h-8 flex items-center justify-center text-sm font-medium rounded-lg transition-colors ${
                         currentPage === pageNumber
-                          ? "bg-teal-500 text-white border border-teal-500"
+                          ? "bg-brand-500 text-white border border-brand-500"
                           : "text-gray-700 bg-white border border-gray-300 hover:bg-gray-50"
                       }`}
                     >
@@ -473,7 +473,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
       <div className="flex justify-end mt-5">
         <button 
           onClick={() => router.push('/admin/products/new')}
-          className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 text-white text-sm font-semibold shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30 hover:from-teal-600 hover:to-teal-700 transition-all duration-200 active:scale-[0.98]"
+          className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-semibold shadow-lg shadow-brand-500/25 hover:shadow-xl hover:shadow-brand-500/30 hover:from-brand-600 hover:to-brand-700 transition-all duration-200 active:scale-[0.98]"
         >
           <PlusIcon className="w-4 h-4" />
           <span>Add a product</span>

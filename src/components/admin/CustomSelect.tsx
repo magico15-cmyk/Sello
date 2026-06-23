@@ -35,8 +35,8 @@ export default function CustomSelect({ value, onChange, options }: CustomSelectP
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full px-4 py-2 text-left bg-white border rounded-xl flex items-center justify-between transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 ${
-          isOpen ? "border-teal-500 ring-2 ring-teal-500" : "border-gray-300"
+        className={`w-full px-4 py-2 text-left bg-white border rounded-xl flex items-center justify-between transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 ${
+          isOpen ? "border-brand-500 ring-2 ring-brand-500" : "border-gray-300"
         }`}
       >
         <span className="block truncate text-gray-900">{selectedOption?.label}</span>
@@ -55,12 +55,12 @@ export default function CustomSelect({ value, onChange, options }: CustomSelectP
               }}
               className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${
                 option.value === value
-                  ? "bg-teal-50 text-teal-700 font-medium"
+                  ? "bg-brand-50 text-brand-700 font-medium"
                   : "text-gray-700 hover:bg-gray-50"
               }`}
             >
               <span className="truncate">{option.label}</span>
-              {option.value === value && <CheckIcon className="w-4 h-4 text-teal-600" />}
+              {option.value === value && <CheckIcon className="w-4 h-4 text-brand-600" />}
             </button>
           ))}
         </div>

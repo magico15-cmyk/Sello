@@ -91,7 +91,7 @@ export default function FilterPanel({ onFilterChange }: FilterPanelProps) {
                   onClick={() => setSelectedCategory(cat.label)}
                   className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors ${
                     selectedCategory === cat.label
-                      ? "bg-teal-50 text-teal-600 font-medium"
+                      ? "bg-brand-50 text-brand-600 font-medium"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   }`}
                 >
@@ -99,7 +99,7 @@ export default function FilterPanel({ onFilterChange }: FilterPanelProps) {
                   <span
                     className={`text-xs px-2 py-0.5 rounded-full ${
                       selectedCategory === cat.label
-                        ? "bg-teal-100 text-teal-600"
+                        ? "bg-brand-100 text-brand-600"
                         : "bg-gray-100 text-gray-400"
                     }`}
                   >

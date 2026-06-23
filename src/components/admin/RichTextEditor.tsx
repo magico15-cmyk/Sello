@@ -105,11 +105,11 @@ export default function RichTextEditor({
               onChange={(e) => updateColor(e.target.value)}
               placeholder="FE7F2D"
               maxLength={6}
-              className="w-20 px-2 py-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-sm"
+              className="w-20 px-2 py-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm"
             />
             <button 
               onClick={handleApplyColor}
-              className="px-3 py-1 bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium rounded-r-lg transition-colors border border-teal-600 hover:border-teal-700"
+              className="px-3 py-1 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-r-lg transition-colors border border-brand-600 hover:border-brand-700"
             >
               Apply
             </button>
@@ -122,7 +122,7 @@ export default function RichTextEditor({
         onSelect={saveSelection}
         onBlur={saveSelection}
         onInput={(e) => onChange(e.currentTarget.innerHTML)}
-        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors min-h-[100px] whitespace-pre-wrap"
+        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors min-h-[100px] whitespace-pre-wrap"
         style={{ textAlign: align, color: color }}
       />
     </div>

@@ -321,7 +321,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
           {isEditing && (
             <button 
               onClick={() => window.open(`/product/${initialData.id}`, '_blank')}
-              className="p-2 text-gray-500 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-colors border border-transparent hover:border-teal-100"
+              className="p-2 text-gray-500 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition-colors border border-transparent hover:border-brand-100"
               title="Preview Product"
             >
               <EyeIcon className="w-5 h-5" />
@@ -336,7 +336,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
           <button 
             onClick={handleSave}
             disabled={loading}
-            className="px-4 py-2 text-sm font-semibold text-white bg-teal-600 hover:bg-teal-700 rounded-xl shadow-sm shadow-teal-600/20 transition-all disabled:opacity-50"
+            className="px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-sm shadow-brand-600/20 transition-all disabled:opacity-50"
           >
             {loading ? 'Saving...' : 'Save Product'}
           </button>
@@ -357,7 +357,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Short Sleeve T-Shirt"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                 />
               </div>
             </div>
@@ -394,7 +394,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                     setDraggedIndex(null);
                   }}
                   onDragEnd={() => setDraggedIndex(null)}
-                  className={`relative group border border-gray-200 rounded-xl p-4 bg-gray-50/50 hover:border-gray-300 transition-colors ${draggedIndex === index ? 'opacity-50 border-dashed border-2 border-teal-500' : ''}`}
+                  className={`relative group border border-gray-200 rounded-xl p-4 bg-gray-50/50 hover:border-gray-300 transition-colors ${draggedIndex === index ? 'opacity-50 border-dashed border-2 border-brand-500' : ''}`}
                 >
                   
                   {/* Block Header */}
@@ -404,7 +404,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                   >
                     <div className="flex items-center gap-2 text-gray-500">
                       <div className="cursor-move p-1 -ml-1 hover:bg-gray-200 rounded transition-colors" title="Drag to reorder">
-                        <Bars3Icon className="w-5 h-5 text-gray-400 hover:text-teal-600 transition-colors" />
+                        <Bars3Icon className="w-5 h-5 text-gray-400 hover:text-brand-600 transition-colors" />
                       </div>
                       {expandedBlockId === block.id ? (
                         <ChevronDownIcon className="w-4 h-4 text-gray-400" />
@@ -523,7 +523,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                       ) : (
                         <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-white">
                           <PhotoIcon className="w-8 h-8 text-gray-400 mx-auto mb-3" />
-                          <label className="cursor-pointer bg-teal-50 text-teal-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-teal-100 transition-colors inline-block">
+                          <label className="cursor-pointer bg-brand-50 text-brand-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-brand-100 transition-colors inline-block">
                             <span>{uploadingImage ? 'Uploading...' : 'Upload Image'}</span>
                             <input 
                               type="file" 
@@ -556,7 +556,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                               updateBlock(block.id, newFeatures);
                             }}
                             placeholder="Enter a feature..."
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                           />
                           <button 
                             onClick={() => {
@@ -574,7 +574,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                           const newFeatures = Array.isArray(block.content) ? [...block.content, ''] : ['', ''];
                           updateBlock(block.id, newFeatures);
                         }}
-                        className="text-sm font-medium text-teal-600 hover:text-teal-700 flex items-center gap-1 mt-2"
+                        className="text-sm font-medium text-brand-600 hover:text-brand-700 flex items-center gap-1 mt-2"
                       >
                         <PlusIcon className="w-4 h-4" /> Add feature
                       </button>
@@ -596,7 +596,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                               updateBlock(block.id, newItems);
                             }}
                             placeholder="Enter marquee item text (e.g. 30-DAY MONEY BACK GUARANTEE 😊)"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                           />
                           <button 
                             onClick={() => {
@@ -614,7 +614,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                           const newItems = Array.isArray(block.content) ? [...block.content, ''] : [''];
                           updateBlock(block.id, newItems);
                         }}
-                        className="text-sm font-medium text-teal-600 hover:text-teal-700 flex items-center gap-1 mt-2"
+                        className="text-sm font-medium text-brand-600 hover:text-brand-700 flex items-center gap-1 mt-2"
                       >
                         <PlusIcon className="w-4 h-4" /> Add Marquee Item
                       </button>
@@ -648,7 +648,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, newBundles);
                                   }}
                                   placeholder="e.g. Single"
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                                 />
                               </div>
                               <div>
@@ -662,7 +662,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, newBundles);
                                   }}
                                   placeholder="e.g. Most Popular"
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                                 />
                               </div>
                               <div className="grid grid-cols-2 gap-2">
@@ -677,7 +677,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                       updateBlock(block.id, newBundles);
                                     }}
                                     placeholder="50.00"
-                                    className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                                    className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                                   />
                                 </div>
                                 <div>
@@ -691,7 +691,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                       updateBlock(block.id, newBundles);
                                     }}
                                     placeholder="45.00"
-                                    className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm font-bold focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                                    className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                                   />
                                 </div>
                               </div>
@@ -742,7 +742,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                           newBundles.push({ title: 'New Bundle', badge: '', originalPrice: '', price: '', image: '' });
                           updateBlock(block.id, newBundles);
                         }}
-                        className="text-sm font-medium text-teal-600 hover:text-teal-700 flex items-center gap-1 mt-2"
+                        className="text-sm font-medium text-brand-600 hover:text-brand-700 flex items-center gap-1 mt-2"
                       >
                         <PlusIcon className="w-4 h-4" /> Add bundle
                       </button>
@@ -816,7 +816,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                   }}
                                   placeholder="I love the fact that these are organic..."
                                   rows={2}
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 resize-y"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 resize-y"
                                 />
                               </div>
                               <div>
@@ -830,7 +830,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, newTestimonials);
                                   }}
                                   placeholder="Emily R. - Verified Buyer"
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                                 />
                               </div>
                             </div>
@@ -844,7 +844,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                           newTestimonials.push({ quote: '', author: '', avatar: '' });
                           updateBlock(block.id, newTestimonials);
                         }}
-                        className="text-sm font-medium text-teal-600 hover:text-teal-700 flex items-center gap-1 mt-2"
+                        className="text-sm font-medium text-brand-600 hover:text-brand-700 flex items-center gap-1 mt-2"
                       >
                         <PlusIcon className="w-4 h-4" /> Add testimonial
                       </button>
@@ -879,7 +879,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, newAccordion);
                                   }}
                                   placeholder="e.g. Description or How to Use"
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                                 />
                               </div>
                               <div>
@@ -940,7 +940,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                           newAccordion.push({ title: '', content: '' });
                           updateBlock(block.id, newAccordion);
                         }}
-                        className="text-sm font-medium text-teal-600 hover:text-teal-700 flex items-center gap-1 mt-2"
+                        className="text-sm font-medium text-brand-600 hover:text-brand-700 flex items-center gap-1 mt-2"
                       >
                         <PlusIcon className="w-4 h-4" /> Add row
                       </button>
@@ -1049,7 +1049,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                           value={block.content?.title || ''}
                           onChange={(e) => updateBlock(block.id, { ...block.content, title: e.target.value })}
                           placeholder="e.g. Backed by Real Results"
-                          className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                         />
                       </div>
                       
@@ -1078,7 +1078,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, { ...block.content, items: newItems });
                                   }}
                                   placeholder="94"
-                                  className="w-full pl-3 pr-6 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                                  className="w-full pl-3 pr-6 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                                 />
                                 <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 text-sm">%</span>
                               </div>
@@ -1095,7 +1095,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, { ...block.content, items: newItems });
                                   }}
                                   placeholder="e.g. of participants"
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                                 />
                               </div>
                               <div>
@@ -1109,7 +1109,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                   }}
                                   placeholder="e.g. noticed a positive difference..."
                                   rows={2}
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 resize-y"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 resize-y"
                                 />
                               </div>
                             </div>
@@ -1122,7 +1122,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                           newItems.push({ percentage: '', label: '', description: '' });
                           updateBlock(block.id, { ...block.content, items: newItems });
                         }}
-                        className="text-sm font-medium text-teal-600 hover:text-teal-700 flex items-center gap-1 mt-2"
+                        className="text-sm font-medium text-brand-600 hover:text-brand-700 flex items-center gap-1 mt-2"
                       >
                         <PlusIcon className="w-4 h-4" /> Add stat
                       </button>
@@ -1139,7 +1139,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                             value={block.content?.score || ''}
                             onChange={(e) => updateBlock(block.id, { ...block.content, score: e.target.value })}
                             placeholder="e.g. 4.8"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                           />
                         </div>
                         <div>
@@ -1149,7 +1149,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                             value={block.content?.reviews || ''}
                             onChange={(e) => updateBlock(block.id, { ...block.content, reviews: e.target.value })}
                             placeholder="e.g. 8,300"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                           />
                         </div>
                       </div>
@@ -1177,7 +1177,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
                       placeholder="0.00"
-                      className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                      className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                     />
                   </div>
                 </div>
@@ -1190,7 +1190,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                       value={originalPrice}
                       onChange={(e) => setOriginalPrice(e.target.value)}
                       placeholder="0.00"
-                      className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                      className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                     />
                   </div>
                 </div>
@@ -1217,7 +1217,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                     type="number" 
                     value={stock}
                     onChange={(e) => setStock(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                   />
                 </div>
               </div>
@@ -1317,13 +1317,13 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
             <div className="grid grid-cols-2 gap-3">
               <button 
                 onClick={() => addBlock('text')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
               >
                 <PlusIcon className="w-5 h-5" /> Text
               </button>
               <button 
                 onClick={() => addBlock('heading')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 19.5H16.5v-1.609a2.25 2.25 0 0 1 1.244-2.012l2.89-1.445c.651-.326 1.116-.955 1.116-1.683 0-.498-.04-.987-.118-1.463-.135-.825-.835-1.422-1.668-1.489a15.202 15.202 0 0 0-3.464.12M2.243 4.492v7.5m0 0v7.502m0-7.501h10.5m0-7.5v7.5m0 0v7.501" />
@@ -1331,7 +1331,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
               </button>
                 <button 
                   onClick={() => addBlock('image')}
-                  className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all"
+                  className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
@@ -1339,55 +1339,55 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                 </button>
               <button 
                 onClick={() => addBlock('gif')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M12.75 8.25v7.5m6-7.5h-3V12m0 0v3.75m0-3.75H18M9.75 9.348c-1.03-1.464-2.698-1.464-3.728 0-1.03 1.465-1.03 3.84 0 5.304 1.03 1.464 2.699 1.464 3.728 0V12h-1.5M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" /></svg> GIF
               </button>
               <button 
                 onClick={() => addBlock('features')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
               >
                 <ListBulletIcon className="w-5 h-5" /> Features
               </button>
               <button 
                 onClick={() => addBlock('bundles')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
               >
                 <Square3Stack3DIcon className="w-5 h-5" /> Bundles
               </button>
               <button 
                 onClick={() => addBlock('testimonials')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
               >
                 <ChatBubbleBottomCenterTextIcon className="w-5 h-5" /> Testimonials
               </button>
               <button 
                 onClick={() => addBlock('accordion')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
               >
                 <QueueListIcon className="w-5 h-5" /> Description
               </button>
               <button 
                 onClick={() => addBlock('before_after')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
               >
                 <ViewColumnsIcon className="w-5 h-5" /> Before & After
               </button>
               <button 
                 onClick={() => addBlock('stats')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
               >
                 <ChartPieIcon className="w-5 h-5" /> Results / Stats
               </button>
               <button 
                 onClick={() => addBlock('rating')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
               >
                 <StarIcon className="w-5 h-5" /> Rating
               </button>
               <button 
                 onClick={() => addBlock('trust_marquee')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" /></svg> Trust Marquee
               </button>
@@ -1416,7 +1416,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                   placeholder="e.g. Footwear"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                 />
               </div>
             </div>

@@ -28,7 +28,7 @@ const STATUS_CONFIGS = {
     'Fulfilled': 'bg-amber-500',
     'Unfulfilled': 'bg-gray-400',
     'Canceled': 'bg-sky-400',
-    'Shipped': 'bg-teal-700',
+    'Shipped': 'bg-brand-700',
     'Processing': 'bg-red-600'
   }
 };

@@ -493,7 +493,9 @@ export default function ProductClient({ initialProduct }: { initialProduct: any 
             {/* Action Area */}
             <div className="action-area" ref={addToCartRef}>
               <div className="add-to-cart-container" onClick={() => {
-                router.push(`/checkout?package=${selectedPackage}`);
+                if (product?.id) {
+                  router.push(`/checkout?productId=${product.id}&package=${selectedPackage}`);
+                }
               }}>
                 <button className="add-to-cart text-[28px] sm:text-[32px]">
                   ORDER NOW
@@ -575,7 +577,9 @@ export default function ProductClient({ initialProduct }: { initialProduct: any 
             className="bg-[#f899a2] hover:bg-[#f6808b] text-white font-extrabold rounded-[30px] text-[17px] sm:text-[20px] transition-colors shadow-sm whitespace-nowrap ml-2 flex-shrink-0 flex items-center justify-center tracking-wide"
             style={{ padding: '0 18px', height: '48px' }}
             onClick={() => {
-              router.push(`/checkout?package=${selectedPackage}`);
+              if (product?.id) {
+                router.push(`/checkout?productId=${product.id}&package=${selectedPackage}`);
+              }
             }}
           >
             ORDER NOW

@@ -34,6 +34,8 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
   const [showFilters, setShowFilters] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -76,15 +78,29 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
       p.subtitle?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
+
+  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   const allSelected =
-    filteredProducts.length > 0 &&
-    filteredProducts.every((p) => selectedIds.has(p.id));
+    paginatedProducts.length > 0 &&
+    paginatedProducts.every((p) => selectedIds.has(p.id));
 
   const toggleAll = () => {
     if (allSelected) {
-      setSelectedIds(new Set());
+      const next = new Set(selectedIds);
+      paginatedProducts.forEach(p => next.delete(p.id));
+      setSelectedIds(next);
     } else {
-      setSelectedIds(new Set(filteredProducts.map((p) => p.id)));
+      const next = new Set(selectedIds);
+      paginatedProducts.forEach(p => next.add(p.id));
+      setSelectedIds(next);
     }
   };
 
@@ -197,7 +213,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
 
             {/* Body */}
             <tbody>
-              {filteredProducts.map((product) => (
+              {paginatedProducts.map((product) => (
                 <tr
                   key={product.id}
                   className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors duration-150 group"
@@ -335,6 +351,31 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
             <p className="text-sm text-gray-400">
               Try adjusting your search or filter criteria
             </p>
+          </div>
+        )}
+
+        {/* Pagination Controls */}
+        {!loading && filteredProducts.length > ITEMS_PER_PAGE && (
+          <div className="flex items-center justify-between px-5 py-4 border-t border-gray-100">
+            <div className="text-sm text-gray-500">
+              Showing <span className="font-medium">{(currentPage - 1) * ITEMS_PER_PAGE + 1}</span> to <span className="font-medium">{Math.min(currentPage * ITEMS_PER_PAGE, filteredProducts.length)}</span> of <span className="font-medium">{filteredProducts.length}</span> results
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                Previous
+              </button>
+              <button
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                Next
+              </button>
+            </div>
           </div>
         )}
       </div>

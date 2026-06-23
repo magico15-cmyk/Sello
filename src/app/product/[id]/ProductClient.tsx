@@ -104,8 +104,8 @@ const BeforeAfterSlider = ({ data }: { data: { title: string, subtitle: string, 
     
     return (
       <div className="ba-section">
-        <h2 className="ba-title" style={{ textAlign: data?.titleAlign || 'center' }} dangerouslySetInnerHTML={{ __html: data?.title || 'Real Results' }} />
-        <p className="ba-desc" style={{ textAlign: data?.subtitleAlign || 'center' }} dangerouslySetInnerHTML={{ __html: data?.subtitle || 'See the difference our product makes.' }} />
+        <div className="ba-title" style={{ textAlign: data?.titleAlign || 'center' }} dangerouslySetInnerHTML={{ __html: data?.title || 'Real Results' }} />
+        <div className="ba-desc" style={{ textAlign: data?.subtitleAlign || 'center' }} dangerouslySetInnerHTML={{ __html: data?.subtitle || 'See the difference our product makes.' }} />
       
       <div className="relative w-full max-w-[400px] aspect-square rounded-full overflow-hidden bg-gray-200 mx-auto">
         
@@ -532,7 +532,7 @@ export default function ProductClient({ initialProduct }: { initialProduct: any 
                         ? { text: block.content, align: 'left', color: '#111827' }
                         : block.content || { text: '', align: 'left', color: '#111827' };
                       return (
-                        <h2 
+                        <div 
                           key={idx} 
                           className="text-2xl font-bold mt-8 mb-4"
                           style={{ textAlign: content.align, color: content.color }}

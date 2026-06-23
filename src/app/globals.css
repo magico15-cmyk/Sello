@@ -1180,3 +1180,112 @@ h1, h2, h3, h4 { font-weight: 600; }
     }
 }
 
+/* ──── Seamless Stitch Effect ──── */
+.workspace-item {
+    transition: all 0.2s ease-in-out;
+}
+.workspace-item.active {
+    width: 60px; /* 72px parent width minus 12px left margin */
+    align-self: flex-end; /* Push to the right edge to seamlessly connect */
+    height: 60px;
+    background-color: #fdf0f1;
+    border-radius: 34px 0 0 34px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 6px;
+    position: relative;
+    z-index: 10;
+}
+
+.workspace-item.active::before,
+.workspace-item.active::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.workspace-item.active::before {
+    top: -24px;
+    background: radial-gradient(circle at top left, transparent 24px, #fdf0f1 24.5px);
+}
+
+.workspace-item.active::after {
+    bottom: -24px;
+    background: radial-gradient(circle at bottom left, transparent 24px, #fdf0f1 24.5px);
+}
+
+/* ──── Isolated Menu Card ──── */
+.menu-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+}
+
+.ws-icon-w {
+    width: 44px;
+    height: 44px;
+    background-color: #ffffff;
+    color: #f899a2;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #f899a2;
+    position: relative;
+    z-index: 20;
+}
+
+/* ──── Custom visible scrollbar for scrollable areas ──── */
+@supports (-moz-appearance: none) {
+  .custom-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #f899a2 transparent;
+  }
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #f899a2;
+  border-radius: 9999px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #e26343;
+}
+.custom-scroll::-webkit-scrollbar-button {
+  display: none;
+  width: 0px;
+  height: 0px;
+}
+
+/* ──── Mobile Safe Area & Bottom Nav ──── */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Hide scrollbar for horizontal scrolling cards */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

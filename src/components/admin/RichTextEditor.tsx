@@ -98,7 +98,6 @@ export default function RichTextEditor({
             </button>
           </div>
         </div>
-        <span className="text-xs text-gray-400 italic ml-1">(Highlight text first)</span>
       </div>
       <div 
         ref={editorRef}

@@ -368,6 +368,28 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
               >
                 Previous
               </button>
+              
+              {/* Page Numbers */}
+              <div className="flex items-center gap-1 hidden sm:flex">
+                {Array.from({ length: totalPages }).map((_, i) => {
+                  const pageNumber = i + 1;
+                  // For many pages, we might want to truncate, but this is fine for now
+                  return (
+                    <button
+                      key={pageNumber}
+                      onClick={() => setCurrentPage(pageNumber)}
+                      className={`w-8 h-8 flex items-center justify-center text-sm font-medium rounded-lg transition-colors ${
+                        currentPage === pageNumber
+                          ? "bg-teal-500 text-white border border-teal-500"
+                          : "text-gray-700 bg-white border border-gray-300 hover:bg-gray-50"
+                      }`}
+                    >
+                      {pageNumber}
+                    </button>
+                  );
+                })}
+              </div>
+
               <button
                 onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}

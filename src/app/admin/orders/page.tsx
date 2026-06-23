@@ -186,7 +186,7 @@ export default function OrdersPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
-              {mockOrders.map((order, i) => (
+              {orders.map((order, i) => (
                 <tr key={i} className="hover:bg-gray-50/50 transition-colors">
                   <td className="px-6 py-4 text-teal-600 font-medium">{order.ref}</td>
                   <td className="px-6 py-4 text-gray-500">{order.date}</td>

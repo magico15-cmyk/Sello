@@ -522,10 +522,9 @@ export default function ProductClient({ initialProduct }: { initialProduct: any 
                         <div 
                           key={idx} 
                           className="leading-relaxed whitespace-pre-wrap"
-                          style={{ textAlign: content.align, color: content.color }}
-                        >
-                          {content.text}
-                        </div>
+                          style={{ textAlign: content.align, color: content.color || '#4B5563' }}
+                          dangerouslySetInnerHTML={{ __html: content.text }}
+                        />
                       );
                     }
                   case 'heading':

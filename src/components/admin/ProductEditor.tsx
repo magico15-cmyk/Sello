@@ -22,6 +22,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 import CustomSelect from "./CustomSelect";
+import RichTextEditor from "./RichTextEditor";
 
 interface ContentBlock {
   id: string;
@@ -432,23 +433,12 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                   Right
                                 </button>
                               </div>
-                              <div className="flex items-center gap-2">
-                                <label className="text-xs font-medium text-gray-500">Color</label>
-                                <input 
-                                  type="color" 
-                                  value={content.color}
-                                  onChange={(e) => updateBlock(block.id, { ...content, color: e.target.value })}
-                                  className="w-8 h-8 rounded cursor-pointer border-0 p-0"
-                                />
-                              </div>
                             </div>
-                            <textarea 
+                            <RichTextEditor 
                               value={content.text}
-                              onChange={(e) => updateBlock(block.id, { ...content, text: e.target.value })}
-                              placeholder="Write your text here..."
-                              rows={4}
-                              style={{ textAlign: content.align, color: content.color }}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors resize-y"
+                              onChange={(val) => updateBlock(block.id, { ...content, text: val })}
+                              align={content.align}
+                              color="#4B5563"
                             />
                           </div>
                         );

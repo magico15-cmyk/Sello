@@ -82,7 +82,133 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
   };
 
   // Initialize blocks
-  const defaultBlocks = [{ id: '1', type: 'text', content: '' }];
+  const defaultBlocks: ContentBlock[] = [
+    {
+      "id": "g0e17pr8i",
+      "type": "rating",
+      "content": {
+        "score": "4.8",
+        "reviews": "1,328"
+      }
+    },
+    {
+      "id": "z95u1m8x8",
+      "type": "features",
+      "content": [
+        "Sleep Monitor, Stress Tracking",
+        "Heart Rate Monitor",
+        "Bluetooth Call and Message"
+      ]
+    },
+    {
+      "id": "gp8ef3fki",
+      "type": "bundles",
+      "content": [
+        {
+          "badge": "",
+          "image": "https://jkejurvqypiytxrgylde.supabase.co/storage/v1/object/public/products/8fwgjf1r26.jpg",
+          "price": "39",
+          "title": "Two watches",
+          "originalPrice": "59"
+        },
+        {
+          "badge": "Best Sale",
+          "image": "https://jkejurvqypiytxrgylde.supabase.co/storage/v1/object/public/products/n7f9sy4ybv.jpg",
+          "price": "19",
+          "title": "Single",
+          "originalPrice": "29"
+        },
+        {
+          "badge": "Best value",
+          "image": "https://jkejurvqypiytxrgylde.supabase.co/storage/v1/object/public/products/5stjyfn66e4.jpg",
+          "price": "79",
+          "title": "three watches",
+          "originalPrice": "129"
+        }
+      ]
+    },
+    {
+      "id": "4m72nesho",
+      "type": "testimonials",
+      "content": [
+        {
+          "quote": "I've been taking this turmeric for a month and the difference in my joints is incredible. I can finally garden without pain!",
+          "author": "Hamid",
+          "avatar": "https://jkejurvqypiytxrgylde.supabase.co/storage/v1/object/public/products/098y9hgl3xyi.jfif"
+        },
+        {
+          "quote": "I've been taking this turmeric for a month and the difference in my joints is incredible. I can finally garden without pain!",
+          "author": "Samir",
+          "avatar": "https://jkejurvqypiytxrgylde.supabase.co/storage/v1/object/public/products/x7dyiq3mfra.jfif"
+        },
+        {
+          "quote": "I've been taking this turmeric for a month and the difference in my joints is incredible. I can finally garden without pain!",
+          "author": "Mehdi",
+          "avatar": "https://jkejurvqypiytxrgylde.supabase.co/storage/v1/object/public/products/tj2kxv5t53m.jfif"
+        }
+      ]
+    },
+    {
+      "id": "gx1o3m83l",
+      "type": "accordion",
+      "content": [
+        {
+          "title": "Description",
+          "content": "Learn to manage stress, sleep better and live healthier with Sense 2 – an advanced health and fitness smartwatch\nManage stress and live healthier: All-day stress detection with cEDA and daily Stress Management Score, ECG app for atrial fibrillation assessment[1], irregular heart rhythm notifications[2], SpO2[3], health metrics dashboard[4], mindfulness content\n\nMeasure and improve sleep quality: Daily sleep stages and Sleep Score, smart wake alarm and do not disturb mode\nEnhance activity: Built-in GPS and workout intensity map, Daily Readiness Score, Active Zone Minutes, all-day activity tracking and 24/7 heart rate, 40+ exercise modes and automatic exercise tracking, water resistant to 50 meters\n\nDesigned for all-day wear: On-wrist Bluetooth calls, texts and phone notifications[5], customizable clock faces, Amazon Alexa built-in[6], Google Wallet & Maps, 6+ day battery[7]"
+        },
+        {
+          "title": "How to Use",
+          "content": "Sense 2 is sleek and slim with raised band attachments that make it more comfortable for all-day wear; both small and large sizes included; small size fits wrist 5.1-7 inches in circumference; large size fits wrist 6.5-8.6 inches in circumference"
+        },
+        {
+          "title": "Ingredients",
+          "content": "Includes a 3-month Google Health Premium membership complete with personalized coaching, advanced analytics, and more[8]"
+        }
+      ]
+    },
+    {
+      "id": "vat86t38e",
+      "type": "before_after",
+      "content": {
+        "title": "Real Results",
+        "subtitle": "See the difference our product makes.",
+        "afterImage": "https://jkejurvqypiytxrgylde.supabase.co/storage/v1/object/public/products/1xy9fshj4fqh.jpg",
+        "beforeImage": "https://jkejurvqypiytxrgylde.supabase.co/storage/v1/object/public/products/ns3xcgy4jsg.jpg"
+      }
+    },
+    {
+      "id": "6oozije5i",
+      "type": "trust_marquee",
+      "content": [
+        "30-DAY MONEY BACK GUARANTEE 😊",
+        "800,000+ HAPPY CUSTOMERS 😊"
+      ]
+    },
+    {
+      "id": "wo5kbiw4w",
+      "type": "stats",
+      "content": {
+        "items": [
+          {
+            "label": "of participants",
+            "percentage": "94",
+            "description": "noticed a positive difference in their wellbeing within weeks."
+          },
+          {
+            "label": "of users",
+            "percentage": "99",
+            "description": "reported fewer digestive issues when taking daily."
+          },
+          {
+            "label": "said they ",
+            "percentage": "96",
+            "description": "would recommend Yu Turmeric to a friend or family member."
+          }
+        ],
+        "title": "Backed by Real Results"
+      }
+    }
+  ] as ContentBlock[];
   const [blocks, setBlocks] = useState<ContentBlock[]>(
     initialData?.content_blocks && Array.isArray(initialData.content_blocks) && initialData.content_blocks.length > 0
       ? initialData.content_blocks 

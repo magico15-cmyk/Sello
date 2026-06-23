@@ -144,7 +144,7 @@ export default function Sidebar() {
                             className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors duration-150 
 ${
                               isChildActive
-                                ? "bg-teal-50 text-teal-600 font-medium border-l-2 border-teal-500"
+                                ? "text-brand-500 font-medium"
                                 : "text-gray-400 hover:text-gray-600 hover:bg-gray-50"
                             }`}
                           >

@@ -56,26 +56,49 @@ export default function RichTextEditor({
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center gap-2 mb-2 pb-2 border-b border-gray-100">
+      <div className="flex items-center gap-3 mb-2 pb-2 border-b border-gray-100">
         <label className="text-xs font-medium text-gray-500">Color selected text:</label>
-        <div className="flex items-center">
-          <span className="text-gray-400 text-sm border border-r-0 border-gray-300 rounded-l-lg px-2 py-1 bg-gray-50">#</span>
+        <div className="flex items-center gap-2">
           <input 
-            type="text" 
-            value={hexColor.replace('#', '')}
-            onChange={(e) => setHexColor(e.target.value)}
-            placeholder="FE7F2D"
-            maxLength={6}
-            className="w-20 px-2 py-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-sm"
+            type="color" 
+            value={hexColor.startsWith('#') ? hexColor : (hexColor ? `#${hexColor}` : '#000000')}
+            onChange={(e) => {
+              setHexColor(e.target.value);
+              
+              const color = e.target.value;
+              const sel = window.getSelection();
+              if (savedRange && sel) {
+                sel.removeAllRanges();
+                sel.addRange(savedRange);
+              }
+              document.execCommand('styleWithCSS', false, 'true');
+              document.execCommand('foreColor', false, color);
+              if (editorRef.current) {
+                onChange(editorRef.current.innerHTML);
+              }
+            }}
+            className="w-7 h-7 rounded cursor-pointer border border-gray-200 p-0 shadow-sm"
+            title="Pick a color from palette"
           />
-          <button 
-            onClick={handleApplyColor}
-            className="px-3 py-1 bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium rounded-r-lg transition-colors border border-teal-600 hover:border-teal-700"
-          >
-            Apply
-          </button>
+          <div className="flex items-center">
+            <span className="text-gray-400 text-sm border border-r-0 border-gray-300 rounded-l-lg px-2 py-1 bg-gray-50">#</span>
+            <input 
+              type="text" 
+              value={hexColor.replace('#', '')}
+              onChange={(e) => setHexColor(e.target.value)}
+              placeholder="FE7F2D"
+              maxLength={6}
+              className="w-20 px-2 py-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-sm"
+            />
+            <button 
+              onClick={handleApplyColor}
+              className="px-3 py-1 bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium rounded-r-lg transition-colors border border-teal-600 hover:border-teal-700"
+            >
+              Apply
+            </button>
+          </div>
         </div>
-        <span className="text-xs text-gray-400 italic ml-2">(Highlight text first)</span>
+        <span className="text-xs text-gray-400 italic ml-1">(Highlight text first)</span>
       </div>
       <div 
         ref={editorRef}

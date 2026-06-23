@@ -272,6 +272,10 @@
     justify-content: center;
     padding: 30px;
     overflow: hidden;
+    /* iOS Safari overflow:hidden fix */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 .hero-image-clean img {
     max-width: 100%;

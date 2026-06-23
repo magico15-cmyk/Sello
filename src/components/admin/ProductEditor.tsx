@@ -37,17 +37,17 @@ interface ContentBlock {
 }
 
 const blockIcons: Record<string, React.ReactNode> = {
-  rating: <StarIcon className="w-4 h-4 text-amber-500" />,
-  features: <ListBulletIcon className="w-4 h-4 text-emerald-500" />,
-  bundles: <Square3Stack3DIcon className="w-4 h-4 text-violet-500" />,
-  testimonials: <ChatBubbleBottomCenterTextIcon className="w-4 h-4 text-sky-500" />,
-  accordion: <DocumentTextIcon className="w-4 h-4 text-orange-500" />,
-  before_after: <ArrowsRightLeftIcon className="w-4 h-4 text-pink-500" />,
-  text: <DocumentTextIcon className="w-4 h-4 text-gray-500" />,
-  heading: <SparklesIcon className="w-4 h-4 text-indigo-500" />,
-  image: <PhotoIcon className="w-4 h-4 text-teal-500" />,
-  stats: <PresentationChartBarIcon className="w-4 h-4 text-blue-500" />,
-  trust_marquee: <MegaphoneIcon className="w-4 h-4 text-rose-500" />,
+  text: <PlusIcon className="w-4 h-4 text-gray-400" />,
+  heading: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4 text-gray-400"><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 19.5H16.5v-1.609a2.25 2.25 0 0 1 1.244-2.012l2.89-1.445c.651-.326 1.116-.955 1.116-1.683 0-.498-.04-.987-.118-1.463-.135-.825-.835-1.422-1.668-1.489a15.202 15.202 0 0 0-3.464.12M2.243 4.492v7.5m0 0v7.502m0-7.501h10.5m0-7.5v7.5m0 0v7.501" /></svg>,
+  image: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4 text-gray-400"><path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg>,
+  features: <ListBulletIcon className="w-4 h-4 text-gray-400" />,
+  bundles: <Square3Stack3DIcon className="w-4 h-4 text-gray-400" />,
+  testimonials: <ChatBubbleBottomCenterTextIcon className="w-4 h-4 text-gray-400" />,
+  accordion: <QueueListIcon className="w-4 h-4 text-gray-400" />,
+  before_after: <ViewColumnsIcon className="w-4 h-4 text-gray-400" />,
+  stats: <ChartPieIcon className="w-4 h-4 text-gray-400" />,
+  rating: <StarIcon className="w-4 h-4 text-gray-400" />,
+  trust_marquee: <Bars3Icon className="w-4 h-4 text-gray-400" />,
 };
 
 export default function ProductEditor({ initialData }: { initialData?: any }) {

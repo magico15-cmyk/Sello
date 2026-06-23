@@ -129,7 +129,6 @@ export default function OrdersPage() {
         setOrders(data);
       }
     } catch (error) {
-      console.error('Error fetching orders:', error);
       // Fallback to mock data if table doesn't exist yet for demo purposes
       setOrders(initialMockOrders);
     } finally {

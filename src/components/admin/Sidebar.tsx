@@ -49,15 +49,24 @@ export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const [activeItem, setActiveItem] = useState("Product");
-  const [activeChild, setActiveChild] = useState("All products");
   const [expandedItem, setExpandedItem] = useState<string | null>("Product");
 
+  let activeChild = "";
+  if (pathname === "/admin/products/new") {
+    activeChild = "New product";
+  } else if (pathname === "/admin/categories") {
+    activeChild = "Categories";
+  } else if (pathname?.startsWith("/admin")) {
+    activeChild = "All products";
+  }
+
   const handleChildClick = (child: string) => {
-    setActiveChild(child);
     if (child === "New product") {
       router.push("/admin/products/new");
     } else if (child === "All products") {
       router.push("/admin");
+    } else if (child === "Categories") {
+      // router.push("/admin/categories");
     }
   };
 

@@ -18,6 +18,18 @@ export default function RichTextEditor({
 
   const [hexColor, setHexColor] = useState('');
 
+  useEffect(() => {
+    const saved = localStorage.getItem('sello_rich_text_color');
+    if (saved) {
+      setHexColor(saved);
+    }
+  }, []);
+
+  const updateColor = (newColor: string) => {
+    setHexColor(newColor);
+    localStorage.setItem('sello_rich_text_color', newColor);
+  };
+
   // Initialize value only once to avoid cursor jumping
   useEffect(() => {
     if (editorRef.current && !editorRef.current.innerHTML && value) {
@@ -63,7 +75,7 @@ export default function RichTextEditor({
             type="color" 
             value={hexColor.startsWith('#') ? hexColor : (hexColor ? `#${hexColor}` : '#000000')}
             onChange={(e) => {
-              setHexColor(e.target.value);
+              updateColor(e.target.value);
               
               const color = e.target.value;
               const sel = window.getSelection();
@@ -85,7 +97,7 @@ export default function RichTextEditor({
             <input 
               type="text" 
               value={hexColor.replace('#', '')}
-              onChange={(e) => setHexColor(e.target.value)}
+              onChange={(e) => updateColor(e.target.value)}
               placeholder="FE7F2D"
               maxLength={6}
               className="w-20 px-2 py-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-sm"

@@ -119,7 +119,7 @@ export default function CheckoutClient({ product, selectedPkg }: { product: any,
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} suppressHydrationWarning>
             
             <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #d1d5db', borderRadius: '6px', overflow: 'hidden' }}>
               <div style={{ width: '45px', backgroundColor: '#e5e7eb', display: 'flex', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', borderRight: '1px solid #d1d5db' }}>
@@ -133,6 +133,7 @@ export default function CheckoutClient({ product, selectedPkg }: { product: any,
                 onChange={handleInputChange}
                 style={{ flex: 1, padding: '12px 14px', fontSize: '16px', border: 'none', outline: 'none' }}
                 placeholder="Full name"
+                suppressHydrationWarning
               />
             </div>
 
@@ -148,6 +149,7 @@ export default function CheckoutClient({ product, selectedPkg }: { product: any,
                 onChange={handleInputChange}
                 style={{ flex: 1, padding: '12px 14px', fontSize: '16px', border: 'none', outline: 'none' }}
                 placeholder="Phone number"
+                suppressHydrationWarning
               />
             </div>
 
@@ -163,6 +165,7 @@ export default function CheckoutClient({ product, selectedPkg }: { product: any,
                 onChange={handleInputChange}
                 style={{ flex: 1, padding: '12px 14px', fontSize: '16px', border: 'none', outline: 'none' }}
                 placeholder="City"
+                suppressHydrationWarning
               />
             </div>
 
@@ -178,6 +181,7 @@ export default function CheckoutClient({ product, selectedPkg }: { product: any,
                 onChange={handleInputChange}
                 style={{ flex: 1, padding: '12px 14px', fontSize: '16px', border: 'none', outline: 'none' }}
                 placeholder="Address (Road, House number)"
+                suppressHydrationWarning
               />
             </div>
 

@@ -387,7 +387,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                       ) : (
                         <ChevronRightIcon className="w-4 h-4 text-gray-400" />
                       )}
-                      <span className="text-xs font-semibold uppercase tracking-wider">{block.type}</span>
+                      <span className="text-xs font-semibold uppercase tracking-wider">{block.type === 'accordion' ? 'Description' : block.type.replace('_', ' ')}</span>
                     </div>
                     <button 
                       onClick={(e) => {
@@ -1189,7 +1189,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                 onClick={() => addBlock('accordion')}
                 className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all text-center"
               >
-                <QueueListIcon className="w-5 h-5" /> Accordion
+                <QueueListIcon className="w-5 h-5" /> Description
               </button>
               <button 
                 onClick={() => addBlock('before_after')}

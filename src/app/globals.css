@@ -1303,12 +1303,20 @@
   100% { left: 100%; }
 }
 
+@-webkit-keyframes shine {
+  0% { left: -100%; }
+  20% { left: 100%; }
+  100% { left: 100%; }
+}
+
 .btn-shine {
   position: relative;
   overflow: hidden;
   /* Fix for iOS Safari to enforce overflow:hidden on elements with border-radius */
-  transform: translateZ(0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   -webkit-mask-image: -webkit-radial-gradient(white, black);
+  isolation: isolate;
 }
 
 .btn-shine::after {
@@ -1318,8 +1326,11 @@
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  /* Increased opacity for better visibility on bright pink */
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+  -webkit-transform: skewX(-20deg);
   transform: skewX(-20deg);
+  -webkit-animation: shine 3s infinite;
   animation: shine 3s infinite;
   pointer-events: none;
   z-index: 10;

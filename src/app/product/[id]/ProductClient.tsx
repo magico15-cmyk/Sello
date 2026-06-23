@@ -507,17 +507,7 @@ export default function ProductClient({ initialProduct }: { initialProduct: any 
               </div>
             </div>
 
-            {/* Trust Marquee */}
-            <div className="bg-[#f899a2] mb-8 relative overflow-hidden" style={{ height: '40px', marginLeft: '-20px', marginRight: '-20px' }}>
-              <div className="absolute top-0 left-0 h-full flex items-center scroll-track" style={{ animationDuration: '20s', width: 'max-content' }}>
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="scroll-content flex items-center h-full">
-                    <span className="scroll-item whitespace-nowrap">30-DAY MONEY BACK GUARANTEE 😊</span>
-                    <span className="scroll-item whitespace-nowrap">800,000+ HAPPY CUSTOMERS 😊</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+
 
             {/* Dynamic Content Blocks */}
             <div className="dynamic-blocks-container mb-20 flex flex-col gap-10">
@@ -535,6 +525,20 @@ export default function ProductClient({ initialProduct }: { initialProduct: any 
                   default:
                     // Handled in the fixed top section
                     return null;
+                  case 'trust_marquee':
+                    return (
+                      <div key={idx} className="bg-[#f899a2] mb-8 relative overflow-hidden" style={{ height: '40px', marginLeft: '-20px', marginRight: '-20px' }}>
+                        <div className="absolute top-0 left-0 h-full flex items-center scroll-track" style={{ animationDuration: '20s', width: 'max-content' }}>
+                          {[...Array(6)].map((_, i) => (
+                            <div key={i} className="scroll-content flex items-center h-full">
+                              {(Array.isArray(block.content) ? block.content : []).map((item: string, itemIdx: number) => (
+                                <span key={itemIdx} className="scroll-item whitespace-nowrap">{item}</span>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
                   case 'testimonials':
                     return <TestimonialCarousel key={idx} data={block.content} />;
                   case 'accordion':

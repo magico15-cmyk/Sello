@@ -23,7 +23,7 @@ import CustomSelect from "./CustomSelect";
 
 interface ContentBlock {
   id: string;
-  type: 'text' | 'image' | 'heading' | 'features' | 'bundles' | 'testimonials' | 'accordion' | 'before_after' | 'stats' | 'rating';
+  type: 'text' | 'image' | 'heading' | 'features' | 'bundles' | 'testimonials' | 'accordion' | 'before_after' | 'stats' | 'rating' | 'trust_marquee';
   content: any;
 }
 
@@ -85,7 +85,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
       : defaultBlocks
   );
 
-  const addBlock = (type: 'text' | 'image' | 'heading' | 'features' | 'bundles' | 'testimonials' | 'accordion' | 'before_after' | 'stats' | 'rating') => {
+  const addBlock = (type: 'text' | 'image' | 'heading' | 'features' | 'bundles' | 'testimonials' | 'accordion' | 'before_after' | 'stats' | 'rating' | 'trust_marquee') => {
     const defaultContent = 
       type === 'features' ? [''] : 
       type === 'bundles' ? [{ title: 'Single', badge: '', originalPrice: '', price: '', image: '' }] : 
@@ -95,6 +95,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
         { title: 'How to Use', content: '' },
         { title: 'Ingredients', content: '' }
       ] :
+      type === 'trust_marquee' ? ['30-DAY MONEY BACK GUARANTEE 😊', '800,000+ HAPPY CUSTOMERS 😊'] :
       type === 'before_after' ? { title: 'Real Results', subtitle: 'See the difference our product makes.', beforeImage: '', afterImage: '' } :
       type === 'stats' ? { title: 'Backed by Real Results', items: [{ percentage: '94', label: 'of participants', description: 'noticed a positive difference in their wellbeing within weeks.' }] } :
       type === 'rating' ? { score: '4.8', reviews: '8,300' } :
@@ -322,6 +323,46 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                         className="text-sm font-medium text-teal-600 hover:text-teal-700 flex items-center gap-1 mt-2"
                       >
                         <PlusIcon className="w-4 h-4" /> Add feature
+                      </button>
+                    </div>
+                  )}
+
+                  {block.type === 'trust_marquee' && (
+                    <div className="space-y-3">
+                      <p className="text-sm text-gray-500 mb-2">Add items to scroll in the trust marquee.</p>
+                      {(Array.isArray(block.content) ? block.content : []).map((item: string, i: number) => (
+                        <div key={i} className="flex items-center gap-3">
+                          <Bars3Icon className="w-6 h-6 text-pink-400 flex-shrink-0" />
+                          <input 
+                            type="text"
+                            value={item}
+                            onChange={(e) => {
+                              const newItems = Array.isArray(block.content) ? [...block.content] : [];
+                              newItems[i] = e.target.value;
+                              updateBlock(block.id, newItems);
+                            }}
+                            placeholder="Enter marquee item text (e.g. 30-DAY MONEY BACK GUARANTEE 😊)"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                          />
+                          <button 
+                            onClick={() => {
+                              const newItems = (Array.isArray(block.content) ? block.content : []).filter((_, idx) => idx !== i);
+                              updateBlock(block.id, newItems);
+                            }}
+                            className="text-gray-400 hover:text-red-500"
+                          >
+                            <TrashIcon className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                      <button 
+                        onClick={() => {
+                          const newItems = Array.isArray(block.content) ? [...block.content, ''] : [''];
+                          updateBlock(block.id, newItems);
+                        }}
+                        className="text-sm font-medium text-teal-600 hover:text-teal-700 flex items-center gap-1 mt-2"
+                      >
+                        <PlusIcon className="w-4 h-4" /> Add Marquee Item
                       </button>
                     </div>
                   )}
@@ -994,6 +1035,12 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                 className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all text-center"
               >
                 <StarIcon className="w-5 h-5" /> Rating
+              </button>
+              <button 
+                onClick={() => addBlock('trust_marquee')}
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl text-xs font-medium text-gray-700 hover:text-teal-700 transition-all text-center"
+              >
+                <Bars3Icon className="w-5 h-5" /> Trust Marquee
               </button>
             </div>
           </div>

@@ -56,7 +56,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this product?")) return;
+    if (!window.confirm("Are you sure you want to delete this product?")) return;
     
     // Optimistic UI update
     setProducts(prev => prev.filter(p => p.id !== id));
@@ -65,6 +65,40 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
     if (error) {
       alert("Failed to delete: " + error.message);
       fetchProducts(); // revert
+    }
+  };
+
+  const handleDuplicate = async (product: Product) => {
+    setLoading(true);
+    try {
+      // Remove id and createdAt so Supabase generates new ones
+      const { id, createdAt, ...productData } = product;
+      const newProduct = {
+        ...productData,
+        name: `${product.name} (Copy)`,
+        orders: 0,
+        visibility: "Hidden" // Keep duplicate as draft by default
+      };
+
+      const { data, error } = await supabase
+        .from('products')
+        .insert([newProduct])
+        .select()
+        .single();
+
+      if (error) throw error;
+      
+      if (data) {
+        const formatted = {
+          ...data,
+          createdAt: new Date(data.createdAt).toISOString().replace("T", " ").substring(0, 19)
+        };
+        setProducts(prev => [formatted, ...prev]);
+      }
+    } catch (err: any) {
+      alert("Failed to duplicate: " + err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -306,6 +340,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                     <div className="flex items-center justify-center gap-1 transition-opacity duration-200">
                       <button
                         title="View"
+                        onClick={() => window.open(`/product/${product.id}`, '_blank')}
                         className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
                       >
                         <EyeIcon className="w-4 h-4" />
@@ -326,6 +361,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                       </button>
                       <button
                         title="Duplicate"
+                        onClick={() => handleDuplicate(product)}
                         className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
                       >
                         <DocumentDuplicateIcon className="w-4 h-4" />

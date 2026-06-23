@@ -1317,13 +1317,13 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
             <div className="grid grid-cols-2 gap-3">
               <button 
                 onClick={() => addBlock('text')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all"
               >
                 <PlusIcon className="w-5 h-5" /> Text
               </button>
               <button 
                 onClick={() => addBlock('heading')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 19.5H16.5v-1.609a2.25 2.25 0 0 1 1.244-2.012l2.89-1.445c.651-.326 1.116-.955 1.116-1.683 0-.498-.04-.987-.118-1.463-.135-.825-.835-1.422-1.668-1.489a15.202 15.202 0 0 0-3.464.12M2.243 4.492v7.5m0 0v7.502m0-7.501h10.5m0-7.5v7.5m0 0v7.501" />
@@ -1331,7 +1331,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
               </button>
                 <button 
                   onClick={() => addBlock('image')}
-                  className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
+                  className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
@@ -1339,55 +1339,55 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                 </button>
               <button 
                 onClick={() => addBlock('gif')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M12.75 8.25v7.5m6-7.5h-3V12m0 0v3.75m0-3.75H18M9.75 9.348c-1.03-1.464-2.698-1.464-3.728 0-1.03 1.465-1.03 3.84 0 5.304 1.03 1.464 2.699 1.464 3.728 0V12h-1.5M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" /></svg> GIF
               </button>
               <button 
                 onClick={() => addBlock('features')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all"
               >
                 <ListBulletIcon className="w-5 h-5" /> Features
               </button>
               <button 
                 onClick={() => addBlock('bundles')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all"
               >
                 <Square3Stack3DIcon className="w-5 h-5" /> Bundles
               </button>
               <button 
                 onClick={() => addBlock('testimonials')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all text-center"
               >
                 <ChatBubbleBottomCenterTextIcon className="w-5 h-5" /> Testimonials
               </button>
               <button 
                 onClick={() => addBlock('accordion')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all text-center"
               >
                 <QueueListIcon className="w-5 h-5" /> Description
               </button>
               <button 
                 onClick={() => addBlock('before_after')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all text-center"
               >
                 <ViewColumnsIcon className="w-5 h-5" /> Before & After
               </button>
               <button 
                 onClick={() => addBlock('stats')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all text-center"
               >
                 <ChartPieIcon className="w-5 h-5" /> Results / Stats
               </button>
               <button 
                 onClick={() => addBlock('rating')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all text-center"
               >
                 <StarIcon className="w-5 h-5" /> Rating
               </button>
               <button 
                 onClick={() => addBlock('trust_marquee')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-200 rounded-xl text-xs font-medium text-gray-700 hover:text-brand-700 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all text-center"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" /></svg> Trust Marquee
               </button>

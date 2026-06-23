@@ -36,6 +36,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
   const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [productToDelete, setProductToDelete] = useState<number | null>(null);
+  const [isBulkDeleting, setIsBulkDeleting] = useState(false);
   const ITEMS_PER_PAGE = 10;
 
   const fetchProducts = async () => {
@@ -65,6 +66,22 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
     const { error } = await supabase.from("products").delete().eq("id", id);
     if (error) {
       alert("Failed to delete: " + error.message);
+      fetchProducts(); // revert
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    setIsBulkDeleting(false); // Close modal
+    
+    const idsToDelete = Array.from(selectedIds);
+    
+    // Optimistic UI update
+    setProducts(prev => prev.filter(p => !idsToDelete.includes(p.id)));
+    setSelectedIds(new Set()); // clear selection
+    
+    const { error } = await supabase.from("products").delete().in("id", idsToDelete);
+    if (error) {
+      alert("Failed to delete some products: " + error.message);
       fetchProducts(); // revert
     }
   };
@@ -155,16 +172,29 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col flex-1">
         {/* Search & Filter Bar */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-          {/* Search */}
-          <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 focus-within:ring-2 focus-within:ring-brand-400 focus-within:border-brand-400 focus-within:bg-white transition-all duration-200 w-72">
-            <MagnifyingGlassIcon className="w-4 h-4 text-gray-400 mr-2 flex-shrink-0" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search for products"
-              className="bg-transparent text-sm text-gray-700 placeholder-gray-400 outline-none w-full"
-            />
+          <div className="flex items-center gap-3">
+            {/* Search */}
+            <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 focus-within:ring-2 focus-within:ring-brand-400 focus-within:border-brand-400 focus-within:bg-white transition-all duration-200 w-72">
+              <MagnifyingGlassIcon className="w-4 h-4 text-gray-400 mr-2 flex-shrink-0" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search for products"
+                className="bg-transparent text-sm text-gray-700 placeholder-gray-400 outline-none w-full"
+              />
+            </div>
+            
+            {/* Bulk Actions */}
+            {selectedIds.size > 0 && (
+              <button
+                onClick={() => setIsBulkDeleting(true)}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors border border-red-100 hover:border-red-200"
+              >
+                <TrashIcon className="w-4 h-4" />
+                Delete Selected ({selectedIds.size})
+              </button>
+            )}
           </div>
 
           {/* Search Filters Button */}
@@ -470,6 +500,32 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                 className="px-4 py-2 text-sm font-semibold text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors shadow-sm"
               >
                 Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Bulk Delete Confirmation Modal */}
+      {isBulkDeleting && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity">
+          <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl transform transition-all border border-gray-100">
+            <h3 className="text-lg font-bold text-gray-900 mb-2">Delete {selectedIds.size} Products</h3>
+            <p className="text-gray-500 text-sm mb-6">
+              Are you sure you want to delete {selectedIds.size} products? This action cannot be undone.
+            </p>
+            <div className="flex items-center justify-end gap-3">
+              <button
+                onClick={() => setIsBulkDeleting(false)}
+                className="px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleBulkDelete}
+                className="px-4 py-2 text-sm font-semibold text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors shadow-sm"
+              >
+                Delete All
               </button>
             </div>
           </div>

@@ -395,25 +395,27 @@ export default function ProductClient({ initialProduct }: { initialProduct: any 
             {/* Hero Section */}
             <div className="hero-section">
               <button className="nav-arrow left" onClick={handlePrevImage}><ChevronLeft size={20} /></button>
-              <div className="hero-image-clean" style={{ position: 'relative' }}>
-                {images.map((img, idx) => (
-                  <img
-                    key={img}
-                    src={img}
-                    alt={`Product image ${idx + 1}`}
-                    style={{
-                      position: idx === 0 ? 'relative' : 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'contain',
-                      opacity: mainImage === img ? 1 : 0,
-                      transition: 'opacity 0.3s ease-in-out',
-                      pointerEvents: mainImage === img ? 'auto' : 'none',
-                    }}
-                  />
-                ))}
+              <div className="hero-image-clean">
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  {images.map((img, idx) => (
+                    <img
+                      key={img}
+                      src={img}
+                      alt={`Product image ${idx + 1}`}
+                      style={{
+                        position: idx === 0 ? 'relative' : 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        opacity: mainImage === img ? 1 : 0,
+                        transition: 'opacity 0.3s ease-in-out',
+                        pointerEvents: mainImage === img ? 'auto' : 'none',
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
               <button className="nav-arrow right" onClick={handleNextImage}><ChevronRight size={20} /></button>
             </div>

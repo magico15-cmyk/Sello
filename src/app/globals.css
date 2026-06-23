@@ -1172,6 +1172,201 @@ h1, h2, h3, h4 { font-weight: 600; }
     .footer-bottom-grid {
         margin: 0;
         align-items: flex-start;
+    color: #fff;
+    width: 100%;
+    padding-top: 60px;
+    margin-top: 0;
+}
+
+.footer-wave {
+    position: absolute;
+    top: -59px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.wave-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+}
+
+.wave-1 path {
+    fill: rgba(248, 153, 162, 0.4);
+}
+
+.wave-2 path {
+    fill: var(--primary-pink);
+}
+
+.wave-1 {
+    animation: wave-drift 7s linear infinite;
+}
+
+.wave-3 path {
+    fill: rgba(248, 153, 162, 0.7);
+}
+
+.wave-3 {
+    animation: wave-drift 9s linear infinite;
+}
+
+.wave-2 {
+    animation: wave-drift 11s linear infinite reverse;
+}
+
+@keyframes wave-drift {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+    text-align: center;
+}
+
+.footer-subscribe {
+    max-width: 400px;
+    margin: 0 auto 40px;
+}
+
+.footer-subscribe h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.footer-subscribe p {
+    font-size: 15px;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    margin-bottom: 20px;
+}
+
+.subscribe-form {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 4px;
+    padding: 5px;
+    background-color: rgba(255,255,255,0.15);
+}
+
+.subscribe-form input {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 15px;
+    outline: none;
+}
+
+.subscribe-form button {
+    background: transparent;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    padding: 0 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+.footer-divider {
+    height: 1px;
+    background-color: rgba(255,255,255,0.3);
+    margin: 40px 0;
+}
+
+.footer-bottom-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.footer-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.logo-box {
+    background-color: #fff;
+    color: var(--primary-pink);
+    font-size: 28px;
+    font-weight: 800;
+    padding: 10px 20px;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.footer-links h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+.stat-text strong {
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+/* Desktop layout: side-by-side */
+@media (min-width: 768px) {
+    .site-footer {
+        padding-top: 50px;
+    }
+    .footer-content {
+        padding: 0 40px 40px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: flex-start;
+        text-align: left;
+        max-width: 1000px;
+    }
+    .footer-subscribe {
+        margin: 0;
+        text-align: right;
+        flex: 1;
+        max-width: 380px;
+    }
+    .subscribe-form {
+        margin-left: auto;
+    }
+    .footer-divider {
+        display: none;
+    }
+    .footer-bottom-grid {
+        margin: 0;
+        align-items: flex-start;
         gap: 25px;
         flex: 1;
     }
@@ -1180,67 +1375,76 @@ h1, h2, h3, h4 { font-weight: 600; }
     }
 }
 
-/* ──── Seamless Stitch Effect ──── */
-.workspace-item {
-    transition: all 0.2s ease-in-out;
-}
-.workspace-item.active {
-    width: 60px; /* 72px parent width minus 12px left margin */
-    align-self: flex-end; /* Push to the right edge to seamlessly connect */
-    height: 60px;
-    background-color: #fdf0f1;
-    border-radius: 34px 0 0 34px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 6px;
-    position: relative;
-    z-index: 10;
+/* ──── Premium Dashboard Styles ──── */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(248, 153, 162, 0.1);
 }
 
-.workspace-item.active::before,
-.workspace-item.active::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    width: 24px;
-    height: 24px;
-    background: transparent;
-    pointer-events: none;
-    z-index: 10;
+.glass-nav {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(248, 153, 162, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 }
 
-.workspace-item.active::before {
-    top: -24px;
-    background: radial-gradient(circle at top left, transparent 24px, #fdf0f1 24.5px);
+.hover-glow {
+    transition: all 0.3s ease;
 }
 
-.workspace-item.active::after {
-    bottom: -24px;
-    background: radial-gradient(circle at bottom left, transparent 24px, #fdf0f1 24.5px);
+.hover-glow:hover {
+    box-shadow: 0 10px 40px -10px rgba(248, 153, 162, 0.5);
+    transform: translateY(-2px);
 }
 
-/* ──── Isolated Menu Card ──── */
-.menu-card {
-    background-color: #ffffff;
-    border-radius: 16px;
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-orange) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.ws-icon-w {
-    width: 44px;
-    height: 44px;
-    background-color: #ffffff;
-    color: #f899a2;
-    font-weight: bold;
-    font-size: 18px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #f899a2;
-    position: relative;
-    z-index: 20;
+.bg-gradient-sello {
+    background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-orange) 100%);
 }
+
+.bg-pattern {
+    background-color: #fafafc;
+    background-image: radial-gradient(#f899a2 0.5px, transparent 0.5px), radial-gradient(#f899a2 0.5px, #fafafc 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    background-attachment: fixed;
+    opacity: 0.9;
+}
+
+/* Animations */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(248, 153, 162, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(248, 153, 162, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(248, 153, 162, 0); }
+}
+
+@keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2s infinite; }
+.animate-fade-in-up { animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
 
 /* ──── Custom visible scrollbar for scrollable areas ──── */
 @supports (-moz-appearance: none) {
@@ -1251,8 +1455,8 @@ h1, h2, h3, h4 { font-weight: 600; }
 }
 
 .custom-scroll::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 .custom-scroll::-webkit-scrollbar-track {
   background: transparent;
@@ -1266,22 +1470,7 @@ h1, h2, h3, h4 { font-weight: 600; }
 }
 .custom-scroll::-webkit-scrollbar-button {
   display: none;
-  width: 0px;
-  height: 0px;
 }
-
-/* ──── Mobile Safe Area & Bottom Nav ──── */
-.safe-area-bottom {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .safe-area-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-}
-
-/* Hide scrollbar for horizontal scrolling cards */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

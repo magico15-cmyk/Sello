@@ -357,7 +357,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Short Sleeve T-Shirt"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
                 />
               </div>
             </div>
@@ -556,7 +556,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                               updateBlock(block.id, newFeatures);
                             }}
                             placeholder="Enter a feature..."
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
                           />
                           <button 
                             onClick={() => {
@@ -596,7 +596,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                               updateBlock(block.id, newItems);
                             }}
                             placeholder="Enter marquee item text (e.g. 30-DAY MONEY BACK GUARANTEE 😊)"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
                           />
                           <button 
                             onClick={() => {
@@ -648,7 +648,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, newBundles);
                                   }}
                                   placeholder="e.g. Single"
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
                                 />
                               </div>
                               <div>
@@ -662,7 +662,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, newBundles);
                                   }}
                                   placeholder="e.g. Most Popular"
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
                                 />
                               </div>
                               <div className="grid grid-cols-2 gap-2">
@@ -677,7 +677,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                       updateBlock(block.id, newBundles);
                                     }}
                                     placeholder="50.00"
-                                    className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                                    className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
                                   />
                                 </div>
                                 <div>
@@ -691,7 +691,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                       updateBlock(block.id, newBundles);
                                     }}
                                     placeholder="45.00"
-                                    className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                                    className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm font-bold focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
                                   />
                                 </div>
                               </div>
@@ -816,7 +816,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                   }}
                                   placeholder="I love the fact that these are organic..."
                                   rows={2}
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 resize-y"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-y"
                                 />
                               </div>
                               <div>
@@ -830,7 +830,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, newTestimonials);
                                   }}
                                   placeholder="Emily R. - Verified Buyer"
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
                                 />
                               </div>
                             </div>
@@ -879,7 +879,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, newAccordion);
                                   }}
                                   placeholder="e.g. Description or How to Use"
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
                                 />
                               </div>
                               <div>
@@ -1049,7 +1049,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                           value={block.content?.title || ''}
                           onChange={(e) => updateBlock(block.id, { ...block.content, title: e.target.value })}
                           placeholder="e.g. Backed by Real Results"
-                          className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
                         />
                       </div>
                       
@@ -1078,7 +1078,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, { ...block.content, items: newItems });
                                   }}
                                   placeholder="94"
-                                  className="w-full pl-3 pr-6 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                                  className="w-full pl-3 pr-6 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
                                 />
                                 <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 text-sm">%</span>
                               </div>
@@ -1095,7 +1095,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                     updateBlock(block.id, { ...block.content, items: newItems });
                                   }}
                                   placeholder="e.g. of participants"
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
                                 />
                               </div>
                               <div>
@@ -1109,7 +1109,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                                   }}
                                   placeholder="e.g. noticed a positive difference..."
                                   rows={2}
-                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 resize-y"
+                                  className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-y"
                                 />
                               </div>
                             </div>
@@ -1139,7 +1139,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                             value={block.content?.score || ''}
                             onChange={(e) => updateBlock(block.id, { ...block.content, score: e.target.value })}
                             placeholder="e.g. 4.8"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
                           />
                         </div>
                         <div>
@@ -1149,7 +1149,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                             value={block.content?.reviews || ''}
                             onChange={(e) => updateBlock(block.id, { ...block.content, reviews: e.target.value })}
                             placeholder="e.g. 8,300"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
                           />
                         </div>
                       </div>
@@ -1177,7 +1177,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
                       placeholder="0.00"
-                      className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
+                      className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
                     />
                   </div>
                 </div>
@@ -1190,7 +1190,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                       value={originalPrice}
                       onChange={(e) => setOriginalPrice(e.target.value)}
                       placeholder="0.00"
-                      className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
+                      className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
                     />
                   </div>
                 </div>
@@ -1217,7 +1217,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                     type="number" 
                     value={stock}
                     onChange={(e) => setStock(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
                   />
                 </div>
               </div>
@@ -1416,7 +1416,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                   placeholder="e.g. Footwear"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
                 />
               </div>
             </div>

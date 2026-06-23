@@ -227,7 +227,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                       type="checkbox"
                       checked={allSelected}
                       onChange={toggleAll}
-                      className="peer appearance-none w-full h-full border-2 border-gray-300 rounded focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 checked:bg-brand-500 checked:border-brand-500 cursor-pointer transition-all duration-200"
+                      className="peer appearance-none w-full h-full border-2 border-gray-300 rounded focus:ring-2 focus:ring-gray-900 focus:ring-offset-1 checked:bg-brand-500 checked:border-brand-500 cursor-pointer transition-all duration-200"
                     />
                     <svg className="absolute w-2.5 h-2.5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12"></polyline>
@@ -290,7 +290,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                         type="checkbox"
                         checked={selectedIds.has(product.id)}
                         onChange={() => toggleOne(product.id)}
-                        className="peer appearance-none w-full h-full border-2 border-gray-300 rounded focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 checked:bg-brand-500 checked:border-brand-500 cursor-pointer transition-all duration-200"
+                        className="peer appearance-none w-full h-full border-2 border-gray-300 rounded focus:ring-2 focus:ring-gray-900 focus:ring-offset-1 checked:bg-brand-500 checked:border-brand-500 cursor-pointer transition-all duration-200"
                       />
                       <svg className="absolute w-2.5 h-2.5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12"></polyline>

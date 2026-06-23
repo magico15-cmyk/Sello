@@ -130,7 +130,7 @@ export default function OrdersPage() {
             <input
               type="text"
               placeholder="Search for orders"
-              className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-brand-500"
+              className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -142,13 +142,13 @@ export default function OrdersPage() {
             <input
               type="text"
               placeholder="Search for products"
-              className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-brand-500"
+              className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900"
               value={productSearch}
               onChange={(e) => setProductSearch(e.target.value)}
             />
           </div>
           <div className="md:col-span-2 relative">
-            <select className="w-full pl-3 pr-8 py-2 appearance-none border border-gray-200 rounded-lg text-sm text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-brand-500">
+            <select className="w-full pl-3 pr-8 py-2 appearance-none border border-gray-200 rounded-lg text-sm text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-gray-900">
               <option>Confirmation status</option>
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
@@ -156,7 +156,7 @@ export default function OrdersPage() {
             </div>
           </div>
           <div className="md:col-span-3 relative">
-            <select className="w-full pl-3 pr-8 py-2 appearance-none border border-gray-200 rounded-lg text-sm text-gray-400 bg-white focus:outline-none focus:ring-1 focus:ring-brand-500">
+            <select className="w-full pl-3 pr-8 py-2 appearance-none border border-gray-200 rounded-lg text-sm text-gray-400 bg-white focus:outline-none focus:ring-1 focus:ring-gray-900">
               <option>Filter by status</option>
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">

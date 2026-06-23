@@ -929,64 +929,24 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
                       <div>
                         <div className="flex items-center justify-between mb-1">
                           <label className="block text-sm font-medium text-gray-700">Title</label>
-                          <div className="flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-lg p-1">
-                            <button 
-                              onClick={() => updateBlock(block.id, { ...block.content, titleAlign: 'left' })}
-                              className={`px-3 py-1 text-xs font-medium rounded-md ${(!block.content?.titleAlign || block.content.titleAlign === 'left') ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-                            >
-                              Left
-                            </button>
-                            <button 
-                              onClick={() => updateBlock(block.id, { ...block.content, titleAlign: 'center' })}
-                              className={`px-3 py-1 text-xs font-medium rounded-md ${block.content?.titleAlign === 'center' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-                            >
-                              Center
-                            </button>
-                            <button 
-                              onClick={() => updateBlock(block.id, { ...block.content, titleAlign: 'right' })}
-                              className={`px-3 py-1 text-xs font-medium rounded-md ${block.content?.titleAlign === 'right' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-                            >
-                              Right
-                            </button>
-                          </div>
                         </div>
                         <RichTextEditor 
                           id={`${block.id}-title`}
                           value={block.content?.title || ''}
                           onChange={(val) => updateBlock(block.id, { ...block.content, title: val })}
-                          align={block.content?.titleAlign || 'left'}
+                          align={block.content?.titleAlign || 'center'}
                           color="#111827"
                         />
                       </div>
                       <div>
                         <div className="flex items-center justify-between mb-1">
                           <label className="block text-sm font-medium text-gray-700">Subtitle</label>
-                          <div className="flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-lg p-1">
-                            <button 
-                              onClick={() => updateBlock(block.id, { ...block.content, subtitleAlign: 'left' })}
-                              className={`px-3 py-1 text-xs font-medium rounded-md ${(!block.content?.subtitleAlign || block.content.subtitleAlign === 'left') ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-                            >
-                              Left
-                            </button>
-                            <button 
-                              onClick={() => updateBlock(block.id, { ...block.content, subtitleAlign: 'center' })}
-                              className={`px-3 py-1 text-xs font-medium rounded-md ${block.content?.subtitleAlign === 'center' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-                            >
-                              Center
-                            </button>
-                            <button 
-                              onClick={() => updateBlock(block.id, { ...block.content, subtitleAlign: 'right' })}
-                              className={`px-3 py-1 text-xs font-medium rounded-md ${block.content?.subtitleAlign === 'right' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-                            >
-                              Right
-                            </button>
-                          </div>
                         </div>
                         <RichTextEditor 
                           id={`${block.id}-subtitle`}
                           value={block.content?.subtitle || ''}
                           onChange={(val) => updateBlock(block.id, { ...block.content, subtitle: val })}
-                          align={block.content?.subtitleAlign || 'left'}
+                          align={block.content?.subtitleAlign || 'center'}
                           color="#4B5563"
                         />
                       </div>

@@ -31,6 +31,7 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
   const router = useRouter();
   const isEditing = !!initialData;
   const [loading, setLoading] = useState(false);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
   const [title, setTitle] = useState(initialData?.name || "");
   const [price, setPrice] = useState(initialData?.price?.toString() || "");
@@ -217,13 +218,39 @@ export default function ProductEditor({ initialData }: { initialData?: any }) {
             
             <div className="space-y-4">
               {blocks.map((block, index) => (
-                <div key={block.id} className="relative group border border-gray-200 rounded-xl p-4 bg-gray-50/50 hover:border-gray-300 transition-colors">
+                <div 
+                  key={block.id} 
+                  draggable
+                  onDragStart={(e) => {
+                    setDraggedIndex(index);
+                    e.dataTransfer.setData('text/plain', index.toString());
+                    e.dataTransfer.effectAllowed = 'move';
+                  }}
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                  }}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    if (draggedIndex === null || draggedIndex === index) return;
+                    
+                    const newBlocks = [...blocks];
+                    const draggedBlock = newBlocks[draggedIndex];
+                    newBlocks.splice(draggedIndex, 1);
+                    newBlocks.splice(index, 0, draggedBlock);
+                    
+                    setBlocks(newBlocks);
+                    setDraggedIndex(null);
+                  }}
+                  onDragEnd={() => setDraggedIndex(null)}
+                  className={`relative group border border-gray-200 rounded-xl p-4 bg-gray-50/50 hover:border-gray-300 transition-colors ${draggedIndex === index ? 'opacity-50 border-dashed border-2 border-teal-500' : ''}`}
+                >
                   
                   {/* Block Header */}
                   <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2 text-gray-500">
-                      <Bars3Icon className="w-4 h-4" />
-                      <span className="text-xs font-semibold uppercase tracking-wider">{block.type}</span>
+                    <div className="flex items-center gap-2 text-gray-500 cursor-move" title="Drag to reorder">
+                      <Bars3Icon className="w-5 h-5 text-gray-400 hover:text-teal-600 transition-colors" />
+                      <span className="text-xs font-semibold uppercase tracking-wider select-none">{block.type}</span>
                     </div>
                     <button 
                       onClick={() => removeBlock(block.id)}

@@ -13,6 +13,7 @@ import {
   ArrowLeftOnRectangleIcon,
   ChevronDownIcon,
   ChevronRightIcon,
+  BuildingStorefrontIcon,
 } from "@heroicons/react/24/outline";
 import {
   Squares2X2Icon as Squares2X2Solid,
@@ -20,6 +21,7 @@ import {
   ShoppingBagIcon as ShoppingBagSolid,
   UsersIcon as UsersSolid,
   IdentificationIcon as IdentificationSolid,
+  BuildingStorefrontIcon as BuildingStorefrontSolid,
 } from "@heroicons/react/24/solid";
 
 interface NavItem {
@@ -38,6 +40,7 @@ const navItems: NavItem[] = [
     children: ["All products", "New product", "Categories"],
   },
   { label: "Orders", icon: ShoppingBagIcon, activeIcon: ShoppingBagSolid },
+  { label: "Store", icon: BuildingStorefrontIcon, activeIcon: BuildingStorefrontSolid },
   { label: "Roles", icon: UsersIcon, activeIcon: UsersSolid },
   { label: "Customer", icon: IdentificationIcon, activeIcon: IdentificationSolid },
 ];

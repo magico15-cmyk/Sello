@@ -1176,9 +1176,9 @@ h1, h2, h3, h4 { font-weight: 600; }
         flex: 1;
     }
     .footer-links ul {
-        align-items: flex-start;
     }
 }
+
 /* ──── Premium Dashboard Styles ──── */
 .glass-panel {
     background: rgba(255, 255, 255, 0.7);

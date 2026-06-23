@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { X, CheckCircle2, User, Phone, MapPin, Menu, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
@@ -11,7 +11,7 @@ const packages = [
   { id: 3, title: "Bundle", originalPrice: "$150.00", price: "$106.00", image: "/assets/bundle.png" }
 ];
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
   const packageId = parseInt(searchParams.get('package') || '2');
   
@@ -208,5 +208,13 @@ export default function CheckoutPage() {
       </div>
     </div>
     </>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#fafafc] text-gray-500 font-medium">Loading checkout...</div>}>
+      <CheckoutContent />
+    </Suspense>
   );
 }

@@ -40,9 +40,9 @@ const navItems: NavItem[] = [
     activeIcon: TagSolid,
     children: ["All products", "New product", "Categories"],
   },
+  { label: "Customer", icon: IdentificationIcon, activeIcon: IdentificationSolid },
   { label: "Store", icon: BuildingStorefrontIcon, activeIcon: BuildingStorefrontSolid },
   { label: "Roles", icon: UsersIcon, activeIcon: UsersSolid },
-  { label: "Customer", icon: IdentificationIcon, activeIcon: IdentificationSolid },
 ];
 
 const footerItems = [

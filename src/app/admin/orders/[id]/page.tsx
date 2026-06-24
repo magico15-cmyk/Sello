@@ -247,34 +247,7 @@ export default function OrderDetailsPage() {
             </div>
           </div>
 
-          {/* Custom Fields */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-            <h2 className="font-semibold text-gray-900 text-sm">Custom fields</h2>
-          </div>
 
-          {/* Shipping Address */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-            <h2 className="font-semibold text-gray-900 text-sm">Shipping address</h2>
-          </div>
-
-          {/* Billing Address */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-            <h2 className="font-semibold text-gray-900 text-sm">Billing address</h2>
-          </div>
-
-          {/* Tags */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-            <div className="p-4 border-b border-gray-100">
-              <h2 className="font-semibold text-gray-900 text-sm">Tags</h2>
-            </div>
-            <div className="p-4">
-              <input 
-                type="text" 
-                placeholder="Type in (comma separated)" 
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
-              />
-            </div>
-          </div>
 
           {/* Payment Info */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200">

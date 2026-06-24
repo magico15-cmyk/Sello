@@ -104,7 +104,7 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
   });
 
   return (
-    <div className="p-6 max-w-[1600px] mx-auto min-h-screen flex flex-col">
+    <div className="p-4 md:p-6 flex-1 min-w-0 flex flex-col min-h-screen">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Orders</h1>
       </div>

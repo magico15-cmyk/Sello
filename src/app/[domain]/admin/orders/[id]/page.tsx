@@ -121,28 +121,28 @@ export default function OrderDetailsPage() {
               </div>
             </div>
             
-            <div className="p-6 overflow-x-auto">
+            <div className="p-6 overflow-visible">
               <table className="w-full text-sm text-left whitespace-nowrap">
-                <thead className="text-xs text-gray-500 mb-4 block">
-                  <tr className="flex gap-12">
-                    <th className="font-medium pb-2 w-20">Order ref</th>
-                    <th className="font-medium pb-2 w-40">Ordered at</th>
-                    <th className="font-medium pb-2 w-40">Confirmation status</th>
-                    <th className="font-medium pb-2 w-32">Payment status</th>
-                    <th className="font-medium pb-2 w-32">Shipping status</th>
+                <thead className="text-xs text-gray-500">
+                  <tr>
+                    <th className="font-medium pb-4 pr-6">Order ref</th>
+                    <th className="font-medium pb-4 pr-6">Ordered at</th>
+                    <th className="font-medium pb-4 pr-6">Confirmation status</th>
+                    <th className="font-medium pb-4 pr-6">Payment status</th>
+                    <th className="font-medium pb-4">Shipping status</th>
                   </tr>
                 </thead>
-                <tbody className="block">
-                  <tr className="flex gap-12 items-center">
-                    <td className="w-20 font-medium text-blue-600">{order.ref}</td>
-                    <td className="w-40 text-gray-600">{order.date}</td>
-                    <td className="w-40">
+                <tbody>
+                  <tr>
+                    <td className="font-medium text-blue-600 pr-6">{order.ref}</td>
+                    <td className="text-gray-600 pr-6">{order.date}</td>
+                    <td className="pr-6">
                       <StatusDropdown type="confirmation" value={order.confStatus} onChange={(v) => updateOrder('confStatus', v)} />
                     </td>
-                    <td className="w-32">
+                    <td className="pr-6">
                       <StatusDropdown type="payment" value={order.payStatus} onChange={(v) => updateOrder('payStatus', v)} />
                     </td>
-                    <td className="w-32">
+                    <td>
                       <StatusDropdown type="shipping" value={order.shipStatus} onChange={(v) => updateOrder('shipStatus', v)} />
                     </td>
                   </tr>

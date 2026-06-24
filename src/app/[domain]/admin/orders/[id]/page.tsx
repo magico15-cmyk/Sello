@@ -311,13 +311,24 @@ export default function OrderDetailsPage() {
                 )}
               </div>
               {isEditingCustomer ? (
-                <div className="space-y-3 animate-in fade-in zoom-in-95 duration-200">
-                  <input type="text" value={customerForm.name} onChange={e => setCustomerForm({...customerForm, name: e.target.value})} className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition-all" placeholder="Customer name" />
-                  <input type="text" value={customerForm.phone} onChange={e => setCustomerForm({...customerForm, phone: e.target.value})} className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition-all" placeholder="Phone number" />
-                  <textarea value={customerForm.address} onChange={e => setCustomerForm({...customerForm, address: e.target.value})} className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-0 focus:border-gray-300 min-h-[80px] resize-y transition-all" placeholder="Shipping address"></textarea>
-                  <div className="flex gap-2 pt-1">
+                <div className="animate-in fade-in zoom-in-95 duration-200">
+                  <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm mb-4">
+                    <div className="px-3.5 py-2.5 border-b border-gray-100 focus-within:bg-gray-50/80 transition-colors">
+                      <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Customer Name</label>
+                      <input type="text" value={customerForm.name} onChange={e => setCustomerForm({...customerForm, name: e.target.value})} className="w-full bg-transparent border-none p-0 text-sm focus:ring-0 focus:outline-none text-gray-900 font-medium placeholder:font-normal placeholder:text-gray-400" placeholder="e.g. John Doe" />
+                    </div>
+                    <div className="px-3.5 py-2.5 border-b border-gray-100 focus-within:bg-gray-50/80 transition-colors">
+                      <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Phone Number</label>
+                      <input type="text" value={customerForm.phone} onChange={e => setCustomerForm({...customerForm, phone: e.target.value})} className="w-full bg-transparent border-none p-0 text-sm focus:ring-0 focus:outline-none text-gray-900 placeholder:text-gray-400" placeholder="e.g. +1 234 567 89" />
+                    </div>
+                    <div className="px-3.5 py-2.5 focus-within:bg-gray-50/80 transition-colors">
+                      <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Shipping Address</label>
+                      <textarea value={customerForm.address} onChange={e => setCustomerForm({...customerForm, address: e.target.value})} className="w-full bg-transparent border-none p-0 text-sm focus:ring-0 focus:outline-none text-gray-900 resize-none min-h-[60px] placeholder:text-gray-400" placeholder="Full shipping address..."></textarea>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
                     <button onClick={saveCustomer} className="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg transition-colors shadow-sm flex-1 focus:outline-none">Save details</button>
-                    <button onClick={() => setIsEditingCustomer(false)} className="px-4 py-2 border border-gray-200 text-gray-700 hover:bg-gray-50 text-sm font-medium rounded-lg transition-colors flex-1 focus:outline-none">Cancel</button>
+                    <button onClick={() => setIsEditingCustomer(false)} className="px-4 py-2 border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 text-sm font-medium rounded-lg transition-colors shadow-sm flex-1 focus:outline-none">Cancel</button>
                   </div>
                 </div>
               ) : (

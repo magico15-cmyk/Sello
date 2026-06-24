@@ -1,11 +1,18 @@
 import { supabase } from '@/lib/supabase';
 import CheckoutClient from './CheckoutClient';
 import { notFound, redirect } from 'next/navigation';
+import { getTenantFromHost } from '@/lib/tenant';
 
-export default async function CheckoutPage({ searchParams }: { searchParams: Promise<{ productId?: string, package?: string }> }) {
-  const resolvedParams = await searchParams;
-  const productId = resolvedParams.productId;
-  const packageIdStr = resolvedParams.package || '1';
+export default async function CheckoutPage(props: { searchParams: Promise<{ productId?: string, package?: string }>, params: Promise<{ domain: string }> }) {
+  const [resolvedParams, resolvedSearchParams] = await Promise.all([props.params, props.searchParams]);
+  const store = await getTenantFromHost(resolvedParams.domain);
+  
+  if (!store) {
+    notFound();
+  }
+
+  const productId = resolvedSearchParams.productId;
+  const packageIdStr = resolvedSearchParams.package || '1';
   
   if (!productId) {
     redirect('/');
@@ -15,6 +22,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: Pro
     .from('products')
     .select('*')
     .eq('id', productId)
+    .eq('store_id', store.id)
     .single();
 
   if (!product) {
@@ -49,5 +57,5 @@ export default async function CheckoutPage({ searchParams }: { searchParams: Pro
     image: foundPkg.image || mainImage // fallback to main image if bundle doesn't have one
   };
 
-  return <CheckoutClient product={product} selectedPkg={selectedPkg} />;
+  return <CheckoutClient product={product} selectedPkg={selectedPkg} storeId={store.id} />;
 }

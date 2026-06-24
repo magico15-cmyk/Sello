@@ -1,15 +1,22 @@
 import { supabase } from '@/lib/supabase';
 import ProductClient from './ProductClient';
 import { notFound } from 'next/navigation';
+import { getTenantFromHost } from '@/lib/tenant';
 
-export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = await params;
+export default async function ProductPage(props: { params: Promise<{ domain: string; id: string }> }) {
+  const params = await props.params;
+  const store = await getTenantFromHost(params.domain);
   
+  if (!store) {
+    notFound();
+  }
+
   // Fetch product data on the server
   const { data: product } = await supabase
     .from('products')
     .select('*')
-    .eq('id', resolvedParams.id)
+    .eq('id', params.id)
+    .eq('store_id', store.id)
     .single();
 
   if (!product) {

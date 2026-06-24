@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import { X, CheckCircle2, User, Phone, MapPin, Menu, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
 
-export default function CheckoutClient({ product, selectedPkg }: { product: any, selectedPkg: any }) {
+import { supabase } from '@/lib/supabase';
+
+export default function CheckoutClient({ product, selectedPkg, storeId }: { product: any, selectedPkg: any, storeId: string }) {
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -13,16 +15,42 @@ export default function CheckoutClient({ product, selectedPkg }: { product: any,
   });
 
   const [orderComplete, setOrderComplete] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Order Submitted:", { product: product.name, package: selectedPkg, ...formData });
-    setOrderComplete(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsSubmitting(true);
+    
+    try {
+      const { error } = await supabase.from('orders').insert([{
+        store_id: storeId,
+        customer_name: formData.fullName,
+        customer_phone: formData.phoneNumber,
+        customer_address: `${formData.address}, ${formData.city}`,
+        total_amount: parseFloat(selectedPkg.price.replace(/[^0-9.]/g, '')),
+        status: 'pending',
+        items: [{
+          product_id: product.id,
+          product_name: product.name,
+          package: selectedPkg.title,
+          price: selectedPkg.price,
+          image: selectedPkg.image
+        }]
+      }]);
+
+      if (error) throw error;
+      
+      setOrderComplete(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err: any) {
+      alert("Failed to submit order. Please try again. " + err.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (orderComplete) {
@@ -188,10 +216,11 @@ export default function CheckoutClient({ product, selectedPkg }: { product: any,
             <div style={{ paddingTop: '8px' }}>
               <button 
                 type="submit"
+                disabled={isSubmitting}
                 className="w-full text-white font-bold rounded-md transition-colors shadow-sm flex items-center justify-center tracking-wide"
-                style={{ backgroundColor: '#f899a2', padding: '16px 0', fontSize: '17px', width: '100%', cursor: 'pointer', border: 'none' }}
+                style={{ backgroundColor: isSubmitting ? '#fca5a5' : '#f899a2', padding: '16px 0', fontSize: '17px', width: '100%', cursor: isSubmitting ? 'not-allowed' : 'pointer', border: 'none' }}
               >
-                COMPLETE ORDER - {selectedPkg.price}
+                {isSubmitting ? 'PROCESSING...' : `COMPLETE ORDER - ${selectedPkg.price}`}
               </button>
             </div>
           </form>

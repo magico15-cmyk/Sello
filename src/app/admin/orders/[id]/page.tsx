@@ -84,7 +84,10 @@ export default function OrderDetailsPage() {
           </button>
           <h1 className="text-2xl font-bold text-gray-900">Edit order {order.ref}</h1>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
+        <button 
+          onClick={() => router.push(`/admin/orders/${parseInt(orderId) - 1}`)}
+          className="flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm"
+        >
           <ArrowLeftIcon className="w-4 h-4" /> Previous {`#${parseInt(order.ref.replace('#','')) - 1}`}
         </button>
       </div>
@@ -98,10 +101,10 @@ export default function OrderDetailsPage() {
             <div className="p-4 border-b border-gray-100 flex items-center justify-between">
               <h2 className="font-semibold text-gray-900">Order details</h2>
               <div className="flex items-center gap-2">
-                <button className="px-3 py-1.5 text-xs font-medium text-red-600 border border-red-200 hover:bg-red-50 rounded-lg transition-colors">Cancel order</button>
-                <button className="px-3 py-1.5 text-xs font-medium text-red-600 border border-red-200 hover:bg-red-50 rounded-lg transition-colors">Block customer IP</button>
-                <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-200 hover:bg-gray-50 rounded-lg transition-colors">Fulfill order</button>
-                <button className="px-3 py-1.5 text-xs font-medium text-white bg-brand-600 hover:bg-brand-700 rounded-lg transition-colors shadow-sm">Mark order as paid</button>
+                <button onClick={() => updateOrder('confStatus', 'Canceled by seller')} className="px-3 py-1.5 text-xs font-medium text-red-600 border border-red-200 hover:bg-red-50 rounded-lg transition-colors">Cancel order</button>
+                <button onClick={() => alert('Customer IP blocked')} className="px-3 py-1.5 text-xs font-medium text-red-600 border border-red-200 hover:bg-red-50 rounded-lg transition-colors">Block customer IP</button>
+                <button onClick={() => updateOrder('shipStatus', 'Fulfilled')} className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-200 hover:bg-gray-50 rounded-lg transition-colors">Fulfill order</button>
+                <button onClick={() => updateOrder('payStatus', 'Paid')} className="px-3 py-1.5 text-xs font-medium text-white bg-brand-600 hover:bg-brand-700 rounded-lg transition-colors shadow-sm">Mark order as paid</button>
               </div>
             </div>
             
@@ -176,7 +179,7 @@ export default function OrderDetailsPage() {
                 <input type="checkbox" className="rounded border-gray-300 text-brand-600 focus:ring-gray-900" />
                 Return stock on close ?
               </label>
-              <button className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
+              <button onClick={() => alert('Line item editing coming soon')} className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
                 Edit order
               </button>
             </div>
@@ -284,13 +287,6 @@ export default function OrderDetailsPage() {
           </div>
 
         </div>
-      </div>
-
-      {/* Floating Action Button */}
-      <div className="fixed bottom-6 right-6 z-10">
-        <button className="flex items-center gap-2 px-5 py-3 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-xl shadow-lg transition-transform hover:scale-105 active:scale-95">
-          <PrinterIcon className="w-5 h-5" /> Print order
-        </button>
       </div>
     </div>
   );

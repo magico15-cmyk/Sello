@@ -83,7 +83,7 @@ export default function OrderDetailsPage() {
 
   if (loading) {
     return (
-      <div className="p-6 max-w-6xl mx-auto min-h-screen flex items-center justify-center">
+      <div className="p-4 md:p-6 flex-1 min-w-0 flex flex-col items-center justify-center min-h-[calc(100vh-80px)]">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
       </div>
     );
@@ -94,7 +94,7 @@ export default function OrderDetailsPage() {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto min-h-screen pb-20">
+    <div className="p-4 md:p-6 flex-1 min-w-0 flex flex-col min-h-[calc(100vh-80px)] pb-20">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">

@@ -160,7 +160,7 @@ export function StoreClient({ store }: { store: any }) {
                         letterSpacing: '0.02em'
                       }}
                     >
-                      Save {product.save || Math.round((1 - (product.price / product.old_price)) * 100)}%
+                      Save {product.save || Math.round((1 - (product.price / product.oldPrice)) * 100)}%
                     </div>
                   </div>
                   

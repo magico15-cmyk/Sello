@@ -3,9 +3,9 @@ import ProductClient from './ProductClient';
 import { notFound } from 'next/navigation';
 import { getTenantFromHost } from '@/lib/tenant';
 
-export default async function ProductPage(props: { params: Promise<{ domain: string; id: string }> }) {
-  const params = await props.params;
-  const store = await getTenantFromHost(params.domain);
+export default async function ProductPage({ params }: { params: Promise<{ domain: string; id: string }> }) {
+  const resolvedParams = await params;
+  const store = await getTenantFromHost(resolvedParams.domain);
   
   if (!store) {
     notFound();
@@ -15,7 +15,7 @@ export default async function ProductPage(props: { params: Promise<{ domain: str
   const { data: product } = await supabase
     .from('products')
     .select('*')
-    .eq('id', params.id)
+    .eq('id', resolvedParams.id)
     .eq('store_id', store.id)
     .single();
 

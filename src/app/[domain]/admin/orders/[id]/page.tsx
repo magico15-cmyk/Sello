@@ -13,6 +13,10 @@ export default function OrderDetailsPage() {
   
   const [order, setOrder] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  
+  const [isEditingCustomer, setIsEditingCustomer] = useState(false);
+  const [customerForm, setCustomerForm] = useState({ name: '', phone: '', address: '' });
+  const [isEditingOrder, setIsEditingOrder] = useState(false);
 
   const formatPrice = (priceVal: any) => {
     if (!priceVal) return "$0.00";
@@ -79,6 +83,31 @@ export default function OrderDetailsPage() {
       console.error('Error updating order:', error);
       fetchOrder();
     }
+  };
+
+  const saveCustomer = async () => {
+    setOrder({
+      ...order,
+      customer: customerForm.name,
+      customer_phone: customerForm.phone,
+      customer_address: customerForm.address
+    });
+    setIsEditingCustomer(false);
+    
+    try {
+      await supabase.from('orders').update({
+        customer_name: customerForm.name,
+        customer_phone: customerForm.phone,
+        customer_address: customerForm.address
+      }).eq('id', orderId);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const saveOrderItems = () => {
+    // In a real app, update the quantities in the DB and recalculate total
+    setIsEditingOrder(false);
   };
 
   if (loading) {
@@ -187,7 +216,13 @@ export default function OrderDetailsPage() {
                       </td>
                       <td className="px-6 py-4 text-gray-600">{formatPrice(item.price)}</td>
                       <td className="px-6 py-4 text-gray-500">Not tracked</td>
-                      <td className="px-6 py-4 text-gray-600">1</td>
+                      <td className="px-6 py-4 text-gray-600">
+                        {isEditingOrder ? (
+                          <input type="number" min="1" defaultValue="1" className="w-16 border border-gray-200 rounded-md p-1 text-sm text-center focus:ring-1 focus:ring-gray-900 focus:outline-none" />
+                        ) : (
+                          "1"
+                        )}
+                      </td>
                       <td className="px-6 py-4 text-right font-medium text-gray-900">{formatPrice(item.price)}</td>
                     </tr>
                   ))}
@@ -199,9 +234,20 @@ export default function OrderDetailsPage() {
                 <input type="checkbox" className="rounded border-gray-300 text-brand-600 focus:ring-gray-900" />
                 Return stock on close ?
               </label>
-              <button onClick={() => alert('Line item editing coming soon')} className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
-                Edit order
-              </button>
+              {isEditingOrder ? (
+                <div className="flex gap-2">
+                  <button onClick={() => setIsEditingOrder(false)} className="px-4 py-2 border border-gray-200 hover:bg-gray-100 text-gray-700 text-sm font-medium rounded-lg transition-colors">
+                    Cancel
+                  </button>
+                  <button onClick={saveOrderItems} className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
+                    Save changes
+                  </button>
+                </div>
+              ) : (
+                <button onClick={() => setIsEditingOrder(true)} className="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
+                  Edit order
+                </button>
+              )}
             </div>
           </div>
 
@@ -255,15 +301,32 @@ export default function OrderDetailsPage() {
             <div className="p-4">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-medium text-gray-700">Customer information</span>
-                <button className="w-6 h-6 bg-gray-100 text-gray-500 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
-                  <PencilIcon className="w-3 h-3" />
-                </button>
+                {!isEditingCustomer && (
+                  <button onClick={() => {
+                    setCustomerForm({ name: order.customer || '', phone: order.customer_phone || '', address: order.customer_address || '' });
+                    setIsEditingCustomer(true);
+                  }} className="w-6 h-6 bg-gray-100 text-gray-500 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                    <PencilIcon className="w-3 h-3" />
+                  </button>
+                )}
               </div>
-              <div className="border border-gray-100 bg-gray-50/50 rounded-lg p-4 text-sm text-gray-600 space-y-1">
-                <p className="font-semibold text-gray-900">{order.customer}</p>
-                <p>{order.customer_phone}</p>
-                <p>{order.customer_address}</p>
-              </div>
+              {isEditingCustomer ? (
+                <div className="space-y-3 animate-in fade-in zoom-in-95 duration-200">
+                  <input type="text" value={customerForm.name} onChange={e => setCustomerForm({...customerForm, name: e.target.value})} className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-shadow" placeholder="Customer name" />
+                  <input type="text" value={customerForm.phone} onChange={e => setCustomerForm({...customerForm, phone: e.target.value})} className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-shadow" placeholder="Phone number" />
+                  <textarea value={customerForm.address} onChange={e => setCustomerForm({...customerForm, address: e.target.value})} className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 min-h-[80px] resize-y transition-shadow" placeholder="Shipping address"></textarea>
+                  <div className="flex gap-2 pt-1">
+                    <button onClick={saveCustomer} className="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg transition-colors shadow-sm flex-1">Save details</button>
+                    <button onClick={() => setIsEditingCustomer(false)} className="px-4 py-2 border border-gray-200 text-gray-700 hover:bg-gray-50 text-sm font-medium rounded-lg transition-colors flex-1">Cancel</button>
+                  </div>
+                </div>
+              ) : (
+                <div className="border border-gray-100 bg-gray-50/50 rounded-lg p-4 text-sm text-gray-600 space-y-1">
+                  <p className="font-semibold text-gray-900">{order.customer}</p>
+                  <p>{order.customer_phone}</p>
+                  <p>{order.customer_address}</p>
+                </div>
+              )}
             </div>
           </div>
 

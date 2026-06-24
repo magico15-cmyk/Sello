@@ -18,9 +18,8 @@ export default function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
   // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
-  let hostname = req.headers
-    .get('host')!
-    .replace('.localhost:3000', `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'localhost:3000'}`);
+  // Strip the port to ensure the rewritten path is clean (e.g., /shop1.localhost instead of /shop1.localhost:3000)
+  let hostname = req.headers.get('host')!.split(':')[0];
 
   // Special case for Vercel preview deployment URLs
   if (

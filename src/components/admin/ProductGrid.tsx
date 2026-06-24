@@ -169,7 +169,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
       <h2 className="text-2xl font-bold text-gray-900 mb-5">Products</h2>
 
       {/* White Card Container */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col flex-1">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col flex-1 min-h-[500px]">
         {/* Search & Filter Bar */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <div className="flex items-center gap-3">
@@ -420,63 +420,63 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
             </p>
           </div>
         )}
-
-        {/* Pagination Controls */}
-        {!loading && filteredProducts.length > ITEMS_PER_PAGE && (
-          <div className="flex items-center justify-between px-5 py-4 border-t border-gray-100">
-            <div className="text-sm text-gray-500">
-              Showing <span className="font-medium">{(currentPage - 1) * ITEMS_PER_PAGE + 1}</span> to <span className="font-medium">{Math.min(currentPage * ITEMS_PER_PAGE, filteredProducts.length)}</span> of <span className="font-medium">{filteredProducts.length}</span> results
-            </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                disabled={currentPage === 1}
-                className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-700 font-medium disabled:text-gray-400 disabled:cursor-not-allowed flex items-center gap-1 bg-white hover:bg-gray-50 transition-colors shadow-sm mr-1"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg> Previous
-              </button>
-              
-              {/* Page Numbers */}
-              <div className="flex items-center gap-1 hidden sm:flex">
-                {Array.from({ length: totalPages }).map((_, i) => {
-                  const pageNumber = i + 1;
-                  return (
-                    <button
-                      key={pageNumber}
-                      onClick={() => setCurrentPage(pageNumber)}
-                      className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors ${
-                        currentPage === pageNumber
-                          ? "bg-gray-900 text-white shadow-sm"
-                          : "text-gray-600 hover:bg-gray-100"
-                      }`}
-                    >
-                      {pageNumber}
-                    </button>
-                  );
-                })}
-              </div>
-
-              <button
-                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                disabled={currentPage === totalPages}
-                className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed font-medium transition-colors flex items-center gap-1 bg-white shadow-sm ml-1"
-              >
-                Next <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-              </button>
-            </div>
-          </div>
-        )}
       </div>
 
-      {/* Floating Add Button */}
-      <div className="flex justify-end mt-5">
-        <button 
-          onClick={() => router.push('/admin/products/new')}
-          className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-semibold shadow-lg shadow-brand-500/25 hover:shadow-xl hover:shadow-brand-500/30 hover:from-brand-600 hover:to-brand-700 transition-all duration-200 active:scale-[0.98]"
-        >
-          <PlusIcon className="w-4 h-4" />
-          <span>Add a product</span>
-        </button>
+      {/* Bottom Actions Row */}
+      <div className="flex justify-between items-center mt-6">
+        {/* Pagination Controls */}
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+            disabled={currentPage === 1 || totalPages === 0}
+            className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-700 font-medium disabled:text-gray-400 disabled:cursor-not-allowed flex items-center gap-1 bg-white hover:bg-gray-50 transition-colors shadow-sm mr-1"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg> Previous
+          </button>
+          
+          {/* Page Numbers */}
+          <div className="flex items-center gap-1 hidden sm:flex">
+            {totalPages === 0 ? (
+              <button className="w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors bg-gray-900 text-white shadow-sm">1</button>
+            ) : (
+              Array.from({ length: totalPages }).map((_, i) => {
+                const pageNumber = i + 1;
+                return (
+                  <button
+                    key={pageNumber}
+                    onClick={() => setCurrentPage(pageNumber)}
+                    className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors ${
+                      currentPage === pageNumber
+                        ? "bg-gray-900 text-white shadow-sm"
+                        : "text-gray-600 hover:bg-gray-100"
+                    }`}
+                  >
+                    {pageNumber}
+                  </button>
+                );
+              })
+            )}
+          </div>
+
+          <button
+            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages || totalPages === 0}
+            className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed font-medium transition-colors flex items-center gap-1 bg-white shadow-sm ml-1"
+          >
+            Next <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+          </button>
+        </div>
+
+        {/* Floating Add Button */}
+        <div className="flex gap-3">
+          <button 
+            onClick={() => router.push('/admin/products/new')}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-colors shadow-sm bg-gray-900 hover:bg-gray-800 text-white"
+          >
+            <PlusIcon className="w-4 h-4" />
+            <span>Add a product</span>
+          </button>
+        </div>
       </div>
 
       {/* Delete Confirmation Modal */}

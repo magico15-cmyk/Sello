@@ -1,0 +1,33 @@
+import { CheckCircle2 } from 'lucide-react';
+import Link from 'next/link';
+
+export default async function ThankYouPage(props: { searchParams: Promise<{ name?: string; item?: string }> }) {
+  const searchParams = await props.searchParams;
+  const { name, item } = searchParams;
+
+  return (
+    <div className="min-h-screen bg-[#e8f0ed] flex flex-col items-center justify-center p-4">
+      <div className="bg-white p-10 rounded-2xl shadow-lg max-w-md w-full text-center" style={{ maxWidth: '448px' }}>
+        <div className="w-20 h-20 bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ width: '80px', height: '80px', backgroundColor: 'rgba(248, 153, 162, 0.2)' }}>
+          <CheckCircle2 size={40} color="#f899a2" />
+        </div>
+        
+        <h1 className="text-3xl font-extrabold text-gray-900 mb-4" style={{ fontSize: '30px' }}>Order Confirmed!</h1>
+        
+        <p className="text-gray-600 mb-8 leading-relaxed">
+          Thank you{name ? `, ${name}` : ''}! Your order {item ? `for ${item} ` : ''}has been successfully received. 
+          <br /><br />
+          One of our operators will call you shortly to confirm your details before we ship your package via Cash on Delivery.
+        </p>
+        
+        <Link 
+          href="/" 
+          className="inline-block text-white font-bold px-8 py-4 rounded-lg text-lg shadow-sm transition-colors w-full text-center hover:bg-opacity-90" 
+          style={{ backgroundColor: '#f899a2', padding: '16px 32px' }}
+        >
+          Return to Store
+        </Link>
+      </div>
+    </div>
+  );
+}

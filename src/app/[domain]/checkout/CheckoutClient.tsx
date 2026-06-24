@@ -3,10 +3,13 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, User, Phone, MapPin, Menu, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { supabase } from '@/lib/supabase';
 
 export default function CheckoutClient({ product, selectedPkg, storeId }: { product: any, selectedPkg: any, storeId: string }) {
+  const router = useRouter();
+  
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -14,7 +17,6 @@ export default function CheckoutClient({ product, selectedPkg, storeId }: { prod
     address: ''
   });
 
-  const [orderComplete, setOrderComplete] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,33 +46,17 @@ export default function CheckoutClient({ product, selectedPkg, storeId }: { prod
 
       if (error) throw error;
       
-      setOrderComplete(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const params = new URLSearchParams({
+        name: formData.fullName,
+        item: selectedPkg.title
+      });
+      router.push(`/thank-you?${params.toString()}`);
     } catch (err: any) {
       alert("Failed to submit order. Please try again. " + err.message);
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  if (orderComplete) {
-    return (
-      <div className="min-h-screen bg-[#e8f0ed] flex flex-col items-center justify-center p-4">
-        <div className="bg-white p-10 rounded-2xl shadow-lg max-w-md w-full text-center" style={{ maxWidth: '448px' }}>
-          <div className="w-20 h-20 bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ width: '80px', height: '80px', backgroundColor: 'rgba(248, 153, 162, 0.2)' }}>
-            <CheckCircle2 size={40} color="#f899a2" />
-          </div>
-          <h1 className="text-3xl font-extrabold text-gray-900 mb-4" style={{ fontSize: '30px' }}>Order Confirmed!</h1>
-          <p className="text-gray-600 mb-8 leading-relaxed">
-            Thank you, <strong>{formData.fullName}</strong>. Your order for <strong>{selectedPkg.title}</strong> has been received and will be shipped to your address via Cash on Delivery.
-          </p>
-          <a href="/" className="inline-block text-white font-bold px-8 py-4 rounded-lg text-lg shadow-sm transition-colors w-full" style={{ backgroundColor: '#f899a2', padding: '16px 32px' }}>
-            Return to Store
-          </a>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>

@@ -198,30 +198,31 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
             </tbody>
           </table>
         </div>
-        
-        {/* Pagination */}
-        <div className="p-4 border-t border-gray-100 flex items-center justify-end">
-          <div className="flex items-center gap-2">
-            <button className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-400 font-medium cursor-not-allowed flex items-center gap-1">
-              <ChevronLeftIcon className="w-4 h-4" /> Previous
-            </button>
-            <button className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-50 font-medium transition-colors flex items-center gap-1">
-              Next <ChevronRightIcon className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
       </div>
 
-      {/* Floating Bottom Actions */}
-      <div className="flex justify-end gap-3 mt-6">
-        <button className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-colors shadow-sm flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
-          Export
-        </button>
-        <button className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-colors shadow-sm flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
-          Add an order
-        </button>
+      {/* Bottom Actions Row */}
+      <div className="flex justify-between items-center mt-6">
+        {/* Pagination */}
+        <div className="flex items-center gap-2">
+          <button className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-400 font-medium cursor-not-allowed flex items-center gap-1 bg-white shadow-sm">
+            <ChevronLeftIcon className="w-4 h-4" /> Previous
+          </button>
+          <button className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-50 font-medium transition-colors flex items-center gap-1 bg-white shadow-sm">
+            Next <ChevronRightIcon className="w-4 h-4" />
+          </button>
+        </div>
+        
+        {/* Action Buttons */}
+        <div className="flex gap-3">
+          <button className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-colors shadow-sm flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+            Export
+          </button>
+          <button className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-colors shadow-sm flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+            Add an order
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -236,15 +236,15 @@ export default function OrderDetailsPage() {
               </label>
               {isEditingOrder ? (
                 <div className="flex gap-2">
-                  <button onClick={() => setIsEditingOrder(false)} className="px-4 py-2 border border-gray-200 hover:bg-gray-100 text-gray-700 text-sm font-medium rounded-lg transition-colors">
+                  <button onClick={() => setIsEditingOrder(false)} className="px-4 py-2 border border-gray-200 hover:bg-gray-100 text-gray-700 text-sm font-medium rounded-lg transition-colors focus:outline-none">
                     Cancel
                   </button>
-                  <button onClick={saveOrderItems} className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
+                  <button onClick={saveOrderItems} className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm focus:outline-none">
                     Save changes
                   </button>
                 </div>
               ) : (
-                <button onClick={() => setIsEditingOrder(true)} className="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
+                <button onClick={() => setIsEditingOrder(true)} className="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg transition-colors shadow-sm focus:outline-none">
                   Edit order
                 </button>
               )}
@@ -305,7 +305,7 @@ export default function OrderDetailsPage() {
                   <button onClick={() => {
                     setCustomerForm({ name: order.customer || '', phone: order.customer_phone || '', address: order.customer_address || '' });
                     setIsEditingCustomer(true);
-                  }} className="w-6 h-6 bg-gray-100 text-gray-500 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                  }} className="w-6 h-6 bg-gray-100 text-gray-500 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors focus:outline-none">
                     <PencilIcon className="w-3 h-3" />
                   </button>
                 )}
@@ -316,8 +316,8 @@ export default function OrderDetailsPage() {
                   <input type="text" value={customerForm.phone} onChange={e => setCustomerForm({...customerForm, phone: e.target.value})} className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-shadow" placeholder="Phone number" />
                   <textarea value={customerForm.address} onChange={e => setCustomerForm({...customerForm, address: e.target.value})} className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 min-h-[80px] resize-y transition-shadow" placeholder="Shipping address"></textarea>
                   <div className="flex gap-2 pt-1">
-                    <button onClick={saveCustomer} className="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg transition-colors shadow-sm flex-1">Save details</button>
-                    <button onClick={() => setIsEditingCustomer(false)} className="px-4 py-2 border border-gray-200 text-gray-700 hover:bg-gray-50 text-sm font-medium rounded-lg transition-colors flex-1">Cancel</button>
+                    <button onClick={saveCustomer} className="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg transition-colors shadow-sm flex-1 focus:outline-none">Save details</button>
+                    <button onClick={() => setIsEditingCustomer(false)} className="px-4 py-2 border border-gray-200 text-gray-700 hover:bg-gray-50 text-sm font-medium rounded-lg transition-colors flex-1 focus:outline-none">Cancel</button>
                   </div>
                 </div>
               ) : (

@@ -203,11 +203,18 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
       {/* Bottom Actions Row */}
       <div className="flex justify-between items-center mt-6">
         {/* Pagination */}
-        <div className="flex items-center gap-2">
-          <button className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-400 font-medium cursor-not-allowed flex items-center gap-1 bg-white shadow-sm">
+        <div className="flex items-center gap-1">
+          <button className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-400 font-medium cursor-not-allowed flex items-center gap-1 bg-white shadow-sm mr-1">
             <ChevronLeftIcon className="w-4 h-4" /> Previous
           </button>
-          <button className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-50 font-medium transition-colors flex items-center gap-1 bg-white shadow-sm">
+          
+          <button className="w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium bg-gray-900 text-white shadow-sm">1</button>
+          <button className="w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">2</button>
+          <button className="w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">3</button>
+          <span className="w-8 h-8 flex items-center justify-center text-gray-400">...</span>
+          <button className="w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">10</button>
+          
+          <button className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-50 font-medium transition-colors flex items-center gap-1 bg-white shadow-sm ml-1">
             Next <ChevronRightIcon className="w-4 h-4" />
           </button>
         </div>

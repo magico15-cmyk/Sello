@@ -217,11 +217,11 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
           </div>
         ) : (
           <div className="overflow-x-auto flex-1">
-          <table className="w-full">
+          <table className="w-full text-sm text-left">
             {/* Header */}
-            <thead>
-              <tr className="border-b border-gray-100">
-                <th className="w-20 pl-5 pr-10 py-3.5">
+            <thead className="text-xs text-gray-500 uppercase bg-gray-50/50 border-b border-gray-100">
+              <tr>
+                <th className="w-20 px-6 py-4 font-semibold">
                   <div className="relative flex items-center justify-center w-4 h-4">
                     <input
                       type="checkbox"
@@ -234,42 +234,42 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                     </svg>
                   </div>
                 </th>
-                <th className="text-left py-3.5 pr-4">
-                  <button className="flex items-center gap-1 text-xs font-semibold text-gray-600 uppercase tracking-wider hover:text-gray-900 transition-colors">
+                <th className="px-6 py-4 font-semibold text-left">
+                  <button className="flex items-center gap-1 uppercase hover:text-gray-900 transition-colors">
                     <ChevronUpDownIcon className="w-3 h-3 text-gray-400" />
                     <span>Name</span>
                   </button>
                 </th>
-                <th className="text-center py-3.5 pr-4">
-                  <button className="flex items-center justify-center gap-1 w-full text-xs font-semibold text-gray-600 uppercase tracking-wider hover:text-gray-900 transition-colors">
+                <th className="px-6 py-4 font-semibold text-center">
+                  <button className="flex items-center justify-center gap-1 w-full uppercase hover:text-gray-900 transition-colors">
                     <ChevronUpDownIcon className="w-3 h-3 text-gray-400" />
                     <span>Price</span>
                   </button>
                 </th>
-                <th className="text-center py-3.5 pr-4">
-                  <span className="text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                <th className="px-6 py-4 font-semibold text-center">
+                  <span className="uppercase">
                     Inventory
                   </span>
                 </th>
-                <th className="text-center py-3.5 pr-4">
-                  <button className="flex items-center justify-center gap-1 w-full text-xs font-semibold text-gray-600 uppercase tracking-wider hover:text-gray-900 transition-colors">
+                <th className="px-6 py-4 font-semibold text-center">
+                  <button className="flex items-center justify-center gap-1 w-full uppercase hover:text-gray-900 transition-colors">
                     <ChevronUpDownIcon className="w-3 h-3 text-gray-400" />
                     <span>Orders</span>
                   </button>
                 </th>
-                <th className="text-left py-3.5 pr-4">
-                  <span className="text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                <th className="px-6 py-4 font-semibold text-left">
+                  <span className="uppercase">
                     Visibility
                   </span>
                 </th>
-                <th className="text-left py-3.5 pr-4">
-                  <button className="flex items-center gap-1 text-xs font-semibold text-gray-600 uppercase tracking-wider hover:text-gray-900 transition-colors">
+                <th className="px-6 py-4 font-semibold text-left">
+                  <button className="flex items-center gap-1 uppercase hover:text-gray-900 transition-colors">
                     <ChevronUpDownIcon className="w-3 h-3 text-gray-400" />
                     <span>Creation date</span>
                   </button>
                 </th>
-                <th className="text-center py-3.5 pr-5">
-                  <span className="text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                <th className="px-6 py-4 font-semibold text-center">
+                  <span className="uppercase">
                     Actions
                   </span>
                 </th>
@@ -277,14 +277,14 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
             </thead>
 
             {/* Body */}
-            <tbody>
+            <tbody className="divide-y divide-gray-100">
               {paginatedProducts.map((product) => (
                 <tr
                   key={product.id}
-                  className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors duration-150 group"
+                  className="hover:bg-gray-50/50 transition-colors group"
                 >
                   {/* Checkbox */}
-                  <td className="pl-5 pr-10 py-3">
+                  <td className="px-6 py-4">
                     <div className="relative flex items-center justify-center w-4 h-4">
                       <input
                         type="checkbox"
@@ -299,7 +299,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                   </td>
 
                   {/* Name + Image */}
-                  <td className="py-3 pr-4">
+                  <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="w-11 h-11 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                         <img
@@ -318,14 +318,14 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                   </td>
 
                   {/* Price */}
-                  <td className="py-3 pr-4 text-center">
+                  <td className="px-6 py-4 text-center">
                     <span className="text-sm font-semibold text-gray-900">
                       {product.price.toFixed(0)}
                     </span>
                   </td>
 
                   {/* Inventory */}
-                  <td className="py-3 pr-4 text-center">
+                  <td className="px-6 py-4 text-center">
                     <span
                       className={`text-sm ${
                         product.inventory === "Tracked"
@@ -338,14 +338,14 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                   </td>
 
                   {/* Orders */}
-                  <td className="py-3 pr-4 text-center">
+                  <td className="px-6 py-4 text-center">
                     <span className="text-sm text-gray-700">
                       {product.orders}
                     </span>
                   </td>
 
                   {/* Visibility */}
-                  <td className="py-3 pr-4">
+                  <td className="px-6 py-4">
                     <span
                       className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${
                         product.visibility === "Visible"
@@ -360,14 +360,14 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                   </td>
 
                   {/* Date */}
-                  <td className="py-3 pr-4">
+                  <td className="px-6 py-4">
                     <span className="text-sm text-gray-500 whitespace-nowrap">
                       {product.createdAt}
                     </span>
                   </td>
 
                   {/* Actions */}
-                  <td className="py-3 pr-5">
+                  <td className="px-6 py-4">
                     <div className="flex items-center justify-center gap-1 transition-opacity duration-200">
                       <button
                         title="View"

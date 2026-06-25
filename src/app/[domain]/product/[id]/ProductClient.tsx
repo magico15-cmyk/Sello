@@ -384,7 +384,7 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
 
 
   return (
-    <div dir={store?.store_rtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col bg-gray-50">
+    <div dir={store?.language === 'ar' || store?.store_rtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col bg-gray-50">
       {/* Top Banner */}
       <div className="top-scroll-bar">
         <div className="scroll-track">

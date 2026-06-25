@@ -1,12 +1,20 @@
 import { CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
+import { getTenantFromHost } from '@/lib/tenant';
+import { notFound } from 'next/navigation';
 
-export default async function ThankYouPage(props: { searchParams: Promise<{ name?: string; item?: string }> }) {
+export default async function ThankYouPage(props: { params: Promise<{ domain: string }>; searchParams: Promise<{ name?: string; item?: string }> }) {
   const searchParams = await props.searchParams;
   const { name, item } = searchParams;
+  const params = await props.params;
+  const store = await getTenantFromHost(params.domain);
+
+  if (!store) {
+    notFound();
+  }
 
   return (
-    <div className="min-h-screen bg-[#e8f0ed] flex flex-col items-center justify-center p-4">
+    <div dir={store?.language === 'ar' || store?.store_rtl ? 'rtl' : 'ltr'} className="min-h-screen bg-[#e8f0ed] flex flex-col items-center justify-center p-4">
       <div className="bg-white p-10 rounded-2xl shadow-lg max-w-md w-full text-center" style={{ maxWidth: '448px' }}>
         <div className="w-20 h-20 bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ width: '80px', height: '80px', backgroundColor: 'rgba(248, 153, 162, 0.2)' }}>
           <CheckCircle2 size={40} color="#f899a2" />

@@ -178,21 +178,37 @@ export default function GeneralSettingsClient({ store }: { store: any }) {
           <div className="space-y-4 pt-4">
             <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-100 pb-2">Localization</h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Store Language</label>
-                <select
-                  value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-all outline-none"
-                >
-                  <option value="en">English</option>
-                  <option value="ar">Arabic</option>
-                  <option value="fr">French</option>
-                  <option value="es">Spanish</option>
-                </select>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Store Language</label>
+              <p className="text-xs text-gray-500 mb-3">Selecting Arabic will automatically switch the store direction to RTL.</p>
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { code: 'en', label: 'English', flag: '🇬🇧' },
+                  { code: 'ar', label: 'العربية', flag: '🇸🇦' },
+                  { code: 'fr', label: 'Français', flag: '🇫🇷' },
+                  { code: 'es', label: 'Español', flag: '🇪🇸' },
+                ].map((lang) => (
+                  <button
+                    key={lang.code}
+                    type="button"
+                    onClick={() => {
+                      setLanguage(lang.code);
+                      setStoreRtl(lang.code === 'ar');
+                    }}
+                    className={`flex items-center gap-2.5 px-5 py-3 rounded-lg border-2 transition-all duration-200 font-medium text-sm ${
+                      language === lang.code
+                        ? 'border-gray-900 bg-gray-900 text-white shadow-md scale-[1.02]'
+                        : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="text-lg leading-none">{lang.flag}</span>
+                    <span>{lang.label}</span>
+                  </button>
+                ))}
               </div>
+            </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Store Direction</label>
                 <select

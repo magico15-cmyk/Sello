@@ -120,7 +120,10 @@ export default function RichTextEditor({
         ref={editorRef}
         contentEditable
         onSelect={saveSelection}
-        onBlur={saveSelection}
+        onBlur={(e) => {
+          saveSelection();
+          onChange(e.currentTarget.innerHTML);
+        }}
         onInput={(e) => onChange(e.currentTarget.innerHTML)}
         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-colors min-h-[100px] whitespace-pre-wrap"
         style={{ textAlign: align, color: color }}

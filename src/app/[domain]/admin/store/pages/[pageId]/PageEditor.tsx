@@ -88,11 +88,15 @@ export default function PageEditor({ store, pageId }: { store: any, pageId: stri
           .insert([pageData]);
         error = insertError;
       } else {
-        const { error: updateError } = await supabase
+        const { data: updatedData, error: updateError } = await supabase
           .from('store_pages')
           .update(pageData)
-          .eq('id', pageId);
+          .eq('id', pageId)
+          .select();
         error = updateError;
+        if (!error && (!updatedData || updatedData.length === 0)) {
+          throw new Error("Failed to update: Page not found or you don't have permission.");
+        }
       }
 
       if (error) {

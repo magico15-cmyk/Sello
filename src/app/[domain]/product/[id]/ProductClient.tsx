@@ -645,10 +645,10 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
                             <thead>
                               <tr>
                                 <th className="empty-corner border-none bg-transparent"></th>
-                                <th className="store-col-header text-white font-bold py-2.5 px-4 rounded-tl-xl" style={{ backgroundColor: primaryColor }}>
+                                <th className="store-col-header text-white font-bold py-2.5 px-4 rounded-tl-xl rtl:rounded-tr-xl rtl:rounded-tl-none" style={{ backgroundColor: primaryColor }}>
                                   {block.content.storeName || store?.store_name}
                                 </th>
-                                <th className="others-col-header text-black font-bold py-2.5 px-4 bg-white rounded-tr-xl border-t border-r border-b border-gray-200">
+                                <th className="others-col-header text-black font-bold py-2.5 px-4 bg-white rounded-tr-xl rtl:rounded-tl-xl rtl:rounded-tr-none border-t border-r rtl:border-l rtl:border-r-0 border-b border-gray-200">
                                   {block.content.competitorName || 'Others'}
                                 </th>
                               </tr>
@@ -659,17 +659,17 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
                                 const isLast = i === (block.content.rows?.length || 0) - 1;
                                 return (
                                   <tr key={i}>
-                                    <td className={`feature-col text-white font-bold py-2.5 px-4 ${isFirst ? 'rounded-tl-xl' : ''} ${isLast ? 'rounded-bl-xl' : ''}`} style={{ backgroundColor: primaryColor, borderBottom: isLast ? 'none' : '1px solid rgba(255,255,255,0.2)' }}>
+                                    <td className={`feature-col text-white font-bold py-2.5 px-4 ${isFirst ? 'rounded-tl-xl rtl:rounded-tr-xl rtl:rounded-tl-none' : ''} ${isLast ? 'rounded-bl-xl rtl:rounded-br-xl rtl:rounded-bl-none' : ''}`} style={{ backgroundColor: primaryColor, borderBottom: isLast ? 'none' : '1px solid rgba(255,255,255,0.2)' }}>
                                       {row.feature}
                                     </td>
-                                    <td className={`store-col text-center py-2.5 bg-white border-b border-r border-gray-200`}>
+                                    <td className={`store-col text-center py-2.5 bg-white border-b border-r rtl:border-l rtl:border-r-0 border-gray-200`}>
                                       {row.store ? (
                                         <Check size={24} color="#22c55e" className="mx-auto" />
                                       ) : (
                                         <X size={24} color="#111827" className="mx-auto" />
                                       )}
                                     </td>
-                                    <td className={`others-col text-center py-2.5 bg-white border-b border-r border-gray-200 ${isLast ? 'rounded-br-xl' : ''}`}>
+                                    <td className={`others-col text-center py-2.5 bg-white border-b border-r rtl:border-l rtl:border-r-0 border-gray-200 ${isLast ? 'rounded-br-xl rtl:rounded-bl-xl rtl:rounded-br-none' : ''}`}>
                                       {row.others ? (
                                         <Check size={24} color="#22c55e" className="mx-auto" />
                                       ) : (

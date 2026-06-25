@@ -9,7 +9,6 @@ export default function SettingsClient({ store }: { store: any }) {
   const router = useRouter();
   
   const [primaryColor, setPrimaryColor] = useState(store?.primary_color || '#f899a2');
-  const [storeRtl, setStoreRtl] = useState(store?.store_rtl || false);
   
   const [isSaving, setIsSaving] = useState(false);
   const [toast, setToast] = useState<{message: string, type: 'success' | 'error'} | null>(null);
@@ -39,7 +38,6 @@ export default function SettingsClient({ store }: { store: any }) {
         .from('stores')
         .update({
           primary_color: primaryColor,
-          store_rtl: storeRtl,
         })
         .eq('id', store.id);
 
@@ -112,30 +110,6 @@ export default function SettingsClient({ store }: { store: any }) {
                   />
                 ))}
               </div>
-            </div>
-          </div>
-
-          <hr className="border-gray-100" />
-
-          {/* Arabic RTL Field */}
-          <div>
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="block text-sm font-medium text-gray-900 mb-1">Enable Arabic Layout (RTL)</label>
-                <p className="text-sm text-gray-500">Align the entire storefront right-to-left for Arabic customers.</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setStoreRtl(!storeRtl)}
-                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${storeRtl ? 'bg-brand-500' : 'bg-gray-200'}`}
-                role="switch"
-                aria-checked={storeRtl}
-              >
-                <span
-                  aria-hidden="true"
-                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${storeRtl ? 'translate-x-5' : 'translate-x-0'}`}
-                />
-              </button>
             </div>
           </div>
         </div>

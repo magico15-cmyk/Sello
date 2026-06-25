@@ -50,6 +50,7 @@ export default function CustomPageClient({ store, page }: { store: any, page: an
         .custom-page-content h1 { font-size: 2em; font-weight: bold; margin-top: 1em; margin-bottom: 0.5em; color: #111827; }
         .custom-page-content h2 { font-size: 1.5em; font-weight: bold; margin-top: 1em; margin-bottom: 0.5em; color: #1f2937; }
         .custom-page-content h3 { font-size: 1.25em; font-weight: bold; margin-top: 1em; margin-bottom: 0.5em; color: #374151; }
+        .custom-page-content p, .custom-page-content div, .custom-page-content span, .custom-page-content li { font-size: 16px !important; line-height: 1.6 !important; }
         .custom-page-content p { margin-top: 0; margin-bottom: 1em; }
         .custom-page-content ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1em; }
         .custom-page-content ol { list-style-type: decimal; padding-left: 1.5em; margin-bottom: 1em; }

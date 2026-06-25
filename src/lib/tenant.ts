@@ -41,5 +41,15 @@ export async function getTenantFromHost(hostname?: string) {
     return null;
   }
 
+  // Fetch menus
+  const { data: menus } = await supabaseServer
+    .from('store_menus')
+    .select('*')
+    .eq('store_id', store.id);
+
+  if (menus) {
+    store.menus = menus;
+  }
+
   return store;
 }

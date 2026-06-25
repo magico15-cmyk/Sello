@@ -32,7 +32,7 @@ export default function CustomPageClient({ store, page }: { store: any, page: an
           </div>
         </main>
 
-        <Footer />
+        <Footer store={store} />
       </div>
 
       {/* Dynamic Theme Styles — same as StoreClient */}

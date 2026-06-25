@@ -1,7 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 
-export const Footer = () => {
+export const Footer = ({ store }: { store?: any }) => {
+  const footerMenu = store?.menus?.find((m: any) => m.slug === 'footer-menu');
+
   return (
     <footer className="site-footer">
       <div className="footer-wave">
@@ -36,11 +38,19 @@ export const Footer = () => {
           <div className="footer-links">
             <h3>Products</h3>
             <ul>
-              <li><Link href="/">Shop All</Link></li>
-              <li><Link href="/pages/about-us">About Us</Link></li>
-              <li><Link href="/pages/shipping">Shipping & Delivery</Link></li>
-              <li><Link href="/pages/faq">FAQ</Link></li>
-              <li><Link href="/contact">Contact Us</Link></li>
+              {footerMenu ? (
+                footerMenu.items.map((item: any, i: number) => (
+                  <li key={i}><Link href={item.url}>{item.label}</Link></li>
+                ))
+              ) : (
+                <>
+                  <li><Link href="/">Shop All</Link></li>
+                  <li><Link href="/pages/about-us">About Us</Link></li>
+                  <li><Link href="/pages/shipping">Shipping & Delivery</Link></li>
+                  <li><Link href="/pages/faq">FAQ</Link></li>
+                  <li><Link href="/contact">Contact Us</Link></li>
+                </>
+              )}
             </ul>
           </div>
         </div>

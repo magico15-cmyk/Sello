@@ -222,7 +222,7 @@ export function StoreClient({ store }: { store: any }) {
 
       </main>
 
-      <Footer />
+      <Footer store={store} />
       
       {/* Dynamic Theme Styles */}
       <style dangerouslySetInnerHTML={{__html: `

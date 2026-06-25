@@ -721,7 +721,7 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
         </div>
 
       </main>
-      <Footer />
+      <Footer store={store} />
       
       {/* Spacer to prevent sticky bar from covering footer */}
       <div className="h-[80px] w-full" />

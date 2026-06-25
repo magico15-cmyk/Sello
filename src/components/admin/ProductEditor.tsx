@@ -76,6 +76,15 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
   }, [storeId]);
 
   const [title, setTitle] = useState(initialData?.name || "");
+  const [slug, setSlug] = useState(initialData?.slug || "");
+  const [slugEdited, setSlugEdited] = useState(!!initialData?.slug);
+
+  // Auto-generate slug from title if it hasn't been manually edited
+  useEffect(() => {
+    if (!slugEdited) {
+      setSlug(title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''));
+    }
+  }, [title, slugEdited]);
   const [price, setPrice] = useState(initialData?.price?.toString() || "");
   const [originalPrice, setOriginalPrice] = useState(initialData?.originalPrice?.toString() || "");
   const [category, setCategory] = useState(initialData?.category || "");
@@ -308,6 +317,7 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
       
       const payload: any = {
         name: title,
+        slug: slug.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
         price: parseFloat(price) || 0,
         originalPrice: originalPrice ? parseFloat(originalPrice) : null,
         category,
@@ -402,6 +412,23 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
                   placeholder="e.g. Short Sleeve T-Shirt"
                   className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-colors"
                 />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">URL Slug</label>
+                <div className="flex items-center">
+                  <span className="px-3 py-2 bg-gray-50 border border-r-0 border-gray-300 rounded-l-xl text-gray-500 text-sm">/product/</span>
+                  <input 
+                    type="text" 
+                    value={slug}
+                    onChange={(e) => {
+                      setSlug(e.target.value);
+                      setSlugEdited(true);
+                    }}
+                    placeholder="e.g. short-sleeve-t-shirt"
+                    className="flex-1 px-4 py-2 border border-gray-300 rounded-r-xl focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-colors"
+                  />
+                </div>
+                <p className="mt-1.5 text-xs text-gray-500">Leave empty to automatically generate from title.</p>
               </div>
             </div>
           </div>
@@ -934,41 +961,7 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
                                 />
                               </div>
                               <div>
-                                <div className="flex items-center justify-between mb-2">
-                                  <label className="text-xs font-semibold text-gray-500 uppercase">Content</label>
-                                  <div className="flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-lg p-1">
-                                    <button 
-                                      onClick={() => {
-                                        const newAccordion = [...block.content];
-                                        newAccordion[i] = { ...item, align: 'left' };
-                                        updateBlock(block.id, newAccordion);
-                                      }}
-                                      className={`px-2 py-0.5 text-[10px] font-medium rounded-md ${(!item.align || item.align === 'left') ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-                                    >
-                                      Left
-                                    </button>
-                                    <button 
-                                      onClick={() => {
-                                        const newAccordion = [...block.content];
-                                        newAccordion[i] = { ...item, align: 'center' };
-                                        updateBlock(block.id, newAccordion);
-                                      }}
-                                      className={`px-2 py-0.5 text-[10px] font-medium rounded-md ${item.align === 'center' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-                                    >
-                                      Center
-                                    </button>
-                                    <button 
-                                      onClick={() => {
-                                        const newAccordion = [...block.content];
-                                        newAccordion[i] = { ...item, align: 'right' };
-                                        updateBlock(block.id, newAccordion);
-                                      }}
-                                      className={`px-2 py-0.5 text-[10px] font-medium rounded-md ${item.align === 'right' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
-                                    >
-                                      Right
-                                    </button>
-                                  </div>
-                                </div>
+                                <label className="text-xs font-semibold text-gray-500 uppercase mb-2 block">Content</label>
                                 <RichTextEditor 
                                   id={`${block.id}-${i}`}
                                   value={item.content || ''}

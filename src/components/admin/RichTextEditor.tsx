@@ -18,9 +18,7 @@ export default function RichTextEditor({
   const editorRef = useRef<HTMLDivElement>(null);
   const [hexColor, setHexColor] = useState('');
   const [formatOpen, setFormatOpen] = useState(false);
-  const [blockFormatOpen, setBlockFormatOpen] = useState(false);
   const formatRef = useRef<HTMLDivElement>(null);
-  const blockFormatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -49,9 +47,6 @@ export default function RichTextEditor({
     const handleClickOutside = (e: MouseEvent) => {
       if (formatRef.current && !formatRef.current.contains(e.target as Node)) {
         setFormatOpen(false);
-      }
-      if (blockFormatRef.current && !blockFormatRef.current.contains(e.target as Node)) {
-        setBlockFormatOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -239,45 +234,8 @@ export default function RichTextEditor({
     <div className="space-y-2">
       <div className="flex flex-wrap items-center gap-4 mb-2 pb-2 border-b border-gray-100">
         <div className="flex items-center gap-1 border-r border-gray-200 pr-4">
-          {/* Block format dropdown (Paragraph, H1, H2, etc) */}
-          <div className="relative" ref={blockFormatRef}>
-            <button
-              type="button"
-              onMouseDown={(e) => {
-                e.preventDefault();
-                setBlockFormatOpen(prev => !prev);
-                setFormatOpen(false);
-              }}
-              className="h-8 px-2 border border-gray-200 rounded text-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none mr-2 flex items-center gap-1"
-            >
-              Format ▾
-            </button>
-            {blockFormatOpen && (
-              <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[150px] py-1">
-                {[
-                  { label: 'Normal Text', value: 'p' },
-                  { label: 'Heading 1', value: 'h1' },
-                  { label: 'Heading 2', value: 'h2' },
-                  { label: 'Heading 3', value: 'h3' },
-                  { label: 'Quote', value: 'blockquote' },
-                ].map(opt => (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      execFormat('formatBlock', `<${opt.value}>`);
-                      setBlockFormatOpen(false);
-                    }}
-                    className="w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                  >
-                    {opt.label}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
           
+
           {/* Font size dropdown — all mousedowns preventDefault to keep editor focused */}
           <div className="relative" ref={formatRef}>
             <button

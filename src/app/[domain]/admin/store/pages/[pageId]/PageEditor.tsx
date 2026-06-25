@@ -186,7 +186,7 @@ export default function PageEditor({ store, pageId }: { store: any, pageId: stri
               <label className="block text-sm font-semibold text-gray-700 mb-1.5">URL Slug</label>
               <div className="flex items-center">
                 <span className="px-3 py-2 bg-gray-100 border border-r-0 border-gray-200 rounded-l-lg text-gray-500 text-sm whitespace-nowrap">
-                  /{store.domain}/pages/
+                  /{store.custom_domain || store.subdomain || store.slug}/pages/
                 </span>
                 <input
                   type="text"

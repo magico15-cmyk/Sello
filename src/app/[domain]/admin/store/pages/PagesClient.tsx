@@ -163,7 +163,7 @@ export default function PagesClient({ store }: { store: any }) {
                         <TrashIcon className="w-5 h-5" />
                       </button>
                       <a 
-                        href={`http://${store.domain || store.slug + '.localhost'}:3000/pages/${page.slug}`} 
+                        href={`http://${store.custom_domain || (store.subdomain || store.slug) + '.localhost'}:3000/pages/${page.slug}`} 
                         target="_blank" 
                         rel="noreferrer"
                         className="text-gray-400 hover:text-gray-600 text-sm font-medium underline"

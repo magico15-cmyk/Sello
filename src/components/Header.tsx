@@ -10,9 +10,9 @@ export const Header = ({ store }: { store?: any }) => {
           <Menu size={26} />
         </button>
         <nav className="hidden md:flex items-center gap-6 font-medium text-[15px]">
-          <Link href="/about" className="hover:text-brand-500 transition-colors">About Us</Link>
-          <Link href="/shipping" className="hover:text-brand-500 transition-colors">Shipping</Link>
-          <Link href="/faq" className="hover:text-brand-500 transition-colors">FAQ</Link>
+          <Link href="/pages/about-us" className="hover:text-brand-500 transition-colors">About Us</Link>
+          <Link href="/pages/shipping" className="hover:text-brand-500 transition-colors">Shipping</Link>
+          <Link href="/pages/faq" className="hover:text-brand-500 transition-colors">FAQ</Link>
         </nav>
       </div>
 

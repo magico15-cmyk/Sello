@@ -37,9 +37,9 @@ export const Footer = () => {
             <h3>Products</h3>
             <ul>
               <li><Link href="/">Shop All</Link></li>
-              <li><Link href="/about">About Us</Link></li>
-              <li><Link href="/shipping">Shipping & Delivery</Link></li>
-              <li><Link href="/faq">FAQ</Link></li>
+              <li><Link href="/pages/about-us">About Us</Link></li>
+              <li><Link href="/pages/shipping">Shipping & Delivery</Link></li>
+              <li><Link href="/pages/faq">FAQ</Link></li>
               <li><Link href="/contact">Contact Us</Link></li>
             </ul>
           </div>

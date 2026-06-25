@@ -82,7 +82,7 @@ export default function Sidebar() {
   let activeChild = "";
   if (pathname === "/admin/products/new") {
     activeChild = "New product";
-  } else if (pathname === "/admin/categories") {
+  } else if (pathname === "/admin/products/categories") {
     activeChild = "Categories";
   } else if (pathname === "/admin") {
     activeChild = "All products";
@@ -106,7 +106,7 @@ export default function Sidebar() {
     } else if (child === "All products") {
       router.push("/admin");
     } else if (child === "Categories") {
-      // router.push("/admin/categories");
+      router.push("/admin/products/categories");
     } else if (child === "Theme") {
       router.push("/admin/store/theme");
     } else if (child === "Checkout") {

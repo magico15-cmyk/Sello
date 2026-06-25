@@ -28,7 +28,8 @@ export function StoreClient({ store }: { store: any }) {
       const { data } = await supabase
         .from('products')
         .select('*')
-        .eq('store_id', store.id);
+        .eq('store_id', store.id)
+        .eq('visibility', 'Visible');
         
         if (data) {
         const formattedData = data.map(p => ({

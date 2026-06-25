@@ -85,8 +85,8 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
       if (typeof product.image === 'string') urls.push(product.image);
     }
 
-    if (Array.isArray(product.content_blocks)) {
-      product.content_blocks.forEach((block: any) => {
+    if (Array.isArray((product as any).content_blocks)) {
+      (product as any).content_blocks.forEach((block: any) => {
         if (block.type === 'image' || block.type === 'gif') {
           if (typeof block.content === 'string') urls.push(block.content);
         } else if (block.type === 'before_after') {

@@ -3,8 +3,15 @@ import ProductClient from './ProductClient';
 import { notFound } from 'next/navigation';
 import { getTenantFromHost } from '@/lib/tenant';
 
-export default async function ProductPage({ params }: { params: Promise<{ domain: string; id: string }> }) {
+export default async function ProductPage({ 
+  params,
+  searchParams 
+}: { 
+  params: Promise<{ domain: string; id: string }>,
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
   const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
   const store = await getTenantFromHost(resolvedParams.domain);
   
   if (!store) {
@@ -20,6 +27,10 @@ export default async function ProductPage({ params }: { params: Promise<{ domain
     .single();
 
   if (!product) {
+    notFound();
+  }
+
+  if (product.visibility !== 'Visible' && resolvedSearchParams.preview !== 'true') {
     notFound();
   }
 

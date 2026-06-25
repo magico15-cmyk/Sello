@@ -4,6 +4,7 @@ import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import { CheckCircleIcon, ExclamationCircleIcon, XMarkIcon, PhotoIcon } from "@heroicons/react/24/outline";
+import CustomSelect from "@/components/admin/CustomSelect";
 
 export default function GeneralSettingsClient({ store }: { store: any }) {
   const router = useRouter();
@@ -211,30 +212,30 @@ export default function GeneralSettingsClient({ store }: { store: any }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Store Direction</label>
-                <select
+                <CustomSelect
                   value={storeRtl ? 'rtl' : 'ltr'}
-                  onChange={(e) => setStoreRtl(e.target.value === 'rtl')}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-all outline-none"
-                >
-                  <option value="ltr">Left-to-Right (LTR)</option>
-                  <option value="rtl">Right-to-Left (RTL)</option>
-                </select>
+                  onChange={(val) => setStoreRtl(val === 'rtl')}
+                  options={[
+                    { value: 'ltr', label: 'Left-to-Right (LTR)' },
+                    { value: 'rtl', label: 'Right-to-Left (RTL)' }
+                  ]}
+                />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Store Country</label>
-                <select
+                <CustomSelect
                   value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-all outline-none"
-                >
-                  <option value="US">United States</option>
-                  <option value="UK">United Kingdom</option>
-                  <option value="FR">France</option>
-                  <option value="MA">Morocco</option>
-                  <option value="SA">Saudi Arabia</option>
-                  <option value="AE">United Arab Emirates</option>
-                </select>
+                  onChange={(val) => setCountry(val)}
+                  options={[
+                    { value: 'US', label: 'United States' },
+                    { value: 'UK', label: 'United Kingdom' },
+                    { value: 'FR', label: 'France' },
+                    { value: 'MA', label: 'Morocco' },
+                    { value: 'SA', label: 'Saudi Arabia' },
+                    { value: 'AE', label: 'United Arab Emirates' }
+                  ]}
+                />
               </div>
             </div>
           </div>
@@ -246,18 +247,18 @@ export default function GeneralSettingsClient({ store }: { store: any }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Currency Symbol</label>
-                <select
+                <CustomSelect
                   value={currency}
-                  onChange={(e) => setCurrency(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-all outline-none"
-                >
-                  <option value="$">USD ($)</option>
-                  <option value="€">EUR (€)</option>
-                  <option value="£">GBP (£)</option>
-                  <option value="DH">MAD (DH)</option>
-                  <option value="SR">SAR (SR)</option>
-                  <option value="AED">AED</option>
-                </select>
+                  onChange={(val) => setCurrency(val)}
+                  options={[
+                    { value: '$', label: 'USD ($)' },
+                    { value: '€', label: 'EUR (€)' },
+                    { value: '£', label: 'GBP (£)' },
+                    { value: 'DH', label: 'MAD (DH)' },
+                    { value: 'SR', label: 'SAR (SR)' },
+                    { value: 'AED', label: 'AED' }
+                  ]}
+                />
               </div>
             </div>
           </div>

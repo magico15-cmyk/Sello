@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 1. Extract the real IP address
-    const ip = req.headers.get("x-forwarded-for")?.split(',')[0].trim() || req.ip || "unknown";
+    const ip = req.headers.get("x-forwarded-for")?.split(',')[0].trim() || "unknown";
 
     // 2. Fetch the store's max_orders_per_ip setting
     const { data: store, error: storeError } = await supabase

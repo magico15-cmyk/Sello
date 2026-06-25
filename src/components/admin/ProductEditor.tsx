@@ -62,6 +62,8 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
   const [dragEnabledId, setDragEnabledId] = useState<string | null>(null);
   const [currencySymbol, setCurrencySymbol] = useState('$');
 
+  const [storeCategories, setStoreCategories] = useState<any[]>([]);
+
   useEffect(() => {
     if (storeId) {
       supabase
@@ -71,6 +73,14 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
         .single()
         .then(({ data }) => {
           if (data?.currency) setCurrencySymbol(data.currency);
+        });
+        
+      supabase
+        .from('store_categories')
+        .select('*')
+        .eq('store_id', storeId)
+        .then(({ data }) => {
+          if (data) setStoreCategories(data);
         });
     }
   }, [storeId]);
@@ -373,7 +383,7 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
         <div className="flex items-center gap-3">
           {isEditing && (
             <button 
-              onClick={() => window.open(`/product/${initialData.id}`, '_blank')}
+              onClick={() => window.open(`/product/${initialData.id}?preview=true`, '_blank')}
               className="p-2 text-gray-500 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition-colors border border-transparent hover:border-brand-100"
               title="Preview Product"
             >
@@ -1583,13 +1593,27 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                <input 
-                  type="text" 
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  placeholder="e.g. Footwear"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-colors"
-                />
+                {storeCategories.length > 0 ? (
+                    <CustomSelect
+                      value={category}
+                      onChange={setCategory}
+                      options={[
+                        { value: "", label: "None" },
+                        ...storeCategories.map(c => ({ value: c.name, label: c.name }))
+                      ]}
+                    />
+                ) : (
+                  <div>
+                    <input 
+                      type="text" 
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      placeholder="e.g. Footwear"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-colors"
+                    />
+                    <p className="text-xs text-gray-500 mt-2">Create categories in the Categories page to use a dropdown here.</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

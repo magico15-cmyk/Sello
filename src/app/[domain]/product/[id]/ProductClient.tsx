@@ -204,7 +204,7 @@ const StatisticsSection = ({ data }: { data: { title: string, items: { percentag
   );
 };
 
-const Footer = () => {
+const Footer = ({ store }: { store?: any }) => {
   return (
     <footer className="site-footer">
       <div className="footer-wave">
@@ -511,7 +511,7 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
 
             {/* Package Selection */}
             <div className="package-options">
-              {packages.map((pkg) => (
+              {packages.map((pkg: any) => (
                 <label key={pkg.id} className={`package-card ${selectedPackage === pkg.id ? 'active' : ''}`}>
                   {pkg.badge && <div className="badge">{pkg.badge}</div>}
                   <input 

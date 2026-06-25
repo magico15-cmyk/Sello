@@ -243,7 +243,6 @@ export default function RichTextEditor({
               onMouseDown={(e) => {
                 e.preventDefault();
                 setFormatOpen(prev => !prev);
-                setBlockFormatOpen(false);
               }}
               className="h-8 px-2 border border-gray-200 rounded text-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none mr-2 flex items-center gap-1"
             >

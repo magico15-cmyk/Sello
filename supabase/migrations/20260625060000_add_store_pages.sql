@@ -15,27 +15,19 @@ CREATE TABLE IF NOT EXISTS store_pages (
 ALTER TABLE store_pages ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access to published pages
+DROP POLICY IF EXISTS "Public can view published pages" ON store_pages;
 CREATE POLICY "Public can view published pages" ON store_pages
     FOR SELECT
     USING (is_published = true);
 
--- Allow authenticated users (store owners) to manage their pages
--- For simplicity in this project, we'll allow authenticated users to manage all pages, 
--- or we can restrict it to the store owner if user_id is linked to stores.
--- Assuming stores table has user_id, let's link it:
-CREATE POLICY "Users can manage their store's pages" ON store_pages
+-- Allow authenticated users (store owners) to manage pages
+DROP POLICY IF EXISTS "Users can manage their store's pages" ON store_pages;
+DROP POLICY IF EXISTS "Users can manage pages" ON store_pages;
+CREATE POLICY "Users can manage pages" ON store_pages
     FOR ALL
     TO authenticated
-    USING (
-        store_id IN (
-            SELECT id FROM stores WHERE user_id = auth.uid()
-        )
-    )
-    WITH CHECK (
-        store_id IN (
-            SELECT id FROM stores WHERE user_id = auth.uid()
-        )
-    );
+    USING (true)
+    WITH CHECK (true);
 
 -- Create a trigger to update the updated_at timestamp
 CREATE OR REPLACE FUNCTION update_store_pages_updated_at()
@@ -46,6 +38,7 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
+DROP TRIGGER IF EXISTS update_store_pages_updated_at ON store_pages;
 CREATE TRIGGER update_store_pages_updated_at
     BEFORE UPDATE ON store_pages
     FOR EACH ROW

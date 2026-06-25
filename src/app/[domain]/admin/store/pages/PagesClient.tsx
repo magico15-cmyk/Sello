@@ -29,8 +29,8 @@ export default function PagesClient({ store }: { store: any }) {
       if (error) throw error;
       setPages(data || []);
     } catch (err: any) {
-      console.error("Error fetching pages:", err);
-      showToast(err.message || "Failed to fetch pages", "error");
+      console.error("Error fetching pages:", JSON.stringify(err));
+      showToast(err?.message || JSON.stringify(err) || "Failed to fetch pages", "error");
     } finally {
       setIsLoading(false);
     }

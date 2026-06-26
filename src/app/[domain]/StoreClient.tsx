@@ -155,7 +155,7 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
             {/* Section Header */}
             <div className="w-full text-center" style={{ marginBottom: '40px' }}>
               <p className="text-[12px] font-bold tracking-[0.3em] uppercase" style={{ marginBottom: '8px', color: primaryColor }}>
-                ✦ CURATED FOR YOU ✦
+                {store?.homepage_products_subtitle || "✦ CURATED FOR YOU ✦"}
               </p>
               <h2 className="text-[28px] sm:text-[36px] font-black text-[#111]" style={{ letterSpacing: '-0.02em', lineHeight: '1.1' }}>
                 {store?.homepage_products_title || "Featured Products"}
@@ -164,9 +164,26 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
             </div>
 
             {/* Products Grid */}
-            <div className="mx-auto grid grid-cols-2 md:grid-cols-4" style={{ gap: '24px', maxWidth: '1000px' }}>
+            {/* Products Grid */}
+            <div 
+              className={
+                store?.homepage_products_view_type === 'Slider' 
+                  ? "flex overflow-x-auto snap-x snap-mandatory pb-10 pt-4 px-[10vw] sm:px-10 gap-6" 
+                  : store?.homepage_products_view_type === 'Style 1'
+                  ? "mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+                  : store?.homepage_products_view_type === 'Style 2'
+                  ? "mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6"
+                  : "mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6" // Default Grid
+              } 
+              style={{ 
+                maxWidth: store?.homepage_products_view_type === 'Slider' ? '100vw' : '1000px',
+                margin: store?.homepage_products_view_type === 'Slider' ? '0 -16px' : '0 auto',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none'
+              }}
+            >
               {products.length === 0 && (
-                <div className="col-span-4 text-center py-10 text-gray-500">
+                <div className="col-span-full text-center py-10 text-gray-500 w-full">
                   No products found in this store yet.
                 </div>
               )}
@@ -175,12 +192,12 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
                 return (
               <div 
                 key={idx} 
-                className="group cursor-pointer"
+                className={`group cursor-pointer ${store?.homepage_products_view_type === 'Slider' ? "snap-center flex-none w-[75vw] sm:w-[320px]" : "w-full"}`}
                 onClick={() => { if (product.link !== '#' && !isOutOfStock) router.push(`/product/${product.id}`); }}
                 style={{ perspective: '1000px' }}
               >
                 <div 
-                  className="rounded-[16px] overflow-hidden flex flex-col relative bg-white transition-all duration-400"
+                  className="rounded-[16px] overflow-hidden flex flex-col relative bg-white transition-all duration-400 h-full"
                   style={{ 
                     boxShadow: '0 4px 20px rgba(0,0,0,0.06)', 
                     border: '1px solid #e0e0e0',
@@ -218,18 +235,20 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
                     />
                     
                     {/* Floating Discount Pill */}
-                    <div 
-                      className="absolute flex items-center"
-                      style={{ 
-                        top: '12px', left: '12px',
-                        background: primaryColor,
-                        color: 'white', fontSize: '11px', fontWeight: '800',
-                        padding: '5px 10px', borderRadius: '4px',
-                        letterSpacing: '0.02em'
-                      }}
-                    >
-                      Save {product.save || Math.round((1 - (product.price / product.oldPrice)) * 100)}%
-                    </div>
+                    {product.oldPrice > product.price && (
+                      <div 
+                        className="absolute flex items-center"
+                        style={{ 
+                          top: '12px', left: '12px',
+                          background: primaryColor,
+                          color: 'white', fontSize: '11px', fontWeight: '800',
+                          padding: '5px 10px', borderRadius: '4px',
+                          letterSpacing: '0.02em'
+                        }}
+                      >
+                        Save {product.save || Math.round((1 - (product.price / product.oldPrice)) * 100)}%
+                      </div>
+                    )}
                   </div>
                   
                   {/* Product Info */}
@@ -246,9 +265,11 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
                       <span style={{ fontSize: '16px', fontWeight: '800', color: primaryColor }}>
                         {product.price} {currencySymbol}
                       </span>
-                      <span style={{ fontSize: '13px', fontWeight: '500', color: '#a0a0a0', textDecoration: 'line-through' }}>
-                        {product.oldPrice} {currencySymbol}
-                      </span>
+                      {product.oldPrice > product.price && (
+                        <span style={{ fontSize: '13px', fontWeight: '500', color: '#a0a0a0', textDecoration: 'line-through' }}>
+                          {product.oldPrice} {currencySymbol}
+                        </span>
+                      )}
                     </div>
 
                     <div style={{ marginTop: 'auto' }}>
@@ -279,7 +300,41 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
               </div>
               );
             })}
+            
+            {/* Trailing space for slider so the last item isn't flush with the right edge */}
+            {store?.homepage_products_view_type === 'Slider' && (
+              <div className="w-1 flex-shrink-0 sm:hidden"></div>
+            )}
           </div>
+
+          {/* Load More Button */}
+          {store?.homepage_products_load_more && products.length > (store?.homepage_products_limit || 8) && (
+            <div className="w-full flex justify-center mt-12">
+              <button 
+                className="font-bold transition-all duration-300 px-8 py-3 rounded-full border-2"
+                style={{ 
+                  color: primaryColor,
+                  borderColor: primaryColor,
+                  fontSize: '14px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}
+                onMouseEnter={(e) => { 
+                  e.currentTarget.style.background = primaryColor;
+                  e.currentTarget.style.color = '#fff';
+                }}
+                onMouseLeave={(e) => { 
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.color = primaryColor;
+                }}
+                onClick={() => {
+                  router.push('/products');
+                }}
+              >
+                View All Products
+              </button>
+            </div>
+          )}
         </section>
         )}
 

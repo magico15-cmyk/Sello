@@ -20,11 +20,17 @@ export default async function StoreHomePage(props: {
   }
 
   // Fetch products server-side for instant loading
-  const { data: rawProducts } = await supabase
+  let query = supabase
     .from('products')
     .select('*')
     .eq('store_id', store.id)
     .eq('visibility', 'Visible');
+
+  if (store.homepage_products_category && store.homepage_products_category.trim() !== '') {
+    query = query.eq('category', store.homepage_products_category);
+  }
+
+  const { data: rawProducts } = await query;
 
   const products = (rawProducts || []).map(p => ({
     ...p,

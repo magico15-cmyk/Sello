@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react';
-import { TopBar } from '@/components/TopBar';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 
@@ -11,13 +10,9 @@ export default function CustomPageClient({ store, page }: { store: any, page: an
 
   return (
     <>
-      <div dir="ltr">
-        <TopBar />
-      </div>
-      <div dir={store?.language === 'ar' || store?.store_rtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col">
-        <Header store={store} />
+      <div dir={store?.language === 'ar' || store?.store_rtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col bg-gray-50">
 
-        <main className="flex-1 bg-gray-50">
+        <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-12 md:py-16">
           <div className="w-full max-w-[800px] mx-auto px-5 py-12 md:py-20">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 pb-6 border-b border-gray-100">
@@ -31,8 +26,6 @@ export default function CustomPageClient({ store, page }: { store: any, page: an
             </div>
           </div>
         </main>
-
-        <Footer store={store} />
       </div>
 
       {/* Dynamic Theme Styles — same as StoreClient */}

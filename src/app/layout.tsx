@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.variable} ${poppins.className} min-h-full flex flex-col`}>
+      <body className={`${poppins.variable} ${poppins.className} min-h-full flex flex-col bg-gray-50`}>
         {children}
       </body>
     </html>

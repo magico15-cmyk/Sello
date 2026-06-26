@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { getTenantFromHost } from "@/lib/tenant";
 import React from "react";
+import { GlobalHeader } from "@/components/GlobalHeader";
+import { GlobalFooter } from "@/components/GlobalFooter";
 
 export async function generateMetadata(
   props: { params: Promise<{ domain: string }> }
@@ -63,7 +65,9 @@ export default async function DomainLayout(props: {
           }
         `}} />
       )}
+      <GlobalHeader store={store} />
       {children}
+      <GlobalFooter store={store} />
     </>
   );
 }

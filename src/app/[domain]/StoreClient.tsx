@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { TopBar } from '@/components/TopBar';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 
@@ -45,11 +44,7 @@ export function StoreClient({ store }: { store: any }) {
 
   return (
     <>
-      <div dir="ltr">
-        <TopBar />
-      </div>
       <div dir={store?.language === 'ar' || store?.store_rtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col">
-        <Header store={store} />
 
       <main className="flex-1 bg-gray-50">
         
@@ -232,7 +227,6 @@ export function StoreClient({ store }: { store: any }) {
 
       </main>
 
-      <Footer store={store} />
       
       {/* Dynamic Theme Styles */}
       <style dangerouslySetInnerHTML={{__html: `
@@ -241,10 +235,6 @@ export function StoreClient({ store }: { store: any }) {
           --star-pink: ${primaryColor};
           --guarantee-color: ${guaranteeColor};
         }
-        
-        .wave-1 path { fill: ${primaryColor}; opacity: 0.4; }
-        .wave-2 path { fill: ${primaryColor}; opacity: 1; }
-        .wave-3 path { fill: ${primaryColor}; opacity: 0.7; }
         
         .add-to-cart-container {
           box-shadow: 0 4px 10px ${primaryColor}4D; /* 30% opacity hex */

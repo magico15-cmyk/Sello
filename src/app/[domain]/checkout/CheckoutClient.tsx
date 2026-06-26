@@ -84,21 +84,8 @@ export default function CheckoutClient({ product, selectedPkg, storeId, store }:
           --primary-pink: ${primaryColor};
         }
       `}} />
-      <header className="header bg-white">
-        <button className="menu-btn" aria-label="Menu" style={{ color: primaryColor }} onClick={() => router.push('/')}><Menu size={26} /></button>
-        <div className="logo" onClick={() => router.push('/')}>
-          {store?.logo_url ? (
-            <img src={store.logo_url} alt={store?.store_name || "Store Logo"} className="max-h-8 w-auto max-w-[220px] object-contain cursor-pointer" />
-          ) : (
-            <div className="logo-circle cursor-pointer" style={{ borderColor: primaryColor, color: primaryColor }}>Yu.</div>
-          )}
-        </div>
-        <button className="cart-btn" aria-label="Cart" style={{ position: 'relative', color: primaryColor }}>
-          <ShoppingBag size={26} />
-        </button>
-      </header>
 
-      <div className="min-h-screen bg-white font-sans py-10 px-4 flex justify-center items-start" style={{ backgroundColor: '#ffffff', minHeight: '100vh', padding: '40px 16px' }}>
+      <main className="flex-grow flex items-center justify-center p-4">
       <div className="w-full rounded-xl overflow-hidden relative border border-gray-300" style={{ maxWidth: '480px', backgroundColor: '#ffffff', borderRadius: '12px', border: '1px solid #d1d5db' }}>
         
         {/* Header */}
@@ -264,7 +251,7 @@ export default function CheckoutClient({ product, selectedPkg, storeId, store }:
           </div>
 
         </div>
-      </div>
+      </main>
     </div>
   );
 }

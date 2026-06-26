@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback, use } from 'react';
-import { Menu, ShoppingBag, ChevronLeft, ChevronRight, Smile, Activity, Wind, ShieldCheck, Star, HandCoins, ChevronDown, ChevronUp, Check, X } from 'lucide-react';
+import { Menu, ShoppingBag, ChevronLeft, ChevronRight, Smile, Activity, Wind, ShieldCheck, Star, HandCoins, ChevronDown, ChevronUp, Check, X, User, Phone, MapPin, CheckCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { Header } from '@/components/Header';
@@ -211,6 +211,15 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
   const [purchaseType, setPurchaseType] = useState('subscribe');
   const [selectedPackage, setSelectedPackage] = useState(2);
   const [showStickyBar, setShowStickyBar] = useState(false);
+
+  // Express Checkout state
+  const hasExpressBlock = product?.content_blocks?.some((b: any) => b.type === 'express_checkout');
+  const hasStandardBlock = product?.content_blocks?.some((b: any) => b.type === 'checkout_button');
+  const hasCheckoutBlock = hasExpressBlock || hasStandardBlock;
+
+  const [expressForm, setExpressForm] = useState({ fullName: '', phoneNumber: '', city: '', address: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const expressFormRef = useRef<HTMLDivElement>(null);
   
   const primaryColor = store?.primary_color || '#f899a2';
   const guaranteeColor = store?.guarantee_color || '#1fb6ff';
@@ -240,6 +249,197 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
   
   const addToCartRef = useRef<HTMLDivElement>(null);
   
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Only show sticky bar when scrolled past the form/button
+        if (!entry.isIntersecting && window.scrollY > 500) {
+          setShowStickyBar(true);
+        } else {
+          setShowStickyBar(false);
+        }
+      },
+      { threshold: 0 }
+    );
+
+    if (addToCartRef.current) {
+      observer.observe(addToCartRef.current);
+    }
+    if (expressFormRef.current) {
+      observer.observe(expressFormRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [product, hasCheckoutBlock]);
+
+  const renderExpressForm = () => (
+    <div ref={expressFormRef} className="express-checkout-form" style={{ marginTop: '8px' }}>
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          if (isSubmitting || isOutOfStock) return;
+          setIsSubmitting(true);
+          try {
+            const storeId = store?.id;
+            const orderPayload = {
+              store_id: storeId,
+              product_id: product.id,
+              customer_name: expressForm.fullName,
+              customer_phone: expressForm.phoneNumber,
+              customer_address: `${expressForm.address}, ${expressForm.city}`,
+              total_amount: parseFloat((currentPrice || '0').replace(/[^0-9.]/g, '')),
+              status: 'pending',
+              items: [{
+                product_id: product.id,
+                product_name: product.name,
+                package: currentPkg?.title,
+                price: currentPrice,
+                image: currentPkg?.img || currentPkg?.image
+              }]
+            };
+            const res = await fetch('/api/checkout', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(orderPayload)
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'Failed to submit order');
+            const params = new URLSearchParams({ name: expressForm.fullName, item: currentPkg?.title || '' });
+            router.push(`/thank-you?${params.toString()}`);
+          } catch (err: any) {
+            alert(err.message || 'Failed to submit order. Please try again.');
+          } finally {
+            setIsSubmitting(false);
+          }
+        }}
+        style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}
+      >
+        {(store?.field_name_enabled ?? true) && (
+          <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #d1d5db', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#fff' }}>
+            <div style={{ width: '45px', backgroundColor: '#e5e7eb', display: 'flex', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', borderRight: '1px solid #d1d5db' }}>
+              <User size={18} color="#4b5563" />
+            </div>
+            <input
+              type="text"
+              name="fullName"
+              required
+              value={expressForm.fullName}
+              onChange={(e) => setExpressForm({ ...expressForm, fullName: e.target.value })}
+              style={{ flex: 1, padding: '13px 14px', fontSize: '15px', border: 'none', outline: 'none', fontFamily: 'inherit' }}
+              placeholder={store?.field_name_label || 'Full name'}
+            />
+          </div>
+        )}
+
+        {(store?.field_phone_enabled ?? true) && (
+          <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #d1d5db', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#fff' }}>
+            <div style={{ width: '45px', backgroundColor: '#e5e7eb', display: 'flex', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', borderRight: '1px solid #d1d5db' }}>
+              <Phone size={18} color="#4b5563" />
+            </div>
+            <input
+              type="tel"
+              name="phoneNumber"
+              required
+              dir="auto"
+              value={expressForm.phoneNumber}
+              onChange={(e) => setExpressForm({ ...expressForm, phoneNumber: e.target.value })}
+              style={{ flex: 1, padding: '13px 14px', fontSize: '15px', border: 'none', outline: 'none', fontFamily: 'inherit' }}
+              placeholder={store?.field_phone_label || 'Phone number'}
+            />
+          </div>
+        )}
+
+        {(store?.field_city_enabled ?? true) && (
+          <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #d1d5db', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#fff' }}>
+            <div style={{ width: '45px', backgroundColor: '#e5e7eb', display: 'flex', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', borderRight: '1px solid #d1d5db' }}>
+              <MapPin size={18} color="#4b5563" />
+            </div>
+            <input
+              type="text"
+              name="city"
+              required
+              value={expressForm.city}
+              onChange={(e) => setExpressForm({ ...expressForm, city: e.target.value })}
+              style={{ flex: 1, padding: '13px 14px', fontSize: '15px', border: 'none', outline: 'none', fontFamily: 'inherit' }}
+              placeholder={store?.field_city_label || 'City'}
+            />
+          </div>
+        )}
+
+        {(store?.field_address_enabled ?? true) && (
+          <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #d1d5db', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#fff' }}>
+            <div style={{ width: '45px', backgroundColor: '#e5e7eb', display: 'flex', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', borderRight: '1px solid #d1d5db' }}>
+              <MapPin size={18} color="#4b5563" />
+            </div>
+            <input
+              type="text"
+              name="address"
+              required
+              value={expressForm.address}
+              onChange={(e) => setExpressForm({ ...expressForm, address: e.target.value })}
+              style={{ flex: 1, padding: '13px 14px', fontSize: '15px', border: 'none', outline: 'none', fontFamily: 'inherit' }}
+              placeholder={store?.field_address_label || 'Address (Road, House number)'}
+            />
+          </div>
+        )}
+
+        <button
+          type="submit"
+          disabled={isSubmitting || isOutOfStock}
+          className="w-full font-bold transition-all flex items-center justify-center gap-2 relative overflow-hidden btn-shine"
+          style={{
+            backgroundColor: isOutOfStock ? '#9ca3af' : primaryColor,
+            color: 'white',
+            padding: '16px',
+            borderRadius: '10px',
+            fontSize: '18px',
+            border: 'none',
+            letterSpacing: '0.5px',
+            cursor: isOutOfStock ? 'not-allowed' : 'pointer',
+            marginTop: '4px',
+            boxShadow: `0 4px 14px ${primaryColor}4D`,
+          }}
+        >
+          {isSubmitting ? (
+            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          ) : (
+            <>
+              <CheckCircle size={20} style={{ opacity: 0.9 }} />
+              {isOutOfStock ? 'OUT OF STOCK' : (store?.checkout_button_text || 'COMPLETE ORDER')}
+            </>
+          )}
+        </button>
+      </form>
+      <div className="returns-info" style={{ textAlign: 'center', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#888', fontSize: '13px' }}>
+        <ShieldCheck size={16} className="shield-icon" />
+        Free 30 Day Returns
+      </div>
+    </div>
+  );
+
+  const renderStandardButton = (attachRef: boolean = false) => (
+    <div 
+      ref={attachRef ? addToCartRef : undefined}
+      className={`add-to-cart-container ${isOutOfStock ? 'opacity-50 cursor-not-allowed' : 'btn-shine'}`} 
+      onClick={() => {
+        if (product?.id && !isOutOfStock) {
+          router.push(`/checkout?productId=${product.id}&package=${selectedPackage}`);
+        }
+      }}
+    >
+      <button 
+        className="add-to-cart text-[28px] sm:text-[32px]"
+        disabled={isOutOfStock}
+      >
+        {isOutOfStock ? "OUT OF STOCK" : "ORDER NOW"}
+      </button>
+      <div className="returns-info">
+        <ShieldCheck size={16} className="shield-icon" />
+        Free 30 Day Returns
+      </div>
+    </div>
+  );
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -474,27 +674,11 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
             </div>
 
             {/* Action Area */}
-            <div className="action-area" ref={addToCartRef}>
-              <div 
-                className={`add-to-cart-container ${isOutOfStock ? 'opacity-50 cursor-not-allowed' : 'btn-shine'}`} 
-                onClick={() => {
-                  if (product?.id && !isOutOfStock) {
-                    router.push(`/checkout?productId=${product.id}&package=${selectedPackage}`);
-                  }
-                }}
-              >
-                <button 
-                  className="add-to-cart text-[28px] sm:text-[32px]"
-                  disabled={isOutOfStock}
-                >
-                  {isOutOfStock ? "OUT OF STOCK" : "ORDER NOW"}
-                </button>
-                <div className="returns-info">
-                  <ShieldCheck size={16} className="shield-icon" />
-                  Free 30 Day Returns
-                </div>
+            {!hasCheckoutBlock && (
+              <div className="action-area" ref={addToCartRef}>
+                {renderStandardButton(false)}
               </div>
-            </div>
+            )}
 
 
 
@@ -640,6 +824,18 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
                     return <BeforeAfterSlider key={idx} data={block.content} />;
                   case 'stats':
                     return <StatisticsSection key={idx} data={block.content} />;
+                  case 'express_checkout':
+                    return (
+                      <div key={idx} className="w-full">
+                        {renderExpressForm()}
+                      </div>
+                    );
+                  case 'checkout_button':
+                    return (
+                      <div key={idx} className="w-full">
+                        {renderStandardButton(true)}
+                      </div>
+                    );
                 }
               })}
             </div>
@@ -673,12 +869,14 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
             onMouseLeave={(e) => { if(!isOutOfStock) e.currentTarget.style.opacity = '1'; }}
             disabled={isOutOfStock}
             onClick={() => {
-              if (product?.id && !isOutOfStock) {
+              if (hasExpressBlock && expressFormRef.current) {
+                expressFormRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              } else if (product?.id && !isOutOfStock) {
                 router.push(`/checkout?productId=${product.id}&package=${selectedPackage}`);
               }
             }}
           >
-            {isOutOfStock ? "OUT OF STOCK" : "ORDER NOW"}
+            {isOutOfStock ? "OUT OF STOCK" : (hasExpressBlock ? "COMPLETE ORDER" : "ORDER NOW")}
           </button>
         </div>
       </div>

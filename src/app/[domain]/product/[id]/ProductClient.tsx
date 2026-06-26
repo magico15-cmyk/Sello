@@ -859,18 +859,18 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
         className={`fixed bottom-0 left-0 right-0 bg-white shadow-[0_-4px_25px_rgba(0,0,0,0.1)] border-t border-gray-100 z-50 transition-transform duration-300 transform ${showStickyBar ? 'translate-y-0' : 'translate-y-full'}`}
       >
         <div className="w-full flex items-center justify-between" style={{ height: '80px', paddingLeft: 'max(20px, calc(50vw - 580px))', paddingRight: 'max(20px, calc(50vw - 580px))', boxSizing: 'border-box' }}>
-          <div className="flex flex-col pr-3 min-w-0 flex-1 justify-center">
-            <span className="font-bold text-[14px] sm:text-[16px] text-[#222] leading-tight truncate">{product?.name}</span>
-            <div className="flex items-baseline mt-0.5 gap-3">
-              <span className="text-[19px] sm:text-[22px] font-extrabold" style={{ color: primaryColor }}>{currentPrice}</span>
+          <div className="flex flex-col pr-2 sm:pr-3 min-w-0 flex-1 justify-center">
+            <span className="font-bold text-[13px] sm:text-[16px] text-[#222] leading-tight truncate">{product?.name}</span>
+            <div className="flex items-baseline mt-0.5 gap-2 sm:gap-3 overflow-hidden">
+              <span className="text-[16px] sm:text-[22px] font-extrabold whitespace-nowrap" style={{ color: primaryColor }}>{currentPrice}</span>
               {currentPkg?.originalPrice && currentPrice !== currentPkg.originalPrice && (
-                <span className="text-[13px] sm:text-[15px] text-[#999] line-through font-medium">{currentPkg.originalPrice}</span>
+                <span className="text-[12px] sm:text-[15px] text-[#999] line-through font-medium whitespace-nowrap truncate">{currentPkg.originalPrice}</span>
               )}
             </div>
           </div>
           <button 
-            className={`text-white font-extrabold rounded-[30px] text-[17px] sm:text-[20px] transition-all shadow-sm whitespace-nowrap ml-2 flex-shrink-0 flex items-center justify-center tracking-wide ${isOutOfStock ? 'opacity-50 cursor-not-allowed' : 'btn-shine'}`}
-            style={{ padding: '0 18px', height: '48px', backgroundColor: isOutOfStock ? '#9ca3af' : primaryColor }}
+            className={`text-white font-extrabold rounded-[30px] text-[13px] sm:text-[20px] px-4 sm:px-[18px] h-[40px] sm:h-[48px] transition-all shadow-sm whitespace-nowrap ml-1 sm:ml-2 flex-shrink-0 flex items-center justify-center tracking-wide ${isOutOfStock ? 'opacity-50 cursor-not-allowed' : 'btn-shine'}`}
+            style={{ backgroundColor: isOutOfStock ? '#9ca3af' : primaryColor }}
             onMouseEnter={(e) => { if(!isOutOfStock) e.currentTarget.style.opacity = '0.9'; }}
             onMouseLeave={(e) => { if(!isOutOfStock) e.currentTarget.style.opacity = '1'; }}
             disabled={isOutOfStock}

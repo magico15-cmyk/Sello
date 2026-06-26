@@ -266,14 +266,14 @@ export default function HomepageClient({ store }: { store: any }) {
                       <label className="block text-sm font-medium text-gray-700 mb-2">Number of Products to Show</label>
                       <input
                         type="number"
-                        min="4"
+                        min="2"
                         max="24"
-                        step="4"
+                        step="2"
                         value={productsLimit}
                         onChange={(e) => setProductsLimit(parseInt(e.target.value) || 8)}
                         className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-all outline-none"
                       />
-                      <p className="text-xs text-gray-500 mt-2">Maximum number of products to display (recommend multiples of 4).</p>
+                      <p className="text-xs text-gray-500 mt-2">Maximum number of products to display (recommend multiples of 2).</p>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">View Type</label>

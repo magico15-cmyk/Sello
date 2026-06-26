@@ -156,9 +156,11 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
     setLoading(true);
     try {
       // Remove id and createdAt so Supabase generates new ones
-      const { id, createdAt, ...productData } = product;
+      // Also ensure the slug is unique
+      const { id, createdAt, slug, ...productData } = product as any;
       const newProduct = {
         ...productData,
+        slug: slug ? `${slug}-copy-${Math.floor(Math.random() * 10000)}` : undefined,
         name: `${product.name} (Copy)`,
         orders: 0,
         visibility: "Hidden" // Keep duplicate as draft by default

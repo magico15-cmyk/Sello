@@ -17,8 +17,8 @@ export default async function FooterSettingsPage({ params }: { params: Promise<{
   return (
     <div className="p-4 md:p-6 flex-1 min-w-0 flex flex-col min-h-[calc(100vh-80px)]">
       <div className="mb-5">
-        <h2 className="text-2xl font-bold text-gray-900">Footer</h2>
-        <p className="text-gray-500 mt-1">Manage your store's footer content and settings.</p>
+        <h2 className="text-2xl font-bold text-gray-900">Header & Footer</h2>
+        <p className="text-gray-500 mt-1">Manage your store's header, footer, and navigation branding.</p>
       </div>
       <FooterClient store={store} />
     </div>

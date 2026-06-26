@@ -45,7 +45,7 @@ const navItems: NavItem[] = [
     label: "Store",
     icon: BuildingStorefrontIcon,
     activeIcon: BuildingStorefrontSolid,
-    children: ["General", "Theme", "Checkout", "Pages", "Menus", "Footer"],
+    children: ["General", "Theme", "Checkout", "Pages", "Menus", "Header & Footer"],
   },
   { label: "Roles", icon: UsersIcon, activeIcon: UsersSolid },
 ];
@@ -97,7 +97,7 @@ export default function Sidebar() {
   } else if (pathname === "/admin/store/menus") {
     activeChild = "Menus";
   } else if (pathname === "/admin/store/footer") {
-    activeChild = "Footer";
+    activeChild = "Header & Footer";
   }
 
   const handleChildClick = (child: string) => {
@@ -117,7 +117,7 @@ export default function Sidebar() {
       router.push("/admin/store/pages");
     } else if (child === "Menus") {
       router.push("/admin/store/menus");
-    } else if (child === "Footer") {
+    } else if (child === "Header & Footer") {
       router.push("/admin/store/footer");
     }
   };

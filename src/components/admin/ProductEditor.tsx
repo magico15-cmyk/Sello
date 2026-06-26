@@ -311,6 +311,8 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
       type === 'stats' ? { title: 'Backed by Real Results', items: [{ percentage: '94', label: 'of participants', description: 'noticed a positive difference in their wellbeing within weeks.' }] } :
       type === 'comparison' ? { title: 'What Makes Us So Special?', highlightWord: 'Special', description: '', storeName: '', competitorName: 'Others', rows: [] } :
       type === 'rating' ? { score: '4.8', reviews: '8,300' } :
+      type === 'express_checkout' ? { buttonText: 'COMPLETE ORDER', showGuarantee: true, guaranteeText: 'Free 30 Day Returns' } :
+      type === 'checkout_button' ? { buttonText: 'ORDER NOW', showGuarantee: true, guaranteeText: 'Free 30 Day Returns' } :
       '';
     const newId = Math.random().toString(36).substr(2, 9);
     setBlocks([...blocks, { id: newId, type, content: defaultContent }]);
@@ -1347,6 +1349,29 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
                           className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-colors"
                         />
                       </div>
+                      <div className="flex items-center mt-4">
+                        <input
+                          type="checkbox"
+                          id={`showGuarantee-${block.id}`}
+                          checked={block.content?.showGuarantee ?? true}
+                          onChange={(e) => updateBlock(block.id, { ...block.content, showGuarantee: e.target.checked })}
+                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                        />
+                        <label htmlFor={`showGuarantee-${block.id}`} className="ml-2 block text-sm text-gray-900">
+                          Show Guarantee Text below button
+                        </label>
+                      </div>
+                      {(block.content?.showGuarantee ?? true) && (
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Guarantee Text</label>
+                          <input 
+                            type="text"
+                            value={block.content?.guaranteeText || 'Free 30 Day Returns'}
+                            onChange={(e) => updateBlock(block.id, { ...block.content, guaranteeText: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-colors"
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -1361,6 +1386,29 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
                           className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-colors"
                         />
                       </div>
+                      <div className="flex items-center mt-4">
+                        <input
+                          type="checkbox"
+                          id={`showGuarantee-${block.id}`}
+                          checked={block.content?.showGuarantee ?? true}
+                          onChange={(e) => updateBlock(block.id, { ...block.content, showGuarantee: e.target.checked })}
+                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                        />
+                        <label htmlFor={`showGuarantee-${block.id}`} className="ml-2 block text-sm text-gray-900">
+                          Show Guarantee Text below button
+                        </label>
+                      </div>
+                      {(block.content?.showGuarantee ?? true) && (
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Guarantee Text</label>
+                          <input 
+                            type="text"
+                            value={block.content?.guaranteeText || 'Free 30 Day Returns'}
+                            onChange={(e) => updateBlock(block.id, { ...block.content, guaranteeText: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-colors"
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
 

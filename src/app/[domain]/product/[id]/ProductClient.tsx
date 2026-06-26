@@ -223,6 +223,12 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
   const expressButtonText = expressBlock?.content?.buttonText || "COMPLETE ORDER";
   const standardButtonText = standardBlock?.content?.buttonText || "ORDER NOW";
 
+  const expressShowGuarantee = expressBlock?.content?.showGuarantee ?? true;
+  const expressGuaranteeText = expressBlock?.content?.guaranteeText || "Free 30 Day Returns";
+  
+  const standardShowGuarantee = standardBlock?.content?.showGuarantee ?? true;
+  const standardGuaranteeText = standardBlock?.content?.guaranteeText || "Free 30 Day Returns";
+
   const [expressForm, setExpressForm] = useState({ fullName: '', phoneNumber: '', city: '', address: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const expressFormRef = useRef<HTMLDivElement>(null);
@@ -416,10 +422,12 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
           )}
         </button>
       </form>
-      <div className="returns-info" style={{ textAlign: 'center', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#888', fontSize: '13px' }}>
-        <ShieldCheck size={16} className="shield-icon" />
-        Free 30 Day Returns
-      </div>
+      {expressShowGuarantee && (
+        <div className="returns-info" style={{ textAlign: 'center', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#888', fontSize: '13px' }}>
+          <ShieldCheck size={16} className="shield-icon" />
+          {expressGuaranteeText}
+        </div>
+      )}
     </div>
   );
 
@@ -439,10 +447,12 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
       >
         {isOutOfStock ? "OUT OF STOCK" : standardButtonText}
       </button>
-      <div className="returns-info">
-        <ShieldCheck size={16} className="shield-icon" />
-        Free 30 Day Returns
-      </div>
+      {standardShowGuarantee && (
+        <div className="returns-info">
+          <ShieldCheck size={16} className="shield-icon" />
+          {standardGuaranteeText}
+        </div>
+      )}
     </div>
   );
 
@@ -869,7 +879,7 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
             </div>
           </div>
           <button 
-            className={`text-white font-extrabold rounded-[30px] text-[13px] sm:text-[20px] px-4 sm:px-[18px] h-[40px] sm:h-[48px] transition-all shadow-sm whitespace-nowrap ml-1 sm:ml-2 flex-shrink-0 flex items-center justify-center tracking-wide ${isOutOfStock ? 'opacity-50 cursor-not-allowed' : 'btn-shine'}`}
+            className={`text-white font-extrabold rounded-[30px] text-[16px] sm:text-[20px] px-4 sm:px-[18px] h-[46px] sm:h-[48px] transition-all shadow-sm whitespace-nowrap ml-1 sm:ml-2 flex-shrink-0 flex items-center justify-center tracking-wide ${isOutOfStock ? 'opacity-50 cursor-not-allowed' : 'btn-shine'}`}
             style={{ backgroundColor: isOutOfStock ? '#9ca3af' : primaryColor }}
             onMouseEnter={(e) => { if(!isOutOfStock) e.currentTarget.style.opacity = '0.9'; }}
             onMouseLeave={(e) => { if(!isOutOfStock) e.currentTarget.style.opacity = '1'; }}

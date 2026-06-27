@@ -211,6 +211,14 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
       ]
     },
     {
+      "id": "guarantee-1",
+      "type": "guarantee",
+      "content": {
+        "title": "30-DAY MONEY BACK GUARANTEE",
+        "text": "100% Risk Free. Love it or your money back."
+      }
+    },
+    {
       "id": "testimonials-1",
       "type": "testimonials",
       "content": [

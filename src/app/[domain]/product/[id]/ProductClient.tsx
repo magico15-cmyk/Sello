@@ -522,7 +522,7 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
     if (!str.includes('.')) {
       str = str + '.00';
     }
-    return `${str} ${currencySymbol}`;
+    return `${str}\u00A0${currencySymbol}`;
   };
 
   const packages = (bundlesBlock ? bundlesBlock.content : [

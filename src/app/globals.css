@@ -682,7 +682,6 @@
     border-radius: var(--radius-md);
     padding: 10px 15px;
     text-align: center;
-    margin-bottom: 20px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(248, 153, 162, 0.3);
 }

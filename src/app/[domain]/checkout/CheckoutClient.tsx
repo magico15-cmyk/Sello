@@ -25,7 +25,7 @@ export default function CheckoutClient({ product, selectedPkg, storeId, store }:
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const primaryColor = store?.primary_color || '#f899a2';
+  const primaryColor = store?.primary_color || '#111111';
   const checkoutColor = store?.checkout_color || primaryColor;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

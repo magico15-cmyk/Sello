@@ -9,8 +9,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Yu Turmeric",
-  description: "Enhanced Bioactive Turmeric",
+  title: "Sello",
+  description: "Your professional storefront powered by Sello",
 };
 
 export default function RootLayout({

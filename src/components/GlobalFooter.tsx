@@ -11,7 +11,7 @@ export function GlobalFooter({ store }: { store?: any }) {
   if (pathname?.includes('/admin')) {
     return null;
   }
-  const primaryColor = store?.primary_color || '#f899a2';
+  const primaryColor = store?.primary_color || '#111111';
 
   const isProductPage = pathname?.includes('/product/');
   const footerPaddingBottom = isProductPage ? '100px' : '0px';

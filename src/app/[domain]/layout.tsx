@@ -12,7 +12,7 @@ export async function generateMetadata(
 
   if (!store) {
     return {
-      title: "Store Not Found",
+      title: "Store Not Found | Sello",
     };
   }
 

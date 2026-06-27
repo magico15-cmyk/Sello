@@ -9,7 +9,7 @@ import CustomSelect from "@/components/admin/CustomSelect";
 export default function SettingsClient({ store }: { store: any }) {
   const router = useRouter();
   
-  const [primaryColor, setPrimaryColor] = useState(store?.primary_color || '#f899a2');
+  const [primaryColor, setPrimaryColor] = useState(store?.primary_color || '#111111');
   const [storeFont, setStoreFont] = useState(store?.store_font || '');
   const [menuFont, setMenuFont] = useState(store?.menu_font || 'Inter');
   const [bodyFont, setBodyFont] = useState(store?.body_font || 'Inter');

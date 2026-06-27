@@ -106,7 +106,7 @@ export default function CheckoutSettingsClient({ store }: { store: any }) {
   const { showToast } = useToast();
 
   const [checkoutLanguage, setCheckoutLanguage] = useState(store?.checkout_language || 'en');
-  const [checkoutColor, setCheckoutColor] = useState(store?.checkout_color || store?.primary_color || '#f899a2');
+  const [checkoutColor, setCheckoutColor] = useState(store?.checkout_color || store?.primary_color || '#111111');
   const [mainTitle, setMainTitle] = useState(store?.checkout_main_title || 'CASH ON DELIVERY');
   const [addressTitle, setAddressTitle] = useState(store?.checkout_address_title || 'Enter your shipping address');
   const [addressDesc, setAddressDesc] = useState(store?.checkout_address_desc || 'You will be contacted by one of our operators to confirm your order before shipping.');

@@ -233,7 +233,7 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
   const [isSubmitting, setIsSubmitting] = useState(false);
   const expressFormRef = useRef<HTMLDivElement>(null);
   
-  const primaryColor = store?.primary_color || '#f899a2';
+  const primaryColor = store?.primary_color || '#111111';
   const guaranteeColor = store?.guarantee_color || '#1fb6ff';
   const currencySymbol = store?.currency || '$';
 

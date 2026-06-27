@@ -38,7 +38,7 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
 
   const products = initialProducts;
 
-  const primaryColor = store?.primary_color || '#f899a2';
+  const primaryColor = store?.primary_color || '#111111';
   const guaranteeColor = store?.guarantee_color || '#1fb6ff';
   const currencySymbol = store?.currency || '$';
 

@@ -896,7 +896,7 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
                     );
                   case 'guarantee':
                     return (
-                      <div key={idx} className="w-[92%] mx-auto bg-[#FFF8E7] border border-[#F5A623] rounded-xl p-4 flex flex-col items-center justify-center text-center my-4">
+                      <div key={idx} className="w-full bg-[#FFF8E7] border border-[#F5A623] rounded-xl p-4 flex flex-col items-center justify-center text-center my-4">
                         <div className="font-bold text-sm tracking-wider text-[#F5A623] mb-1 uppercase">
                           {block.content?.title || '30-DAY MONEY BACK GUARANTEE'}
                         </div>

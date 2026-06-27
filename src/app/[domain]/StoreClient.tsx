@@ -262,7 +262,7 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
               }}
               className={
               featuresViewType === 'Slider' 
-                ? "flex overflow-x-auto snap-x snap-mandatory pb-4 pt-4 px-[10vw] sm:px-10 gap-4"
+                ? "flex overflow-x-auto snap-x snap-mandatory pb-4 pt-4 px-4 sm:px-0 gap-4 max-w-lg sm:max-w-xl md:max-w-2xl mx-auto"
                 : `max-w-5xl mx-auto grid gap-4 sm:gap-6 ${
                     featuresViewType === 'Grid (4x1)' 
                       ? 'grid-cols-2 md:grid-cols-4' 
@@ -280,7 +280,7 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
                 return (
                   <div 
                     key={idx} 
-                    className={`bg-[#f8f8fb] rounded-2xl p-6 sm:py-10 sm:px-8 flex flex-col items-center text-center ${featuresViewType === 'Slider' ? 'min-w-[280px] snap-center' : ''}`}
+                    className={`bg-[#f8f8fb] rounded-2xl p-6 sm:py-10 sm:px-8 flex flex-col items-center text-center ${featuresViewType === 'Slider' ? 'w-full flex-none snap-center' : ''}`}
                   >
                     <div className="mb-3" style={{ color: primaryColor }}>
                       <IconComponent className="w-8 h-8" strokeWidth={1.5} />

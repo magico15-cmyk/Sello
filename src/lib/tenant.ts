@@ -13,25 +13,40 @@ const supabaseServer = createClient(supabaseUrl, supabaseAnonKey, {
 export async function getTenantFromHost(hostname?: string) {
   if (!hostname) return null;
 
-  // Clean hostname (e.g., remove port in local dev if needed, though middleware handles some of this)
+  // Clean hostname (remove port if present)
   const cleanHostname = hostname.split(':')[0];
 
-  // Extract just the subdomain part (e.g. 'shop1' from 'shop1.localhost' or 'shop1.sello.com')
   const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'localhost';
+  const defaultStore = process.env.DEFAULT_STORE_SUBDOMAIN || 'shop1';
+
   let subdomain = cleanHostname;
-  if (cleanHostname.endsWith(`.${rootDomain}`)) {
+
+  // --- Detect environment-specific hostnames and resolve to a subdomain ---
+
+  // Vercel preview/production URLs — middleware should have already rewritten these,
+  // but as a safety net, fall back to the default store.
+  if (cleanHostname.endsWith('.vercel.app')) {
+    subdomain = defaultStore;
+  }
+  // Standard subdomain routing (e.g., shop1.localhost or shop1.sello.com)
+  else if (cleanHostname.endsWith(`.${rootDomain}`)) {
     subdomain = cleanHostname.replace(`.${rootDomain}`, '');
   }
-  
-  // Local network testing fallback: if accessed via IP address, default to 'shop1'
-  if (/^[0-9.]+$/.test(cleanHostname)) {
-    subdomain = 'shop1';
+  // IP address access
+  else if (/^[0-9.]+$/.test(cleanHostname)) {
+    subdomain = defaultStore;
   }
+  // Bare root domain with no subdomain
+  else if (cleanHostname === rootDomain) {
+    subdomain = defaultStore;
+  }
+  // Otherwise, treat cleanHostname as a potential custom domain — the query below
+  // checks both the subdomain column and the custom_domain column.
 
   let query = supabaseServer
     .from('stores')
     .select('*')
-    // Check if the cleanHostname matches a custom domain OR if the extracted subdomain matches the subdomain column
+    // Check if the subdomain matches OR if the full hostname is a registered custom domain
     .or(`subdomain.eq.${subdomain},custom_domain.eq.${cleanHostname}`)
     .single();
 

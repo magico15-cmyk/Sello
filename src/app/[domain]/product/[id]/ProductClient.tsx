@@ -680,15 +680,6 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
 
 
 
-            {/* Guarantee Box */}
-            <div className="guarantee-box">
-              <div className="guarantee-title">30-DAY MONEY BACK GUARANTEE</div>
-              <div className="guarantee-text">
-                <HandCoins size={22} className="guarantee-icon" />
-                <span><strong>100% Risk Free.</strong> Love it or your money back.</span>
-              </div>
-            </div>
-
             {/* Action Area */}
             {!hasCheckoutBlock && (
               <div className="action-area" ref={addToCartRef}>

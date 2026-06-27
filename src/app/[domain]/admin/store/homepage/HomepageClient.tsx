@@ -3,7 +3,39 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
-import { CheckCircleIcon, ExclamationCircleIcon, XMarkIcon, PhotoIcon, TrashIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, ExclamationCircleIcon, XMarkIcon, PhotoIcon, TrashIcon, PlusIcon, Bars2Icon, GlobeAltIcon, StarIcon, ShoppingBagIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
+function SortableSectionItem({ id, title, icon }: { id: string, title: string, icon: React.ReactNode }) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+  
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 10 : 1,
+    opacity: isDragging ? 0.9 : 1,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={`flex items-center gap-3 p-4 bg-white border ${isDragging ? 'border-gray-900 shadow-md' : 'border-gray-200 hover:border-gray-300'} rounded-xl mb-3 transition-colors`}
+    >
+      <div 
+        {...attributes} 
+        {...listeners}
+        className="cursor-grab hover:bg-gray-100 p-2 -ml-2 rounded-lg text-gray-400 hover:text-gray-900 transition-colors"
+      >
+        <Bars2Icon className="w-5 h-5" />
+      </div>
+      <div className="flex-shrink-0 text-gray-400">{icon}</div>
+      <div className="font-medium text-gray-900 select-none">{title}</div>
+    </div>
+  );
+}
 
 export default function HomepageClient({ store }: { store: any }) {
   const router = useRouter();
@@ -24,14 +56,49 @@ export default function HomepageClient({ store }: { store: any }) {
   const [productsLoadMore, setProductsLoadMore] = useState<boolean>(store?.homepage_products_load_more ?? false);
   const [productsViewType, setProductsViewType] = useState<string>(store?.homepage_products_view_type || 'Grid');
 
+  // Ticker Section State
+  const defaultTickerItems = ['Free Shipping Worldwide', '30-Day Money Back Guarantee', '24/7 Customer Support'];
+  const [tickerEnabled, setTickerEnabled] = useState<boolean>(store?.homepage_ticker_enabled ?? true);
+  const [tickerItems, setTickerItems] = useState<string[]>(
+    Array.isArray(store?.homepage_ticker_items)
+      ? store.homepage_ticker_items
+      : (typeof store?.homepage_ticker_items === 'string' ? JSON.parse(store.homepage_ticker_items || '[]') : defaultTickerItems)
+  );
+
   // Features Section State
   const [featuresEnabled, setFeaturesEnabled] = useState<boolean>(store?.homepage_features_enabled ?? true);
   const [featuresViewType, setFeaturesViewType] = useState<string>(store?.homepage_features_view_type || 'Grid (2x2)');
+  const [featuresTitle, setFeaturesTitle] = useState<string>(store?.homepage_features_title || 'Why Choose Us');
+  const [featuresSubtitle, setFeaturesSubtitle] = useState<string>(store?.homepage_features_subtitle || '✦ OUR BENEFITS ✦');
   const [features, setFeatures] = useState<any[]>(
     Array.isArray(store?.homepage_features) 
       ? store.homepage_features 
       : (typeof store?.homepage_features === 'string' ? JSON.parse(store.homepage_features || '[]') : [])
   );
+
+  // Layout Order State
+  const defaultLayout = ["ticker", "features", "products"];
+  const [layoutOrder, setLayoutOrder] = useState<string[]>(
+    Array.isArray(store?.homepage_layout_order) 
+      ? store.homepage_layout_order 
+      : (typeof store?.homepage_layout_order === 'string' ? JSON.parse(store.homepage_layout_order || '["ticker", "features", "products"]') : defaultLayout)
+  );
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
+
+  const handleDragEnd = (event: any) => {
+    const { active, over } = event;
+    if (active.id !== over?.id) {
+      setLayoutOrder((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
 
   // Categories fetched from store_categories table
   const [categories, setCategories] = useState<any[]>([]);
@@ -52,6 +119,14 @@ export default function HomepageClient({ store }: { store: any }) {
   const [isSaving, setIsSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [toast, setToast] = useState<{message: string, type: 'success' | 'error'} | null>(null);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [featuresOpen, setFeaturesOpen] = useState(false);
+  const [tickerOpen, setTickerOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const showToast = (message: string, type: 'success' | 'error') => {
     setToast({ message, type });
@@ -132,9 +207,14 @@ export default function HomepageClient({ store }: { store: any }) {
           homepage_products_category: productsCategory,
           homepage_products_load_more: productsLoadMore,
           homepage_products_view_type: productsViewType,
+          homepage_ticker_enabled: tickerEnabled,
+          homepage_ticker_items: tickerItems,
           homepage_features_enabled: featuresEnabled,
           homepage_features_view_type: featuresViewType,
-          homepage_features: features
+          homepage_features_title: featuresTitle,
+          homepage_features_subtitle: featuresSubtitle,
+          homepage_features: features,
+          homepage_layout_order: layoutOrder
         })
         .eq('id', store.id);
 
@@ -218,12 +298,145 @@ export default function HomepageClient({ store }: { store: any }) {
               </div>
             </div>
 
-            {/* Products Section */}
+            {/* Layout Order Section */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-100 pb-2">Products List Section</h3>
-              <p className="text-sm text-gray-500">Configure the featured products section on your homepage.</p>
+              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-100 pb-2">Homepage Layout Order</h3>
+              <p className="text-sm text-gray-500">Drag and drop the sections to reorder them on your live storefront.</p>
               
-              <div className="bg-gray-50/50 p-4 md:p-5 rounded-xl border border-gray-100 space-y-5">
+              <div className="bg-gray-50/50 p-4 md:p-5 rounded-xl border border-gray-100 max-w-lg">
+                {isMounted ? (
+                  <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                    <SortableContext items={layoutOrder} strategy={verticalListSortingStrategy}>
+                      {layoutOrder.map((id) => (
+                        <SortableSectionItem 
+                          key={id} 
+                          id={id} 
+                          title={
+                            id === 'ticker' ? 'Brand/Shipping Ticker' :
+                            id === 'features' ? 'Content Boxes / Features' :
+                            id === 'products' ? 'Products List Section' : id
+                          }
+                          icon={
+                            id === 'ticker' ? <GlobeAltIcon className="w-5 h-5"/> :
+                            id === 'features' ? <StarIcon className="w-5 h-5"/> :
+                            id === 'products' ? <ShoppingBagIcon className="w-5 h-5"/> : <div className="w-5 h-5"/>
+                          }
+                        />
+                      ))}
+                    </SortableContext>
+                  </DndContext>
+                ) : (
+                  <div className="space-y-3">
+                    {layoutOrder.map((id) => (
+                      <div key={id} className="p-4 bg-white border border-gray-200 rounded-lg flex items-center gap-3 text-gray-500">
+                        <Bars2Icon className="w-5 h-5 opacity-50" />
+                        <span className="text-sm font-medium">Loading layout...</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Ticker Section */}
+            <div>
+              <button 
+                type="button"
+                onClick={() => setTickerOpen(!tickerOpen)}
+                className="w-full flex items-center gap-3 px-4 py-3.5 bg-white border border-gray-200 rounded-xl hover:border-gray-300 transition-colors"
+              >
+                <Bars2Icon className="w-5 h-5 text-gray-300" />
+                <ChevronRightIcon className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${tickerOpen ? 'rotate-90' : ''}`} />
+                <GlobeAltIcon className="w-5 h-5 text-gray-400" />
+                <span className="text-[13px] font-bold tracking-wider text-gray-700 uppercase">Ticker</span>
+              </button>
+              
+              {tickerOpen && (
+              <div className="mt-3 ml-2 pl-4 border-l-2 border-gray-100 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <label className="text-sm font-medium text-gray-900 block mb-1">Enable Ticker</label>
+                    <p className="text-xs text-gray-500">Show scrolling logo marquee banner on homepage.</p>
+                  </div>
+                  <button 
+                    type="button"
+                    onClick={() => setTickerEnabled(!tickerEnabled)}
+                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${tickerEnabled ? 'bg-gray-900' : 'bg-gray-200'}`}
+                  >
+                    <span aria-hidden="true" className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${tickerEnabled ? 'translate-x-5' : 'translate-x-0'}`} />
+                  </button>
+                </div>
+
+                {tickerEnabled && (
+                  <div className="space-y-3 pt-3 border-t border-gray-200/60">
+                    <label className="block text-sm font-medium text-gray-700">Ticker Logos</label>
+                    <p className="text-xs text-gray-500">Upload brand/partner logo images (PNG, JPG). They will scroll across the banner.</p>
+                    
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                      {tickerItems.map((url, index) => (
+                        <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 bg-gray-50 flex items-center justify-center p-3 h-20">
+                          <img src={url} alt={`Logo ${index + 1}`} className="max-h-full max-w-full object-contain" />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newItems = [...tickerItems];
+                              newItems.splice(index, 1);
+                              setTickerItems(newItems);
+                            }}
+                            className="absolute top-1.5 right-1.5 p-1 bg-white/90 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 hover:text-red-600"
+                          >
+                            <TrashIcon className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      ))}
+                      
+                      <label className="relative rounded-xl border-2 border-dashed border-gray-300 hover:border-gray-400 bg-gray-50 hover:bg-gray-100 transition-colors flex flex-col items-center justify-center cursor-pointer h-20">
+                        <input
+                          type="file"
+                          className="hidden"
+                          accept="image/png,image/jpeg,image/jpg,image/svg+xml,image/webp"
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+                            try {
+                              const formData = new FormData();
+                              formData.append('file', file);
+                              const res = await fetch('/api/upload', { method: 'POST', body: formData });
+                              if (!res.ok) throw new Error('Upload failed');
+                              const data = await res.json();
+                              if (!data.success) throw new Error(data.error || 'Upload failed');
+                              setTickerItems(prev => [...prev, data.url]);
+                            } catch (err: any) {
+                              showToast('Error uploading logo: ' + err.message, 'error');
+                            }
+                            e.target.value = '';
+                          }}
+                        />
+                        <PhotoIcon className="w-6 h-6 text-gray-400 mb-1" />
+                        <span className="text-xs text-gray-500 font-medium">Add Logo</span>
+                      </label>
+                    </div>
+                  </div>
+                )}
+              </div>
+              )}
+            </div>
+
+            {/* Products Section */}
+            <div>
+              <button 
+                type="button"
+                onClick={() => setProductsOpen(!productsOpen)}
+                className="w-full flex items-center gap-3 px-4 py-3.5 bg-white border border-gray-200 rounded-xl hover:border-gray-300 transition-colors"
+              >
+                <Bars2Icon className="w-5 h-5 text-gray-300" />
+                <ChevronRightIcon className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${productsOpen ? 'rotate-90' : ''}`} />
+                <ShoppingBagIcon className="w-5 h-5 text-gray-400" />
+                <span className="text-[13px] font-bold tracking-wider text-gray-700 uppercase">Products</span>
+              </button>
+              
+              {productsOpen && (
+              <div className="mt-3 ml-2 pl-4 border-l-2 border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
                     <label className="text-sm font-medium text-gray-900 block mb-1">Enable Products Section</label>
@@ -316,13 +529,24 @@ export default function HomepageClient({ store }: { store: any }) {
                   </div>
                 )}
               </div>
+              )}
             </div>
 
             {/* Features Section */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-100 pb-2">Content Boxes / Features</h3>
-              <p className="text-sm text-gray-500">Configure content boxes with icons (e.g. Benefits, Guarantees).</p>
+            <div>
+              <button 
+                type="button"
+                onClick={() => setFeaturesOpen(!featuresOpen)}
+                className="w-full flex items-center gap-3 px-4 py-3.5 bg-white border border-gray-200 rounded-xl hover:border-gray-300 transition-colors"
+              >
+                <Bars2Icon className="w-5 h-5 text-gray-300" />
+                <ChevronRightIcon className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${featuresOpen ? 'rotate-90' : ''}`} />
+                <StarIcon className="w-5 h-5 text-gray-400" />
+                <span className="text-[13px] font-bold tracking-wider text-gray-700 uppercase">Features</span>
+              </button>
               
+              {featuresOpen && (
+              <div className="mt-3 ml-2 pl-4 border-l-2 border-gray-100">
               <div className="bg-gray-50/50 p-4 md:p-5 rounded-xl border border-gray-100 space-y-5">
                 <div className="flex items-center justify-between">
                   <div>
@@ -352,6 +576,29 @@ export default function HomepageClient({ store }: { store: any }) {
                         <option value="List (Vertical)">List (Vertical)</option>
                         <option value="Slider">Slider (Swipeable)</option>
                       </select>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Section Title</label>
+                        <input
+                          type="text"
+                          value={featuresTitle}
+                          onChange={(e) => setFeaturesTitle(e.target.value)}
+                          className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-all outline-none"
+                          placeholder="e.g. Why Choose Us"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Section Subtitle</label>
+                        <input
+                          type="text"
+                          value={featuresSubtitle}
+                          onChange={(e) => setFeaturesSubtitle(e.target.value)}
+                          className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-all outline-none"
+                          placeholder="e.g. ✦ OUR BENEFITS ✦"
+                        />
+                      </div>
                     </div>
 
                     {features.map((feature, index) => (
@@ -439,6 +686,8 @@ export default function HomepageClient({ store }: { store: any }) {
                   </div>
                 )}
               </div>
+              </div>
+              )}
             </div>
 
           </div>

@@ -53,6 +53,11 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
     : (typeof store?.homepage_features === 'string' ? JSON.parse(store.homepage_features || '[]') : []);
   const featuresEnabled = store?.homepage_features_enabled ?? true;
   const featuresViewType = store?.homepage_features_view_type || 'Grid (2x2)';
+  
+  const defaultLayout = ["ticker", "features", "products"];
+  const layoutOrder = Array.isArray(store?.homepage_layout_order) 
+    ? store.homepage_layout_order 
+    : (typeof store?.homepage_layout_order === 'string' ? JSON.parse(store.homepage_layout_order || '["ticker", "features", "products"]') : defaultLayout);
 
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [displayedLimit, setDisplayedLimit] = React.useState(store?.homepage_products_limit || 8);
@@ -186,23 +191,62 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
           </div>
         </section>
 
-        {/* Brand/Shipping Ticker */}
-        <div className="w-full text-white flex items-center overflow-hidden whitespace-nowrap" style={{ padding: '12px 0', backgroundColor: primaryColor }}>
-          <div className="flex animate-marquee items-center w-max" style={{ gap: '80px', paddingRight: '80px' }}>
-            {[...Array(12)].map((_, i) => (
-              <div key={i} className="flex items-center" style={{ gap: '80px' }}>
-                <FedExLogo className="h-5 w-auto" />
-                <span className="font-serif tracking-normal text-2xl lowercase flex items-center gap-2">
-                  <span className="text-white">❈</span> Yu.
-                </span>
+        {/* Dynamic Sections */}
+        {layoutOrder.map((sectionId: string, idx: number) => {
+          if (sectionId === 'ticker') {
+            if (!(store?.homepage_ticker_enabled ?? true)) return null;
+            
+            let tickerLogos: string[] = [];
+            if (Array.isArray(store?.homepage_ticker_items)) {
+              tickerLogos = store.homepage_ticker_items;
+            } else if (typeof store?.homepage_ticker_items === 'string') {
+              try {
+                tickerLogos = JSON.parse(store.homepage_ticker_items);
+              } catch (e) {
+                tickerLogos = [];
+              }
+            }
+            tickerLogos = tickerLogos.filter((t: string) => t && t.trim());
+            
+            if (tickerLogos.length === 0) return null;
+            
+            return (
+              <div key={idx} className="w-full flex items-center overflow-hidden whitespace-nowrap border-b border-gray-100" style={{ padding: '14px 0', backgroundColor: primaryColor }}>
+                <div className="scroll-track items-center" style={{ gap: '80px', paddingRight: '80px', animationDuration: '20s' }}>
+                  {[...Array(8)].map((_, repeatIdx) => (
+                    <div key={repeatIdx} className="flex items-center" style={{ gap: '80px' }}>
+                      {tickerLogos.map((url: string, logoIdx: number) => (
+                        <div key={logoIdx} className="flex items-center justify-center h-8">
+                          <img 
+                            src={url} 
+                            alt={`Brand ${logoIdx + 1}`} 
+                            className="h-full w-auto object-contain max-w-[150px]"
+                            onError={(e) => {
+                              // If image fails to load, hide it
+                              (e.target as HTMLImageElement).style.display = 'none';
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Features Section */}
-        {featuresEnabled && features.length > 0 && (
-          <section className={`w-full bg-white px-4 ${featuresViewType === 'Slider' ? 'py-8' : 'py-12 sm:py-16'}`}>
+            );
+          }
+          
+          if (sectionId === 'features') {
+            return featuresEnabled && features.length > 0 ? (
+          <section key={idx} className="w-full bg-white px-4" style={{ paddingTop: '48px', paddingBottom: '64px' }}>
+            {/* Features Section Header */}
+            <div className="w-full text-center max-w-2xl mx-auto" style={{ marginBottom: '40px' }}>
+              <h2 className="text-[30px] sm:text-[40px] font-extrabold text-[#1a1a2e]" style={{ letterSpacing: '-0.02em', lineHeight: '1.15' }}>
+                {store?.homepage_features_title || "Why Choose Us"}
+              </h2>
+              <p className="text-[14px] sm:text-[16px] text-gray-500 leading-relaxed mt-4 mx-auto max-w-lg">
+                {store?.homepage_features_subtitle || "Discover the benefits that make our products stand out from the rest."}
+              </p>
+            </div>
             <div 
               ref={featuresViewType === 'Slider' ? featuresSliderRef : null}
               onScroll={(e) => {
@@ -260,11 +304,12 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
               </div>
             )}
           </section>
-        )}
+            ) : null;
+          }
 
-        {/* Products Section */}
-        {(store?.homepage_products_enabled ?? true) && (
-          <section className="w-full" style={{ background: '#ffffff', padding: '56px 16px 64px' }}>
+          if (sectionId === 'products') {
+            return (store?.homepage_products_enabled ?? true) ? (
+          <section key={idx} className="w-full" style={{ background: '#ffffff', padding: '56px 16px 64px' }}>
             
             {/* Section Header */}
             <div className="w-full text-center" style={{ marginBottom: '40px' }}>
@@ -547,7 +592,11 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
             </div>
           )}
         </section>
-        )}
+            ) : null;
+          }
+          
+          return null;
+        })}
 
       </main>
 

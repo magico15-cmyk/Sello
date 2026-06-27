@@ -1793,7 +1793,7 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
               </button>
               <button 
                 onClick={() => addBlock('guarantee')}
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-orange-50 hover:bg-orange-100 border border-orange-200 hover:border-orange-400 hover:shadow-md rounded-xl text-xs font-medium text-orange-800 hover:text-orange-900 transition-all text-center"
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all text-center"
               >
                 <ShieldCheckIcon className="w-5 h-5" /> Guarantee
               </button>

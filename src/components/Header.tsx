@@ -11,10 +11,15 @@ export const Header = ({ store }: { store?: any }) => {
   const desktopLayout = store?.header_desktop_layout || defaultDesktop;
   const mobileLayout = store?.header_mobile_layout || defaultMobile;
 
-  const headerBgColor = store?.header_bg_color || '#FFFFFF';
-  const headerButtonColor = store?.header_button_color || '#171717';
-  const headerBorderEnabled = store?.header_border_enabled ?? true;
-  const headerBorderColor = store?.header_border_color || '#F0F0F0';
+  const mobileBgColor = store?.header_bg_color || '#FFFFFF';
+  const mobileButtonColor = store?.header_button_color || '#171717';
+  const mobileBorderEnabled = store?.header_border_enabled ?? true;
+  const mobileBorderColor = store?.header_border_color || '#F0F0F0';
+
+  const desktopBgColor = store?.header_desktop_bg_color || '#FFFFFF';
+  const desktopButtonColor = store?.header_desktop_button_color || '#171717';
+  const desktopBorderEnabled = store?.header_desktop_border_enabled ?? true;
+  const desktopBorderColor = store?.header_desktop_border_color || '#F0F0F0';
 
   const renderDesktopItem = (type: string, i: number) => {
     switch (type) {
@@ -44,25 +49,25 @@ export const Header = ({ store }: { store?: any }) => {
             {store?.logo_url ? (
               <img src={store.logo_url} alt={store?.store_name || "Store Logo"} className="max-h-8 w-auto max-w-[220px] object-contain" />
             ) : (
-              <div className="logo-circle" style={{ color: headerButtonColor }}>Yu.</div>
+              <div className="logo-circle header-item-desktop">Yu.</div>
             )}
           </Link>
         );
       case 'search':
         return (
-          <button key={`d-${i}`} className="hidden md:block hover:opacity-70 transition-opacity" aria-label="Search" style={{ color: headerButtonColor }}>
+          <button key={`d-${i}`} className="hidden md:block hover:opacity-70 transition-opacity header-item-desktop" aria-label="Search">
             <Search size={22} />
           </button>
         );
       case 'account':
         return (
-          <Link key={`d-${i}`} href="/account" className="hidden md:block hover:opacity-70 transition-opacity" aria-label="Account" style={{ color: headerButtonColor }}>
+          <Link key={`d-${i}`} href="/account" className="hidden md:block hover:opacity-70 transition-opacity header-item-desktop" aria-label="Account">
             <User size={22} />
           </Link>
         );
       case 'cart':
         return (
-          <button key={`d-${i}`} className="hidden md:block cart-btn hover:opacity-70 transition-opacity relative" aria-label="Cart" style={{ color: headerButtonColor }}>
+          <button key={`d-${i}`} className="hidden md:block cart-btn hover:opacity-70 transition-opacity relative header-item-desktop" aria-label="Cart">
             <ShoppingBag size={22} />
           </button>
         );
@@ -75,7 +80,7 @@ export const Header = ({ store }: { store?: any }) => {
     switch (type) {
       case 'menu':
         return (
-          <button key={`m-${i}`} className="md:hidden hover:opacity-70 transition-opacity" aria-label="Menu" style={{ color: headerButtonColor }}>
+          <button key={`m-${i}`} className="md:hidden hover:opacity-70 transition-opacity header-item-mobile" aria-label="Menu">
             <Menu size={26} />
           </button>
         );
@@ -85,25 +90,25 @@ export const Header = ({ store }: { store?: any }) => {
             {store?.logo_url ? (
               <img src={store.logo_url} alt={store?.store_name || "Store Logo"} className="max-h-8 w-auto max-w-[220px] object-contain" />
             ) : (
-              <div className="logo-circle" style={{ color: headerButtonColor }}>Yu.</div>
+              <div className="logo-circle header-item-mobile">Yu.</div>
             )}
           </Link>
         );
       case 'search':
         return (
-          <button key={`m-${i}`} className="md:hidden hover:opacity-70 transition-opacity" aria-label="Search" style={{ color: headerButtonColor }}>
+          <button key={`m-${i}`} className="md:hidden hover:opacity-70 transition-opacity header-item-mobile" aria-label="Search">
             <Search size={22} />
           </button>
         );
       case 'account':
         return (
-          <Link key={`m-${i}`} href="/account" className="md:hidden hover:opacity-70 transition-opacity" aria-label="Account" style={{ color: headerButtonColor }}>
+          <Link key={`m-${i}`} href="/account" className="md:hidden hover:opacity-70 transition-opacity header-item-mobile" aria-label="Account">
             <User size={22} />
           </Link>
         );
       case 'cart':
         return (
-          <button key={`m-${i}`} className="md:hidden cart-btn hover:opacity-70 transition-opacity relative" aria-label="Cart" style={{ color: headerButtonColor }}>
+          <button key={`m-${i}`} className="md:hidden cart-btn hover:opacity-70 transition-opacity relative header-item-mobile" aria-label="Cart">
             <ShoppingBag size={22} />
           </button>
         );
@@ -127,13 +132,23 @@ export const Header = ({ store }: { store?: any }) => {
   const mRight = mobileLogoIndex !== -1 ? mobileLayout.slice(mobileLogoIndex + 1) : [];
 
   return (
-    <header 
-      className="header relative w-full"
-      style={{ 
-        backgroundColor: headerBgColor,
-        borderBottom: headerBorderEnabled ? `1px solid ${headerBorderColor}` : 'none'
-      }}
-    >
+    <>
+      <style dangerouslySetInnerHTML={{__html: `
+        .header-responsive {
+          background-color: ${mobileBgColor};
+          border-bottom: ${mobileBorderEnabled ? `1px solid ${mobileBorderColor}` : 'none'};
+        }
+        .header-item-mobile { color: ${mobileButtonColor} !important; }
+        
+        @media (min-width: 768px) {
+          .header-responsive {
+            background-color: ${desktopBgColor};
+            border-bottom: ${desktopBorderEnabled ? `1px solid ${desktopBorderColor}` : 'none'};
+          }
+          .header-item-desktop { color: ${desktopButtonColor} !important; }
+        }
+      `}} />
+      <header className="header header-responsive relative w-full">
       {/* DESKTOP LAYOUT */}
       <div className="hidden md:flex items-center justify-between h-16 px-6 max-w-7xl mx-auto w-full">
         <div className="flex items-center gap-8 flex-1">
@@ -168,5 +183,6 @@ export const Header = ({ store }: { store?: any }) => {
         </div>
       </div>
     </header>
+    </>
   );
 };

@@ -47,19 +47,21 @@ export default function FooterClient({ store }: { store: any }) {
   const [linksTitle, setLinksTitle] = useState(store?.footer_links_title || 'Products');
   
   // --- HEADER SETTINGS ---
-  const initialDesktopLayout = store?.header_desktop_layout || ["menu", "logo", "search", "account", "cart"];
-  const initialMobileLayout = store?.header_mobile_layout || ["menu", "logo", "cart"];
-  
-  const [desktopActiveItems, setDesktopActiveItems] = useState<string[]>(initialDesktopLayout);
-  const [desktopUnwantedItems, setDesktopUnwantedItems] = useState<string[]>(allHeaderItems.filter(i => !initialDesktopLayout.includes(i)));
-  
-  const [mobileActiveItems, setMobileActiveItems] = useState<string[]>(initialMobileLayout);
-  const [mobileUnwantedItems, setMobileUnwantedItems] = useState<string[]>(allHeaderItems.filter(i => !initialMobileLayout.includes(i)));
+  // --- HEADER DESKTOP ---
+  const [desktopActiveItems, setDesktopActiveItems] = useState<string[]>(store?.header_desktop_layout || ["menu", "logo", "search", "account", "cart"]);
+  const [desktopUnwantedItems, setDesktopUnwantedItems] = useState<string[]>(allHeaderItems.filter(i => !(store?.header_desktop_layout || ["menu", "logo", "search", "account", "cart"]).includes(i)));
+  const [desktopHeaderBgColor, setDesktopHeaderBgColor] = useState(store?.header_desktop_bg_color || '#FFFFFF');
+  const [desktopHeaderButtonColor, setDesktopHeaderButtonColor] = useState(store?.header_desktop_button_color || '#171717');
+  const [desktopHeaderBorderEnabled, setDesktopHeaderBorderEnabled] = useState(store?.header_desktop_border_enabled ?? true);
+  const [desktopHeaderBorderColor, setDesktopHeaderBorderColor] = useState(store?.header_desktop_border_color || '#F0F0F0');
 
-  const [headerBgColor, setHeaderBgColor] = useState(store?.header_bg_color || '#FFFFFF');
-  const [headerButtonColor, setHeaderButtonColor] = useState(store?.header_button_color || '#171717');
-  const [headerBorderEnabled, setHeaderBorderEnabled] = useState(store?.header_border_enabled ?? true);
-  const [headerBorderColor, setHeaderBorderColor] = useState(store?.header_border_color || '#F0F0F0');
+  // --- HEADER MOBILE ---
+  const [mobileActiveItems, setMobileActiveItems] = useState<string[]>(store?.header_mobile_layout || ["menu", "logo", "cart"]);
+  const [mobileUnwantedItems, setMobileUnwantedItems] = useState<string[]>(allHeaderItems.filter(i => !(store?.header_mobile_layout || ["menu", "logo", "cart"]).includes(i)));
+  const [mobileHeaderBgColor, setMobileHeaderBgColor] = useState(store?.header_bg_color || '#FFFFFF');
+  const [mobileHeaderButtonColor, setMobileHeaderButtonColor] = useState(store?.header_button_color || '#171717');
+  const [mobileHeaderBorderEnabled, setMobileHeaderBorderEnabled] = useState(store?.header_border_enabled ?? true);
+  const [mobileHeaderBorderColor, setMobileHeaderBorderColor] = useState(store?.header_border_color || '#F0F0F0');
 
   // --- NOTICE BAR SETTINGS (DESKTOP) ---
   const [desktopNoticeEnabled, setDesktopNoticeEnabled] = useState(store?.notice_bar_desktop_enabled ?? false);
@@ -121,11 +123,16 @@ export default function FooterClient({ store }: { store: any }) {
           
           // Header Layout & Styling
           header_desktop_layout: desktopActiveItems,
+          header_desktop_bg_color: desktopHeaderBgColor,
+          header_desktop_button_color: desktopHeaderButtonColor,
+          header_desktop_border_enabled: desktopHeaderBorderEnabled,
+          header_desktop_border_color: desktopHeaderBorderColor,
+
           header_mobile_layout: mobileActiveItems,
-          header_bg_color: headerBgColor,
-          header_button_color: headerButtonColor,
-          header_border_enabled: headerBorderEnabled,
-          header_border_color: headerBorderColor,
+          header_bg_color: mobileHeaderBgColor,
+          header_button_color: mobileHeaderButtonColor,
+          header_border_enabled: mobileHeaderBorderEnabled,
+          header_border_color: mobileHeaderBorderColor,
           
           // Notice Bar Desktop
           notice_bar_desktop_enabled: desktopNoticeEnabled,
@@ -203,32 +210,32 @@ export default function FooterClient({ store }: { store: any }) {
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Header background</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Desktop Header background</label>
               <div className="flex items-center border border-gray-300 rounded-xl px-3 py-2 bg-white focus-within:ring-1 focus-within:ring-gray-300 transition-shadow">
-                <CustomColorPicker color={headerBgColor} onChange={setHeaderBgColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: headerBgColor }} />} />
-                <input type="text" value={headerBgColor} onChange={(e) => setHeaderBgColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
+                <CustomColorPicker color={desktopHeaderBgColor} onChange={setDesktopHeaderBgColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: desktopHeaderBgColor }} />} />
+                <input type="text" value={desktopHeaderBgColor} onChange={(e) => setDesktopHeaderBgColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Header buttons color</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Desktop Header buttons color</label>
               <div className="flex items-center border border-gray-300 rounded-xl px-3 py-2 bg-white focus-within:ring-1 focus-within:ring-gray-300 transition-shadow">
-                <CustomColorPicker color={headerButtonColor} onChange={setHeaderButtonColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: headerButtonColor }} />} />
-                <input type="text" value={headerButtonColor} onChange={(e) => setHeaderButtonColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
+                <CustomColorPicker color={desktopHeaderButtonColor} onChange={setDesktopHeaderButtonColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: desktopHeaderButtonColor }} />} />
+                <input type="text" value={desktopHeaderButtonColor} onChange={(e) => setDesktopHeaderButtonColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Header border</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Desktop Header border</label>
               <div className="flex items-center justify-between border border-gray-300 rounded-xl px-4 py-2.5 bg-white">
                 <span className="text-sm text-gray-600">Enable</span>
-                <input type="checkbox" checked={headerBorderEnabled} onChange={(e) => setHeaderBorderEnabled(e.target.checked)} className="w-4 h-4 text-brand-600 cursor-pointer" />
+                <input type="checkbox" checked={desktopHeaderBorderEnabled} onChange={(e) => setDesktopHeaderBorderEnabled(e.target.checked)} className="w-4 h-4 text-brand-600 cursor-pointer" />
               </div>
             </div>
-            {headerBorderEnabled && (
+            {desktopHeaderBorderEnabled && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Header border color</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Desktop Header border color</label>
                 <div className="flex items-center border border-gray-300 rounded-xl px-3 py-2 bg-white focus-within:ring-1 focus-within:ring-gray-300 transition-shadow">
-                  <CustomColorPicker color={headerBorderColor} onChange={setHeaderBorderColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: headerBorderColor }} />} />
-                  <input type="text" value={headerBorderColor} onChange={(e) => setHeaderBorderColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
+                  <CustomColorPicker color={desktopHeaderBorderColor} onChange={setDesktopHeaderBorderColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: desktopHeaderBorderColor }} />} />
+                  <input type="text" value={desktopHeaderBorderColor} onChange={(e) => setDesktopHeaderBorderColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
                 </div>
               </div>
             )}
@@ -249,37 +256,36 @@ export default function FooterClient({ store }: { store: any }) {
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Header background</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Mobile Header background</label>
               <div className="flex items-center border border-gray-300 rounded-xl px-3 py-2 bg-white focus-within:ring-1 focus-within:ring-gray-300 transition-shadow">
-                <CustomColorPicker color={headerBgColor} onChange={setHeaderBgColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: headerBgColor }} />} />
-                <input type="text" value={headerBgColor} onChange={(e) => setHeaderBgColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
+                <CustomColorPicker color={mobileHeaderBgColor} onChange={setMobileHeaderBgColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: mobileHeaderBgColor }} />} />
+                <input type="text" value={mobileHeaderBgColor} onChange={(e) => setMobileHeaderBgColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Header buttons color</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Mobile Header buttons color</label>
               <div className="flex items-center border border-gray-300 rounded-xl px-3 py-2 bg-white focus-within:ring-1 focus-within:ring-gray-300 transition-shadow">
-                <CustomColorPicker color={headerButtonColor} onChange={setHeaderButtonColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: headerButtonColor }} />} />
-                <input type="text" value={headerButtonColor} onChange={(e) => setHeaderButtonColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
+                <CustomColorPicker color={mobileHeaderButtonColor} onChange={setMobileHeaderButtonColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: mobileHeaderButtonColor }} />} />
+                <input type="text" value={mobileHeaderButtonColor} onChange={(e) => setMobileHeaderButtonColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Header border</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Mobile Header border</label>
               <div className="flex items-center justify-between border border-gray-300 rounded-xl px-4 py-2.5 bg-white">
                 <span className="text-sm text-gray-600">Enable</span>
-                <input type="checkbox" checked={headerBorderEnabled} onChange={(e) => setHeaderBorderEnabled(e.target.checked)} className="w-4 h-4 text-brand-600 cursor-pointer" />
+                <input type="checkbox" checked={mobileHeaderBorderEnabled} onChange={(e) => setMobileHeaderBorderEnabled(e.target.checked)} className="w-4 h-4 text-brand-600 cursor-pointer" />
               </div>
             </div>
-            {headerBorderEnabled && (
+            {mobileHeaderBorderEnabled && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Header border color</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Mobile Header border color</label>
                 <div className="flex items-center border border-gray-300 rounded-xl px-3 py-2 bg-white focus-within:ring-1 focus-within:ring-gray-300 transition-shadow">
-                  <CustomColorPicker color={headerBorderColor} onChange={setHeaderBorderColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: headerBorderColor }} />} />
-                  <input type="text" value={headerBorderColor} onChange={(e) => setHeaderBorderColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
+                  <CustomColorPicker color={mobileHeaderBorderColor} onChange={setMobileHeaderBorderColor} trigger={<div className="w-6 h-6 rounded cursor-pointer mr-3 border border-gray-200" style={{ backgroundColor: mobileHeaderBorderColor }} />} />
+                  <input type="text" value={mobileHeaderBorderColor} onChange={(e) => setMobileHeaderBorderColor(e.target.value)} className="w-20 text-sm text-gray-600 font-mono focus:outline-none bg-transparent uppercase" />
                 </div>
               </div>
             )}
           </div>
-          <p className="text-xs text-gray-400 italic mt-2">Note: Colors and border settings apply to both Desktop and Mobile headers.</p>
         </div>
       )}
 

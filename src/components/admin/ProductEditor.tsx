@@ -26,7 +26,8 @@ import {
   ArrowsRightLeftIcon,
   MegaphoneIcon,
   ShoppingCartIcon,
-  CursorArrowRaysIcon
+  CursorArrowRaysIcon,
+  ShieldCheckIcon
 } from "@heroicons/react/24/outline";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 import CustomSelect from "./CustomSelect";
@@ -34,7 +35,7 @@ import RichTextEditor from "./RichTextEditor";
 
 interface ContentBlock {
   id: string;
-  type: 'text' | 'image' | 'gif' | 'heading' | 'features' | 'bundles' | 'testimonials' | 'accordion' | 'before_after' | 'stats' | 'rating' | 'trust_marquee' | 'comparison' | 'express_checkout' | 'checkout_button';
+  type: 'text' | 'image' | 'gif' | 'heading' | 'features' | 'bundles' | 'testimonials' | 'accordion' | 'before_after' | 'stats' | 'rating' | 'trust_marquee' | 'comparison' | 'express_checkout' | 'checkout_button' | 'guarantee';
   content: any;
 }
 
@@ -54,6 +55,7 @@ const blockIcons: Record<string, React.ReactNode> = {
   gif: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4 text-gray-400"><path strokeLinecap="round" strokeLinejoin="round" d="M12.75 8.25v7.5m6-7.5h-3V12m0 0v3.75m0-3.75H18M9.75 9.348c-1.03-1.464-2.698-1.464-3.728 0-1.03 1.465-1.03 3.84 0 5.304 1.03 1.464 2.699 1.464 3.728 0V12h-1.5M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" /></svg>,
   express_checkout: <ShoppingCartIcon className="w-4 h-4 text-gray-400" />,
   checkout_button: <CursorArrowRaysIcon className="w-4 h-4 text-gray-400" />,
+  guarantee: <ShieldCheckIcon className="w-4 h-4 text-gray-400" />,
   accordion_icons: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4 text-gray-400"><path strokeLinecap="round" strokeLinejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z" /></svg>
 };
 
@@ -1468,6 +1470,29 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
                     </div>
                   )}
 
+                  {block.type === 'guarantee' && (
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                        <input 
+                          type="text"
+                          value={block.content?.title || '30-DAY MONEY BACK GUARANTEE'}
+                          onChange={(e) => updateBlock(block.id, { ...block.content, title: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-colors"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Text</label>
+                        <input 
+                          type="text"
+                          value={block.content?.text || '100% Risk Free. Love it or your money back.'}
+                          onChange={(e) => updateBlock(block.id, { ...block.content, text: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300 transition-colors"
+                        />
+                      </div>
+                    </div>
+                  )}
+
                   {block.type === 'checkout_button' && (
                     <div className="space-y-4">
                       <div>
@@ -1765,6 +1790,12 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
                 className="flex flex-col items-center justify-center gap-2 p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-xl text-xs font-medium text-gray-700 hover:text-gray-900 transition-all text-center"
               >
                 <CursorArrowRaysIcon className="w-5 h-5" /> Order Button
+              </button>
+              <button 
+                onClick={() => addBlock('guarantee')}
+                className="flex flex-col items-center justify-center gap-2 p-3 bg-orange-50 hover:bg-orange-100 border border-orange-200 hover:border-orange-400 hover:shadow-md rounded-xl text-xs font-medium text-orange-800 hover:text-orange-900 transition-all text-center"
+              >
+                <ShieldCheckIcon className="w-5 h-5" /> Guarantee
               </button>
             </div>
           </div>

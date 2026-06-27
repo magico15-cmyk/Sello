@@ -903,6 +903,18 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
                         {renderStandardButton(true)}
                       </div>
                     );
+                  case 'guarantee':
+                    return (
+                      <div key={idx} className="w-[92%] mx-auto bg-[#FFF8E7] border border-[#F5A623] rounded-xl p-4 flex flex-col items-center justify-center text-center my-4">
+                        <div className="font-bold text-sm tracking-wider text-[#F5A623] mb-1 uppercase">
+                          {block.content?.title || '30-DAY MONEY BACK GUARANTEE'}
+                        </div>
+                        <div className="text-sm text-gray-900 flex items-center gap-2 justify-center">
+                          <HandCoins className="w-5 h-5 text-[#F5A623]" />
+                          <span dangerouslySetInnerHTML={{ __html: block.content?.text || '100% Risk Free. Love it or your money back.' }} />
+                        </div>
+                      </div>
+                    );
                 }
               })}
             </div>

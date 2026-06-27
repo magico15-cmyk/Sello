@@ -15,7 +15,7 @@ function DraggableSection({ id, title, icon, isOpen, toggleOpen, children }: { i
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    zIndex: isDragging ? 50 : 1,
+    zIndex: isDragging ? 50 : undefined,
     opacity: isDragging ? 0.9 : 1,
   };
 
@@ -269,7 +269,7 @@ export default function HomepageClient({ store }: { store: any }) {
       )}
 
       <div className="w-full pb-20">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100">
           <div className="p-6 md:p-8 space-y-8">
             
             {/* Slider Settings */}

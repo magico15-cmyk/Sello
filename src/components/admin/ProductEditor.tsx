@@ -35,7 +35,7 @@ import RichTextEditor from "./RichTextEditor";
 
 interface ContentBlock {
   id: string;
-  type: 'text' | 'image' | 'gif' | 'heading' | 'features' | 'bundles' | 'testimonials' | 'accordion' | 'before_after' | 'stats' | 'rating' | 'trust_marquee' | 'comparison' | 'express_checkout' | 'checkout_button' | 'guarantee';
+  type: 'text' | 'image' | 'gif' | 'heading' | 'features' | 'bundles' | 'testimonials' | 'accordion' | 'accordion_icons' | 'before_after' | 'stats' | 'rating' | 'trust_marquee' | 'comparison' | 'express_checkout' | 'checkout_button' | 'guarantee';
   content: any;
 }
 

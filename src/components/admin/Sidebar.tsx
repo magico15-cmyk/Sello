@@ -14,6 +14,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   BuildingStorefrontIcon,
+  GlobeAltIcon,
 } from "@heroicons/react/24/outline";
 import {
   Squares2X2Icon as Squares2X2Solid,
@@ -45,7 +46,7 @@ const navItems: NavItem[] = [
     label: "Store",
     icon: BuildingStorefrontIcon,
     activeIcon: BuildingStorefrontSolid,
-    children: ["General", "Theme", "Homepage", "Checkout", "Pages", "Menus", "Header & Footer"],
+    children: ["General", "Theme", "Homepage", "Checkout", "Pages", "Menus", "Header & Footer", "Domains"],
   },
   { label: "Roles", icon: UsersIcon, activeIcon: UsersSolid },
 ];
@@ -100,6 +101,8 @@ export default function Sidebar() {
     activeChild = "Menus";
   } else if (pathname === "/admin/store/footer") {
     activeChild = "Header & Footer";
+  } else if (pathname === "/admin/store/domains") {
+    activeChild = "Domains";
   }
 
   const handleChildClick = (child: string) => {
@@ -123,6 +126,8 @@ export default function Sidebar() {
       router.push("/admin/store/menus");
     } else if (child === "Header & Footer") {
       router.push("/admin/store/footer");
+    } else if (child === "Domains") {
+      router.push("/admin/store/domains");
     }
   };
 

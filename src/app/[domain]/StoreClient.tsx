@@ -293,7 +293,7 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
             </div>
             {featuresViewType === 'Slider' && features.length > 1 && (
               <div className="flex justify-center gap-2 mt-2">
-                {features.map((_, idx) => (
+                {features.map((_: any, idx: number) => (
                   <div 
                     key={idx}
                     className="h-1.5 rounded-full transition-all duration-300"

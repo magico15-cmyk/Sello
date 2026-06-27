@@ -301,6 +301,8 @@ export default function FooterClient({ store }: { store: any }) {
                  id="desktop-notice-editor"
                  value={desktopNoticeText}
                  onChange={setDesktopNoticeText}
+                 align="left"
+                 color={desktopNoticeTextColor}
                />
              </div>
           </div>
@@ -359,6 +361,8 @@ export default function FooterClient({ store }: { store: any }) {
                  id="mobile-notice-editor"
                  value={mobileNoticeText}
                  onChange={setMobileNoticeText}
+                 align="left"
+                 color={mobileNoticeTextColor}
                />
              </div>
           </div>

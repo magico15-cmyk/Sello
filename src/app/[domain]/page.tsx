@@ -2,6 +2,8 @@ import { StoreClient } from "./StoreClient";
 import { getTenantFromHost } from "@/lib/tenant";
 import { supabase } from "@/lib/supabase";
 
+export const dynamic = 'force-dynamic';
+
 export default async function StoreHomePage(props: {
   params: Promise<{ domain: string }>;
 }) {

@@ -412,8 +412,8 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
 
       {/* Pagination */}
       {totalPages > 0 && (
-        <div className="flex justify-between items-center mt-6">
-          <div className="flex items-center gap-1">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6">
+          <div className="flex items-center justify-between sm:justify-start gap-1 w-full sm:w-auto">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}

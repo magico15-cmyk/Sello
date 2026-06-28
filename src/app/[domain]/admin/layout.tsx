@@ -34,7 +34,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <Header onMenuClick={() => setIsSidebarOpen(true)} />
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto custom-scrollbar bg-gray-50/50 relative pb-24 md:pb-0">
+        <div className="flex-1 overflow-y-auto custom-scrollbar bg-gray-50/50 relative pb-6 md:pb-0">
           {children}
         </div>
       </main>

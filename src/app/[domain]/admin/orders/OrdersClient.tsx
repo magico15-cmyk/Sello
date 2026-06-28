@@ -257,6 +257,7 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
                 <th className="px-6 py-4 font-semibold">Ref</th>
                 <th className="px-6 py-4 font-semibold">Creation date</th>
                 <th className="px-6 py-4 font-semibold">Customer</th>
+                <th className="px-6 py-4 font-semibold">Bundle</th>
                 <th className="px-6 py-4 font-semibold">Confirmation status</th>
                 <th className="px-6 py-4 font-semibold">Payment status</th>
                 <th className="px-6 py-4 font-semibold">Shipping status</th>
@@ -274,6 +275,11 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
                   </td>
                   <td className="px-6 py-4 text-gray-500">{order.date}</td>
                   <td className="px-6 py-4 font-medium text-gray-900">{order.customer}</td>
+                  <td className="px-6 py-4 text-gray-500">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      {order.bundle || 'N/A'}
+                    </span>
+                  </td>
                   <td className="px-6 py-4">
                     <StatusDropdown 
                       type="confirmation" 

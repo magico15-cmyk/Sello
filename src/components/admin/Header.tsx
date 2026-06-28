@@ -14,8 +14,8 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   let breadcrumb = "Home > Dashboard";
   
   if (pathname.endsWith('/admin')) {
-    title = "All products";
-    breadcrumb = "Home > Product > All products";
+    title = "Overview";
+    breadcrumb = "Home > Overview";
   } else if (pathname.includes('/admin/products/new')) {
     title = "New product";
     breadcrumb = "Home > Product > New product";

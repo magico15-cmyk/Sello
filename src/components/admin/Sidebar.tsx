@@ -59,8 +59,18 @@ const footerItems = [
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
-  const [activeItem, setActiveItem] = useState("Product");
-  const [expandedItem, setExpandedItem] = useState<string | null>("Product");
+
+  const getInitialActiveItem = () => {
+    if (pathname?.startsWith("/admin/orders")) return "Orders";
+    if (pathname?.startsWith("/admin/customers")) return "Customer";
+    if (pathname?.startsWith("/admin/products")) return "Product";
+    if (pathname === "/admin") return "Overview";
+    if (pathname?.startsWith("/admin/store")) return "Store";
+    return "Overview";
+  };
+
+  const [activeItem, setActiveItem] = useState(getInitialActiveItem());
+  const [expandedItem, setExpandedItem] = useState<string | null>(getInitialActiveItem());
   const [storeName, setStoreName] = useState("SELLO");
 
   useEffect(() => {
@@ -75,8 +85,10 @@ export default function Sidebar() {
       setActiveItem("Orders");
     } else if (pathname?.startsWith("/admin/customers")) {
       setActiveItem("Customer");
-    } else if (pathname?.startsWith("/admin/products") || pathname === "/admin") {
+    } else if (pathname?.startsWith("/admin/products")) {
       setActiveItem("Product");
+    } else if (pathname === "/admin") {
+      setActiveItem("Overview");
     } else if (pathname?.startsWith("/admin/store")) {
       setActiveItem("Store");
     }
@@ -87,7 +99,7 @@ export default function Sidebar() {
     activeChild = "New product";
   } else if (pathname === "/admin/products/categories") {
     activeChild = "Categories";
-  } else if (pathname === "/admin") {
+  } else if (pathname === "/admin/products") {
     activeChild = "All products";
   } else if (pathname === "/admin/store/theme") {
     activeChild = "Theme";
@@ -111,7 +123,7 @@ export default function Sidebar() {
     if (child === "New product") {
       router.push("/admin/products/new");
     } else if (child === "All products") {
-      router.push("/admin");
+      router.push("/admin/products");
     } else if (child === "Categories") {
       router.push("/admin/products/categories");
     } else if (child === "Theme") {

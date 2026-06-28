@@ -377,7 +377,7 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
         if (error) throw error;
       }
 
-      router.push('/admin');
+      router.push('/admin/products');
       router.refresh();
     } catch (err: any) {
       console.error("Error saving product:", err);
@@ -393,7 +393,7 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
       <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <button 
-            onClick={() => router.push('/admin')}
+            onClick={() => router.push('/admin/products')}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
             <ArrowLeftIcon className="w-5 h-5 text-gray-600" />
@@ -413,7 +413,7 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
             </button>
           )}
           <button 
-            onClick={() => router.push('/admin')}
+            onClick={() => router.push('/admin/products')}
             className="px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 border border-gray-300 rounded-xl transition-colors shadow-sm"
           >
             Discard

@@ -24,6 +24,7 @@ interface Customer {
   totalOrders: number;
   totalSpent: number;
   lastOrderDate: string;
+  currency: string;
   orders: any[];
 }
 
@@ -81,6 +82,7 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
         totalOrders: number;
         totalSpent: number;
         lastOrderDate: string;
+        currency: string;
         orders: any[];
       }>();
 
@@ -88,12 +90,19 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
         const phone = order.customer_phone || order.phone || "N/A";
         const existing = customerMap.get(phone);
 
+        let orderCurrency = currency;
+        if (order.items && order.items.length > 0 && order.items[0].price) {
+          const extracted = String(order.items[0].price).replace(/[0-9.,\s]/g, '');
+          if (extracted) orderCurrency = extracted;
+        }
+
         if (existing) {
           existing.totalOrders += 1;
           existing.totalSpent += parseFloat(order.total_amount || 0);
           if (new Date(order.created_at) > new Date(existing.lastOrderDate)) {
             existing.lastOrderDate = order.created_at;
             existing.name = order.customer_name || existing.name;
+            existing.currency = orderCurrency;
           }
           existing.orders.push(order);
         } else {
@@ -104,6 +113,7 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
             totalOrders: 1,
             totalSpent: parseFloat(order.total_amount || 0),
             lastOrderDate: order.created_at || new Date().toISOString(),
+            currency: orderCurrency,
             orders: [order],
           });
         }
@@ -118,6 +128,7 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
           totalOrders: data.totalOrders,
           totalSpent: data.totalSpent,
           lastOrderDate: data.lastOrderDate,
+          currency: data.currency,
           orders: data.orders,
         })
       );
@@ -235,8 +246,8 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
       .slice(0, 2);
   };
 
-  const formatCurrency = (amount: number) => {
-    return `${amount.toFixed(2)} ${currency}`;
+  const formatCurrency = (amount: number, ccy: string = currency) => {
+    return `${amount.toFixed(2)} ${ccy}`;
   };
 
   return (
@@ -362,7 +373,7 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
                       </td>
                       {/* Total Spent */}
                       <td className="px-6 py-4 text-right font-medium text-gray-900">
-                        {formatCurrency(customer.totalSpent)}
+                        {formatCurrency(customer.totalSpent, customer.currency)}
                       </td>
                       {/* Actions */}
                       <td className="px-6 py-4 text-center">
@@ -487,7 +498,7 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
                 <div className="bg-gray-50 rounded-xl p-4">
                   <p className="text-xs text-gray-500 mb-1">Total Spent</p>
                   <p className="text-xl font-bold text-gray-900">
-                    {formatCurrency(selectedCustomer.totalSpent)}
+                    {formatCurrency(selectedCustomer.totalSpent, selectedCustomer.currency)}
                   </p>
                 </div>
               </div>
@@ -530,7 +541,14 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
                       </div>
                       <div className="text-right">
                         <p className="text-sm font-bold text-gray-900">
-                          {formatCurrency(parseFloat(order.total_amount || 0))}
+                          {(() => {
+                            let itemCcy = selectedCustomer.currency;
+                            if (order.items && order.items.length > 0 && order.items[0].price) {
+                              const extracted = String(order.items[0].price).replace(/[0-9.,\s]/g, '');
+                              if (extracted) itemCcy = extracted;
+                            }
+                            return formatCurrency(parseFloat(order.total_amount || 0), itemCcy);
+                          })()}
                         </p>
                         <p className="text-xs text-gray-400 capitalize">
                           {order.status || "pending"}

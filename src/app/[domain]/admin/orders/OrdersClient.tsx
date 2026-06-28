@@ -54,16 +54,23 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
         
       if (error) throw error;
       if (data) {
-        const formattedOrders = data.map((o: any) => ({
+        const formattedOrders = data.map((o: any) => {
+          let orderCurrency = '$';
+          if (o.items && o.items.length > 0 && o.items[0].price) {
+            const extracted = String(o.items[0].price).replace(/[0-9.,\s]/g, '');
+            if (extracted) orderCurrency = extracted;
+          }
+          return {
           id: o.id,
           ref: `#${o.id.toString().padStart(4, '0')}`,
           date: new Date(o.created_at || new Date()).toLocaleString(),
           customer: o.customer_name,
-          total: `$${o.total_amount}`,
+          total: `${parseFloat(o.total_amount).toFixed(2)} ${orderCurrency}`,
           confStatus: o.status === 'pending' ? 'Open' : o.status,
           payStatus: 'Unpaid',
           shipStatus: 'Unfulfilled',
-        }));
+          };
+        });
         setOrders(formattedOrders);
       }
     } catch (error) {

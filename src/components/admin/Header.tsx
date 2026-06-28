@@ -176,14 +176,26 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
               </div>
 
               <div className="py-1">
-                <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2">
+                <button 
+                  onClick={() => {
+                    setIsProfileOpen(false);
+                    router.push('/admin/settings/account');
+                  }}
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2"
+                >
                   <UserIcon className="w-4 h-4 text-gray-400" />
                   <span>Manage account</span>
                 </button>
               </div>
 
               <div className="border-t border-gray-100 py-1">
-                <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2">
+                <button 
+                  onClick={() => {
+                    setIsProfileOpen(false);
+                    window.open('/', '_blank');
+                  }}
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2"
+                >
                   <BuildingStorefrontIcon className="w-4 h-4 text-gray-400" />
                   <span>Your store</span>
                 </button>

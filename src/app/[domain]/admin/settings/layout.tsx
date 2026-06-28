@@ -18,7 +18,7 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
   const currentTab = settingsNav.find(item => pathname.includes(item.href))?.name || "Account";
 
   return (
-    <div className="flex-1 overflow-auto bg-gray-50 h-[calc(100vh-64px)]">
+    <div className="flex-1 bg-gray-50 min-h-full">
       <div className="w-full mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-8">{currentTab} settings</h1>
         

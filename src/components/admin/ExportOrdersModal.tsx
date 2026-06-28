@@ -17,11 +17,6 @@ const ALL_AVAILABLE_FIELDS: Field[] = [
   { id: "payStatus", label: "Payment status" },
   { id: "shipStatus", label: "Shipping status" },
   { id: "sku", label: "SKU" },
-  { id: "totalQuantity", label: "Total quantity" },
-  { id: "vendor", label: "Vendor" },
-  { id: "trackingNumber", label: "Tracking number" },
-  { id: "paymentGateway", label: "Payment gateway" },
-  { id: "total", label: "Total charge" },
 ];
 
 export default function ExportOrdersModal({ 

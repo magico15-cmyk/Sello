@@ -203,7 +203,7 @@ export default function Sidebar() {
             value={storeName}
             onChange={handleNameChange}
             onBlur={handleNameBlur}
-            className="text-xl font-bold text-gray-900 tracking-tight bg-transparent border border-transparent hover:border-gray-200 focus:border-brand-500 rounded px-2 py-1 -ml-2 focus:outline-none focus:ring-2 focus:ring-brand-500/20 w-full cursor-text transition-all"
+            className="text-xl font-bold text-gray-900 tracking-tight bg-transparent border border-transparent md:hover:border-gray-200 focus:border-brand-500 rounded px-2 py-1 -ml-2 focus:outline-none focus:ring-2 focus:ring-brand-500/20 w-full cursor-text transition-all"
             placeholder="Store Name"
           />
         </div>
@@ -227,7 +227,7 @@ export default function Sidebar() {
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 ${
                     isActive
                       ? "text-gray-900 bg-gray-50"
-                      : "text-gray-500 hover:text-gray-800 hover:bg-gray-50"
+                      : "text-gray-500 md:hover:text-gray-800 md:hover:bg-gray-50 active:bg-gray-50"
                   }`}
                 >
                   <div className="flex items-center space-x-3">
@@ -262,7 +262,7 @@ export default function Sidebar() {
 ${
                               isChildActive
                                 ? "text-brand-500 font-medium"
-                                : "text-gray-400 hover:text-gray-600 hover:bg-gray-50"
+                                : "text-gray-400 md:hover:text-gray-600 md:hover:bg-gray-50 active:bg-gray-50"
                             }`}
                           >
                             {child}

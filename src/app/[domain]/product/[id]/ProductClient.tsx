@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback, use } from 'react';
+import Image from 'next/image';
 import { Menu, ShoppingBag, ChevronLeft, ChevronRight, Smile, Activity, Wind, ShieldCheck, Star, HandCoins, ChevronDown, ChevronUp, Check, X, User, Phone, MapPin, CheckCircle, MessageCircle, Send, RotateCcw, Heart, Zap, Leaf, Truck, Sparkles, Gift } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
@@ -113,12 +114,12 @@ const BeforeAfterSlider = ({ data }: { data: { title: string, subtitle: string, 
         
         {/* After Image (Background) */}
         <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">
-          {data?.afterImage && <img className="w-full h-full object-cover block" src={data.afterImage} alt="After" />}
+          {data?.afterImage && <Image fill sizes="400px" className="object-cover block" src={data.afterImage} alt="After" />}
         </div>
         
         {/* Before Image (Foreground, clipped) */}
         <div className="absolute inset-0 w-full h-full z-20 pointer-events-none" style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}>
-          {data?.beforeImage && <img className="w-full h-full object-cover block" src={data.beforeImage} alt="Before" />}
+          {data?.beforeImage && <Image fill sizes="400px" className="object-cover block" src={data.beforeImage} alt="Before" />}
         </div>
 
         {/* Invisible Range Slider for logic */}

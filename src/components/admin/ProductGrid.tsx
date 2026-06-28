@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import {
@@ -349,7 +350,7 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
               {paginatedProducts.map((product) => (
                 <tr
                   key={product.id}
-                  className="hover:bg-gray-50/50 transition-colors group"
+                  className="md:hover:bg-gray-50/50 active:bg-gray-50/50 transition-colors group"
                 >
                   {/* Checkbox */}
                   <td className="px-6 py-4">
@@ -369,16 +370,18 @@ export default function ProductGrid({ onToggleFilter }: ProductGridProps) {
                   {/* Name + Image */}
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
-                        <img
-                          src={getFirstImage(product.image)}
+                      <div className="relative w-11 h-11 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                        <Image
+                          src={getFirstImage(product.image) || '/placeholder.png'}
                           alt={product.name}
-                          className="w-full h-full object-cover"
+                          fill
+                          sizes="44px"
+                          className="object-cover"
                         />
                       </div>
                       <a
                         href="#"
-                        className="text-sm font-semibold text-gray-800 hover:text-gray-900 hover:underline transition-colors leading-snug line-clamp-2 max-w-[180px]"
+                        className="text-sm font-semibold text-gray-800 md:hover:text-gray-900 md:hover:underline transition-colors leading-snug line-clamp-2 max-w-[180px]"
                       >
                         {product.name}
                       </a>

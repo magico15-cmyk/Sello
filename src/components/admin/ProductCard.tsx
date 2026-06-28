@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { HeartIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
 import type { Product } from "@/data/products";
@@ -13,13 +14,13 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
-    <div className="bg-white rounded-2xl p-4 shadow-sm hover:shadow-soft transition-all duration-300 group cursor-pointer">
+    <div className="bg-white rounded-2xl p-4 shadow-sm md:hover:shadow-soft active:bg-gray-50 transition-all duration-300 group cursor-pointer">
       {/* Image */}
       <div className="relative aspect-[4/5] bg-gray-100 rounded-xl overflow-hidden mb-3">
         {!imgLoaded && (
           <div className="absolute inset-0 bg-gray-100 animate-pulse rounded-xl" />
         )}
-        <img
+        <Image
           src={(() => {
             try {
               const parsed = JSON.parse(product.image);
@@ -27,9 +28,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             } catch {
               return product.image;
             }
-          })()}
+          })() || '/placeholder.png'}
           alt={product.name}
-          className={`w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500 ${
+          fill
+          sizes="(max-width: 768px) 50vw, 33vw"
+          className={`object-cover rounded-xl group-hover:scale-105 transition-transform duration-500 ${
             imgLoaded ? "opacity-100" : "opacity-0"
           }`}
           onLoad={() => setImgLoaded(true)}

@@ -9,7 +9,8 @@ import {
   BuildingStorefrontIcon,
   ArrowLeftOnRectangleIcon
 } from "@heroicons/react/24/outline";
-import GlobalSearchModal from "./GlobalSearchModal";
+import dynamic from 'next/dynamic';
+const GlobalSearchModal = dynamic(() => import('./GlobalSearchModal'), { ssr: false });
 
 export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const pathname = usePathname() || "";
@@ -181,7 +182,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
                     setIsProfileOpen(false);
                     router.push('/admin/settings/account');
                   }}
-                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2"
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 md:hover:bg-gray-50 active:bg-gray-50 flex items-center space-x-2"
                 >
                   <UserIcon className="w-4 h-4 text-gray-400" />
                   <span>Manage account</span>
@@ -194,12 +195,12 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
                     setIsProfileOpen(false);
                     window.open('/', '_blank');
                   }}
-                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2"
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 md:hover:bg-gray-50 active:bg-gray-50 flex items-center space-x-2"
                 >
                   <BuildingStorefrontIcon className="w-4 h-4 text-gray-400" />
                   <span>Your store</span>
                 </button>
-                <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2">
+                <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-sm text-gray-700 md:hover:bg-gray-50 active:bg-gray-50 flex items-center space-x-2">
                   <ArrowLeftOnRectangleIcon className="w-4 h-4 text-gray-400" />
                   <span>Log out</span>
                 </button>
@@ -209,11 +210,13 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
         </div>
       </div>
 
-      <GlobalSearchModal 
-        isOpen={isSearchOpen} 
-        onClose={() => setIsSearchOpen(false)} 
-        domain={pathname.split("/")[1] || "default"} 
-      />
+      {isSearchOpen && (
+        <GlobalSearchModal 
+          isOpen={isSearchOpen} 
+          onClose={() => setIsSearchOpen(false)} 
+          domain={pathname.split("/")[1] || "default"} 
+        />
+      )}
     </header>
   );
 }

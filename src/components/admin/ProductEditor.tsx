@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { 
@@ -1663,8 +1664,8 @@ export default function ProductEditor({ initialData, storeId }: { initialData?: 
                   data-image-index={i}
                   className={`relative rounded-xl overflow-hidden border cursor-grab active:cursor-grabbing transition-all ${i === 0 ? 'col-span-2 aspect-[4/3]' : 'aspect-square'} ${draggedImageIndex === i ? 'opacity-40 border-dashed border-2 border-pink-400 scale-95' : 'border-gray-200 hover:border-gray-300'}`}
                 >
-                  <img src={img} alt={`Product ${i + 1}`} className="w-full h-full object-cover pointer-events-none" />
-                  <div className="absolute top-2 left-2 bg-white/80 backdrop-blur-sm p-1 rounded-lg shadow-sm cursor-grab">
+                  <Image fill sizes="(max-width: 768px) 100vw, 30vw" src={img} alt={`Product ${i + 1}`} className="object-cover pointer-events-none" />
+                  <div className="absolute top-2 left-2 bg-white/80 backdrop-blur-sm p-1 rounded-lg shadow-sm cursor-grab z-10">
                     <Bars3Icon className="w-4 h-4 text-gray-500" />
                   </div>
                   <button 

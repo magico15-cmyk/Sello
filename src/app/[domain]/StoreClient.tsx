@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -115,10 +116,13 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
               >
                 {sliderImages.map((img: string, idx: number) => (
                   <div key={idx} className="w-full h-full flex-shrink-0 relative">
-                    <img 
+                    <Image 
                       src={img} 
                       alt={`Hero Banner ${idx + 1}`} 
-                      className="w-full h-full object-cover sm:max-h-[500px]"
+                      width={1920}
+                      height={800}
+                      sizes="100vw"
+                      className="w-full h-auto object-cover sm:max-h-[500px]"
                     />
                   </div>
                 ))}

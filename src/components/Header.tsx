@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, ShoppingBag, Search, User, X } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
 export const Header = ({ store }: { store?: any }) => {
@@ -94,7 +95,7 @@ export const Header = ({ store }: { store?: any }) => {
         return (
           <Link key={`d-${i}`} href={store?.domain ? `/${store.domain}` : '/'} className="logo flex-shrink-0 flex-grow text-center md:flex-grow-0 md:text-left flex justify-center">
             {store?.logo_url ? (
-              <img src={store.logo_url} alt={store?.store_name || "Store Logo"} className="max-h-8 w-auto max-w-[220px] object-contain" />
+              <Image src={store.logo_url} alt={store?.store_name || "Store Logo"} width={220} height={32} className="max-h-8 w-auto max-w-[220px] object-contain" />
             ) : (
               <div className="text-[28px] font-bold tracking-tight header-item-desktop">{store?.header_logo_text || 'Sello.'}</div>
             )}
@@ -135,7 +136,7 @@ export const Header = ({ store }: { store?: any }) => {
         return (
           <Link key={`m-${i}`} href={store?.domain ? `/${store.domain}` : '/'} className="md:hidden logo flex-shrink-0 flex-grow flex justify-center">
             {store?.logo_url ? (
-              <img src={store.logo_url} alt={store?.store_name || "Store Logo"} className="max-h-8 w-auto max-w-[220px] object-contain" />
+              <Image src={store.logo_url} alt={store?.store_name || "Store Logo"} width={220} height={32} className="max-h-8 w-auto max-w-[220px] object-contain" />
             ) : (
               <div className="text-[28px] font-bold tracking-tight header-item-mobile">{store?.header_logo_text || 'Sello.'}</div>
             )}
@@ -164,12 +165,6 @@ export const Header = ({ store }: { store?: any }) => {
     }
   };
 
-  // Group items to maintain a nice flex layout. 
-  // Let's assume:
-  // - everything before 'logo' goes to the left group
-  // - 'logo' is in the center group
-  // - everything after 'logo' goes to the right group
-  // This allows the logo to easily stay centered or flex-positioned.
   const desktopLogoIndex = desktopLayout.indexOf('logo');
   const dLeft = desktopLogoIndex !== -1 ? desktopLayout.slice(0, desktopLogoIndex) : desktopLayout;
   const dRight = desktopLogoIndex !== -1 ? desktopLayout.slice(desktopLogoIndex + 1) : [];
@@ -196,7 +191,6 @@ export const Header = ({ store }: { store?: any }) => {
         }
       `}} />
       <header className="header header-responsive relative w-full">
-      {/* DESKTOP LAYOUT */}
       <div className="hidden md:flex items-center justify-between h-12 px-6 max-w-7xl mx-auto w-full">
         <div className="flex items-center gap-8 flex-1">
           {dLeft.map((item: string, i: number) => renderDesktopItem(item, i))}
@@ -213,7 +207,6 @@ export const Header = ({ store }: { store?: any }) => {
         </div>
       </div>
 
-      {/* MOBILE LAYOUT */}
       <div className="flex md:hidden items-center justify-between h-10 px-4 w-full">
         <div className="flex items-center gap-4 flex-1">
           {mLeft.map((item: string, i: number) => renderMobileItem(item, i))}
@@ -231,16 +224,13 @@ export const Header = ({ store }: { store?: any }) => {
       </div>
     </header>
 
-      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-50 flex md:hidden">
-          {/* Backdrop */}
           <div 
             className="fixed inset-0 bg-black/50 transition-opacity" 
             onClick={() => setIsMobileMenuOpen(false)}
           />
           
-          {/* Slide-out Menu */}
           <div className="relative flex flex-col w-4/5 max-w-sm h-full bg-white shadow-xl animate-in slide-in-from-left">
             <div className="flex items-center justify-between p-4 border-b border-gray-100">
               <span className="text-xl font-bold font-menu">{store?.header_logo_text || 'Sello.'}</span>
@@ -277,16 +267,13 @@ export const Header = ({ store }: { store?: any }) => {
         </div>
       )}
 
-      {/* Cart Drawer Overlay */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50 flex justify-end">
-          {/* Backdrop */}
           <div 
             className="fixed inset-0 bg-black/50 transition-opacity" 
             onClick={() => setIsCartOpen(false)}
           />
           
-          {/* Slide-out Cart Panel (Right side) */}
           <div className="relative flex flex-col w-4/5 max-w-sm h-full bg-white shadow-xl animate-in slide-in-from-right ml-auto">
             <div className="flex items-center justify-between p-4 border-b border-gray-100">
               <span className="text-xl font-bold font-menu flex items-center gap-2">
@@ -320,7 +307,6 @@ export const Header = ({ store }: { store?: any }) => {
           </div>
         </div>
       )}
-      {/* Search Overlay Modal */}
       {isSearchOpen && (
         <div className="fixed inset-0 z-[60] flex items-start justify-center pt-16 sm:pt-24 px-4 sm:px-6 animate-in fade-in duration-200">
           <div 
@@ -376,9 +362,11 @@ export const Header = ({ store }: { store?: any }) => {
                         >
                           <div className="aspect-[4/5] bg-gray-50 rounded-xl overflow-hidden mb-3 relative border border-gray-100">
                             {product.images && product.images[0] ? (
-                              <img 
+                              <Image 
                                 src={product.images[0]} 
                                 alt={product.name}
+                                fill
+                                sizes="(max-width: 768px) 50vw, 25vw"
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                               />
                             ) : (

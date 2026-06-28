@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const Footer = ({ store }: { store?: any }) => {
   const footerMenu = store?.menus?.find((m: any) => m.slug === 'footer-menu');
@@ -44,7 +45,15 @@ export const Footer = ({ store }: { store?: any }) => {
         <div className="footer-bottom-grid">
           <div className="footer-logo">
             {logoUrl ? (
-              <img src={logoUrl} alt="Footer Logo" style={{ height: `${logoSize}px` }} className="w-auto object-contain md:-ml-8" />
+              <div className="relative w-full md:-ml-8" style={{ height: `${logoSize}px`, maxWidth: '300px' }}>
+                <Image 
+                  src={logoUrl} 
+                  alt="Footer Logo" 
+                  fill
+                  sizes="300px"
+                  className="object-contain object-left md:object-center" 
+                />
+              </div>
             ) : (
               <span className="logo-box">{logoText}</span>
             )}

@@ -22,30 +22,10 @@ interface Customer {
   totalOrders: number;
   totalSpent: number;
   lastOrderDate: string;
-  status: "High Value" | "Frequent Buyer" | "New" | "At Risk" | "Inactive";
   orders: any[];
 }
 
-// --- Status Badge Config ---
-const statusConfig: Record<string, { bg: string; text: string; dot: string }> = {
-  "High Value":     { bg: "bg-emerald-50", text: "text-emerald-700", dot: "bg-emerald-500" },
-  "Frequent Buyer": { bg: "bg-blue-50",    text: "text-blue-700",    dot: "bg-blue-500" },
-  "New":            { bg: "bg-amber-50",   text: "text-amber-700",   dot: "bg-amber-500" },
-  "At Risk":        { bg: "bg-orange-50",  text: "text-orange-700",  dot: "bg-orange-500" },
-  "Inactive":       { bg: "bg-gray-50",    text: "text-gray-500",    dot: "bg-gray-400" },
-};
 
-function getCustomerStatus(totalOrders: number, totalSpent: number, lastOrderDate: string): Customer["status"] {
-  const daysSinceLast = lastOrderDate
-    ? Math.floor((Date.now() - new Date(lastOrderDate).getTime()) / (1000 * 60 * 60 * 24))
-    : 999;
-
-  if (totalSpent >= 1000)   return "High Value";
-  if (totalOrders >= 5)     return "Frequent Buyer";
-  if (daysSinceLast > 90)   return "Inactive";
-  if (daysSinceLast > 60)   return "At Risk";
-  return "New";
-}
 
 // --- Filter Options ---
 type FilterKey = "all" | "total_spent" | "order_count" | "status";
@@ -55,7 +35,6 @@ const filterOptions: { value: FilterKey; label: string }[] = [
   { value: "all",         label: "All Customers" },
   { value: "total_spent", label: "Total Spent" },
   { value: "order_count", label: "Order Count" },
-  { value: "status",      label: "Status" },
 ];
 
 export default function CustomersClient({ storeId, currency }: { storeId?: string; currency: string }) {
@@ -134,7 +113,6 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
           totalOrders: data.totalOrders,
           totalSpent: data.totalSpent,
           lastOrderDate: data.lastOrderDate,
-          status: getCustomerStatus(data.totalOrders, data.totalSpent, data.lastOrderDate),
           orders: data.orders,
         })
       );
@@ -168,9 +146,6 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
       result = [...result].sort((a, b) => b.totalSpent - a.totalSpent);
     } else if (filterBy === "order_count") {
       result = [...result].sort((a, b) => b.totalOrders - a.totalOrders);
-    } else if (filterBy === "status") {
-      const statusOrder = ["High Value", "Frequent Buyer", "New", "At Risk", "Inactive"];
-      result = [...result].sort((a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status));
     }
 
     return result;
@@ -290,13 +265,11 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
                   <th className="px-6 py-4 font-semibold">Phone</th>
                   <th className="px-6 py-4 font-semibold text-center">Orders</th>
                   <th className="px-6 py-4 font-semibold text-right">Total Spent</th>
-                  <th className="px-6 py-4 font-semibold text-center">Status</th>
                   <th className="px-6 py-4 font-semibold text-center">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {paginatedCustomers.map((customer) => {
-                  const badge = statusConfig[customer.status];
                   return (
                     <tr key={customer.id} className="hover:bg-gray-50/50 transition-colors">
                       {/* Customer Name & Email */}
@@ -328,15 +301,6 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
                       {/* Total Spent */}
                       <td className="px-6 py-4 text-right font-medium text-gray-900">
                         {formatCurrency(customer.totalSpent)}
-                      </td>
-                      {/* Status Badge */}
-                      <td className="px-6 py-4 text-center">
-                        <span
-                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${badge.bg} ${badge.text}`}
-                        >
-                          <span className={`w-1.5 h-1.5 rounded-full ${badge.dot}`}></span>
-                          {customer.status}
-                        </span>
                       </td>
                       {/* Actions */}
                       <td className="px-6 py-4 text-center">
@@ -467,21 +431,7 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
                 </div>
               </div>
 
-              {/* Status */}
-              <div className="space-y-3">
-                <h3 className="text-sm font-semibold text-gray-900">Customer Status</h3>
-                {(() => {
-                  const badge = statusConfig[selectedCustomer.status];
-                  return (
-                    <span
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${badge.bg} ${badge.text}`}
-                    >
-                      <span className={`w-1.5 h-1.5 rounded-full ${badge.dot}`}></span>
-                      {selectedCustomer.status}
-                    </span>
-                  );
-                })()}
-              </div>
+
 
               {/* Order History */}
               <div className="space-y-3">

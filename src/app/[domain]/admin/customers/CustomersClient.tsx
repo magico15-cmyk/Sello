@@ -12,6 +12,8 @@ import {
   EnvelopeIcon,
   UserGroupIcon,
   XMarkIcon,
+  PencilIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
 
 interface Customer {
@@ -304,13 +306,33 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
                       </td>
                       {/* Actions */}
                       <td className="px-6 py-4 text-center">
-                        <button
-                          onClick={() => setSelectedCustomer(customer)}
-                          className="p-1.5 text-gray-400 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100 border border-transparent hover:border-gray-200"
-                          title="View details"
-                        >
-                          <EyeIcon className="w-4 h-4" />
-                        </button>
+                        <div className="flex items-center justify-center gap-1.5">
+                          <button
+                            onClick={() => setSelectedCustomer(customer)}
+                            className="p-1.5 text-gray-400 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100 border border-transparent hover:border-gray-200"
+                            title="View details"
+                          >
+                            <EyeIcon className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => alert("Edit customer coming soon")}
+                            className="p-1.5 text-gray-400 hover:text-brand-500 transition-colors rounded-lg hover:bg-brand-50 border border-transparent hover:border-brand-100"
+                            title="Edit customer"
+                          >
+                            <PencilIcon className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              if (confirm("Are you sure you want to delete this customer? This will delete all their associated orders.")) {
+                                alert("Delete action coming soon");
+                              }
+                            }}
+                            className="p-1.5 text-gray-400 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50 border border-transparent hover:border-red-100"
+                            title="Delete customer"
+                          >
+                            <TrashIcon className="w-4 h-4" />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );

@@ -48,6 +48,9 @@ export default function ExportOrdersModal({
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  
+  const [dateFilterType, setDateFilterType] = useState('Custom');
+  const [isDateTypeOpen, setIsDateTypeOpen] = useState(false);
 
   const getDaysInMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
   const getFirstDayOfMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth(), 1).getDay();
@@ -85,6 +88,7 @@ export default function ExportOrdersModal({
           onClick={(e) => {
             e.stopPropagation();
             setSelectedDate(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), i));
+            setDateFilterType('Custom');
             setIsDateOpen(false);
           }}
           className={`cursor-pointer rounded-full w-7 h-7 flex items-center justify-center mx-auto transition-colors ${isSelected ? 'bg-gray-900 text-white' : 'hover:bg-gray-100 text-gray-700'}`}
@@ -178,13 +182,42 @@ export default function ExportOrdersModal({
       });
     }
 
-    if (selectedDate) {
+    if (dateFilterType === 'Custom' && selectedDate) {
       ordersToExport = ordersToExport.filter(o => {
         if (!o.date) return false;
         const orderDate = new Date(o.date);
         return orderDate.getFullYear() === selectedDate.getFullYear() &&
                orderDate.getMonth() === selectedDate.getMonth() &&
                orderDate.getDate() === selectedDate.getDate();
+      });
+    } else if (dateFilterType !== 'Custom') {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      const yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+      
+      const startOfWeek = new Date(today);
+      startOfWeek.setDate(today.getDate() - today.getDay());
+      
+      const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+      ordersToExport = ordersToExport.filter(o => {
+        if (!o.date) return false;
+        const orderDate = new Date(o.date);
+        
+        switch (dateFilterType) {
+          case 'Today':
+            return orderDate >= today;
+          case 'Yesterday':
+            return orderDate >= yesterday && orderDate < today;
+          case 'This week':
+            return orderDate >= startOfWeek;
+          case 'This month':
+            return orderDate >= startOfMonth;
+          default:
+            return true;
+        }
       });
     }
 
@@ -280,15 +313,16 @@ export default function ExportOrdersModal({
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <CalendarIcon className="w-5 h-5 text-gray-400" />
               </div>
-              <span className={`truncate ${selectedDate ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
-                {selectedDate ? selectedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : "Filter by date"}
+              <span className={`truncate ${(selectedDate || dateFilterType !== 'Custom') ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
+                {dateFilterType !== 'Custom' ? dateFilterType : (selectedDate ? selectedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : "Filter by date")}
               </span>
-              {selectedDate && (
+              {(selectedDate || dateFilterType !== 'Custom') && (
                 <XMarkIcon 
                   className="w-4 h-4 text-gray-400 hover:text-gray-600 transition-colors ml-2" 
                   onClick={(e) => {
                     e.stopPropagation();
                     setSelectedDate(null);
+                    setDateFilterType('Custom');
                   }}
                 />
               )}
@@ -296,9 +330,33 @@ export default function ExportOrdersModal({
             
             {isDateOpen && (
               <div className="absolute z-20 top-[calc(100%+4px)] left-0 bg-white border border-gray-200 rounded-xl shadow-xl w-72 p-0 overflow-hidden">
-                <div className="p-3 border-b border-gray-100 flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700">Custom</span>
+                <div 
+                  className="p-3 border-b border-gray-100 flex items-center justify-between cursor-pointer hover:bg-gray-50 relative"
+                  onClick={() => setIsDateTypeOpen(!isDateTypeOpen)}
+                >
+                  <span className="text-sm font-medium text-gray-700">{dateFilterType}</span>
                   <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+                  
+                  {isDateTypeOpen && (
+                    <div className="absolute top-full left-0 w-full bg-white border border-gray-200 shadow-xl z-30">
+                      {['Today', 'Yesterday', 'This week', 'This month', 'Custom'].map(type => (
+                        <div 
+                          key={type}
+                          className={`p-3 text-sm border-b border-gray-100 last:border-b-0 hover:bg-gray-50 cursor-pointer ${dateFilterType === type ? 'text-[#015289] border-r-2 border-r-gray-900 bg-gray-50' : 'text-[#015289]'}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setDateFilterType(type);
+                            setIsDateTypeOpen(false);
+                            if (type !== 'Custom') {
+                              setSelectedDate(null);
+                            }
+                          }}
+                        >
+                          {type}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div className="p-4">
                   <div className="flex items-center justify-between mb-4">

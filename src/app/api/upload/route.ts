@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { r2 } from "@/lib/r2";
 import crypto from "crypto";
+import { withTenant, TenantContext } from "@/lib/tenant/withTenant";
 
-export async function POST(req: NextRequest) {
+export const POST = withTenant(async (req: NextRequest, context: TenantContext) => {
   try {
     const formData = await req.formData();
     const file = formData.get("file") as File;
@@ -52,9 +53,9 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
-}
+});
 
-export async function DELETE(req: NextRequest) {
+export const DELETE = withTenant(async (req: NextRequest, context: TenantContext) => {
   try {
     const { url } = await req.json();
     if (!url) {
@@ -88,4 +89,4 @@ export async function DELETE(req: NextRequest) {
       { status: 500 }
     );
   }
-}
+});

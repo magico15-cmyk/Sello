@@ -1,40 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { withTenant, TenantContext } from "@/lib/tenant/withTenant";
 
-// Initialize Supabase admin client for secure server-side operations
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-
-const supabase = createClient(supabaseUrl, supabaseServiceKey, {
-  auth: {
-    persistSession: false
-  }
-});
-
-export async function POST(req: NextRequest) {
+export const POST = withTenant(async (req: NextRequest, context: TenantContext) => {
   try {
     const orderData = await req.json();
-    const { store_id } = orderData;
+    
+    // STRICT TENANT ISOLATION:
+    // We completely ignore any store_id the client might have maliciously passed.
+    // Instead, we force the store_id to be the securely resolved tenant ID.
+    const store_id = context.tenant.id;
+    const ip = context.ip;
+    const supabase = context.supabase;
 
-    if (!store_id) {
-      return NextResponse.json({ error: "Missing store_id" }, { status: 400 });
-    }
-
-    // 1. Extract the real IP address
-    const ip = req.headers.get("x-forwarded-for")?.split(',')[0].trim() || "unknown";
-
-    // 2. Fetch the store's max_orders_per_ip setting
-    const { data: store, error: storeError } = await supabase
-      .from('stores')
-      .select('max_orders_per_ip')
-      .eq('id', store_id)
-      .single();
-
-    if (storeError) {
-      console.error("Error fetching store settings:", storeError);
-      return NextResponse.json({ error: "Failed to fetch store settings." }, { status: 500 });
-    }
-
+    // 2. Fetch the store's max_orders_per_ip setting (we already have the store from context!)
+    const store = context.tenant;
     // 3. Check rate limit if configured
     if (store && store.max_orders_per_ip) {
       // Calculate time 24 hours ago
@@ -133,4 +112,4 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
-}
+});

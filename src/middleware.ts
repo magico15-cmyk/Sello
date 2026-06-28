@@ -1,18 +1,18 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { createServerClient } from '@supabase/ssr';
 
 export const config = {
   matcher: [
     /*
      * Match all paths except for:
-     * 1. /api routes
-     * 2. /_next (Next.js internals)
-     * 3. /_static (inside /public)
-     * 4. _vercel (Vercel internals)
-     * 5. assets/
-     * 6. root static files (e.g. favicon.ico)
+     * 1. /_next (Next.js internals)
+     * 2. /_static (inside /public)
+     * 3. _vercel (Vercel internals)
+     * 4. assets/
+     * 5. root static files (e.g. favicon.ico)
      */
-    '/((?!api/|_next/|_static/|_vercel|assets/|[\\w-]+\\.\\w+).*)',
+    '/((?!_next/|_static/|_vercel|assets/|[\\w-]+\\.\\w+).*)',
   ],
 };
 
@@ -28,7 +28,7 @@ export const config = {
  *    default store defined by DEFAULT_STORE_SUBDOMAIN env var.
  * 4. IP address access — falls back to default store.
  */
-export default function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
   // Get hostname, strip port for clean rewrite paths
@@ -72,6 +72,53 @@ export default function middleware(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams.toString();
   const path = `${url.pathname}${searchParams.length > 0 ? `?${searchParams}` : ''}`;
 
-  // Rewrite to the [domain] dynamic route folder
-  return NextResponse.rewrite(new URL(`/${tenantKey}${path}`, req.url));
+  // If this is an API route, do not rewrite the path to inject the tenantKey.
+  // API routes live at /api/... globally, so we just attach the tenantKey via a header.
+  if (url.pathname.startsWith('/api/')) {
+    const requestHeaders = new Headers(req.headers);
+    requestHeaders.set('x-tenant-subdomain', tenantKey);
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
+  // Update supabase session
+  let response = NextResponse.rewrite(new URL(`/${tenantKey}${path}`, req.url));
+  
+  // We handle Supabase SSR auth here. We need a server client to check user.
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return req.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => req.cookies.set(name, value));
+          response = NextResponse.rewrite(new URL(`/${tenantKey}${path}`, req.url));
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options)
+          );
+        },
+      },
+    }
+  );
+
+  const { data: { user } } = await supabase.auth.getUser();
+
+  // Protect /admin routes
+  if (path.startsWith('/admin') && !user) {
+    // redirect to login
+    return NextResponse.redirect(new URL(`/login`, req.url));
+  }
+
+  // If user is logged in and trying to access /login, redirect to /admin
+  if (path.startsWith('/login') && user) {
+    return NextResponse.redirect(new URL(`/admin`, req.url));
+  }
+
+  return response;
 }

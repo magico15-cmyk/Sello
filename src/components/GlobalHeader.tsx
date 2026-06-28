@@ -16,8 +16,8 @@ const DeliveryIcon = ({ className, size }: { className?: string, size?: number }
 export function GlobalHeader({ store }: { store?: any }) {
   const pathname = usePathname();
 
-  // Do not render the storefront header on admin pages
-  if (pathname?.includes('/admin')) {
+  // Do not render the storefront header on admin or login pages
+  if (pathname?.includes('/admin') || pathname?.includes('/login')) {
     return null;
   }
 

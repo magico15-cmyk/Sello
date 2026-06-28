@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 import {
   Squares2X2Icon,
   TagIcon,
@@ -74,11 +75,40 @@ export default function Sidebar() {
   const [storeName, setStoreName] = useState("SELLO");
 
   useEffect(() => {
-    const savedName = localStorage.getItem('sello_store_name');
-    if (savedName) {
-      setStoreName(savedName);
+    async function fetchStoreName() {
+      try {
+        const res = await fetch("/api/store");
+        if (res.ok) {
+          const { store } = await res.json();
+          if (store && store.store_name) {
+            setStoreName(store.store_name);
+            document.title = store.store_name + " | Admin";
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch store name", err);
+      }
     }
+    fetchStoreName();
   }, []);
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newName = e.target.value;
+    setStoreName(newName);
+    document.title = newName;
+  };
+
+  const handleNameBlur = async () => {
+    try {
+      await fetch("/api/store", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ store_name: storeName })
+      });
+    } catch (err) {
+      console.error("Failed to update store name", err);
+    }
+  };
 
   useEffect(() => {
     if (pathname?.startsWith("/admin/orders")) {
@@ -171,11 +201,10 @@ export default function Sidebar() {
           <input
             type="text"
             value={storeName}
-            onChange={(e) => {
-              setStoreName(e.target.value);
-              localStorage.setItem('sello_store_name', e.target.value);
-            }}
-            className="text-xl font-bold text-gray-900 tracking-tight bg-transparent border-none focus:outline-none focus:ring-0 w-full p-0 m-0 cursor-text"
+            onChange={handleNameChange}
+            onBlur={handleNameBlur}
+            className="text-xl font-bold text-gray-900 tracking-tight bg-transparent border border-transparent hover:border-gray-200 focus:border-brand-500 rounded px-2 py-1 -ml-2 focus:outline-none focus:ring-2 focus:ring-brand-500/20 w-full cursor-text transition-all"
+            placeholder="Store Name"
           />
         </div>
       </div>

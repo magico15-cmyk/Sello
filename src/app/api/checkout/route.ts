@@ -67,22 +67,26 @@ export async function POST(req: NextRequest) {
     // Check product stock
     let currentStock = null;
     let isTracked = false;
-    const { data: productData, error: productError } = await supabase
-      .from('products')
-      .select('inventory, stock')
-      .eq('id', orderData.product_id)
-      .single();
+    const productId = orderData.product_id || (orderData.items && orderData.items.length > 0 ? orderData.items[0].product_id : null);
 
-    if (productError) {
-      console.error("Error fetching product:", productError);
-      return NextResponse.json({ error: "Failed to validate product." }, { status: 500 });
-    }
+    if (productId) {
+      const { data: productData, error: productError } = await supabase
+        .from('products')
+        .select('inventory, stock')
+        .eq('id', productId)
+        .single();
 
-    if (productData.inventory === 'Tracked') {
-      isTracked = true;
-      currentStock = Number(productData.stock || 0);
-      if (currentStock <= 0) {
-        return NextResponse.json({ error: "Product is out of stock." }, { status: 400 });
+      if (productError) {
+        console.error("Error fetching product:", productError);
+        return NextResponse.json({ error: "Failed to validate product." }, { status: 500 });
+      }
+
+      if (productData.inventory === 'Tracked') {
+        isTracked = true;
+        currentStock = Number(productData.stock || 0);
+        if (currentStock <= 0) {
+          return NextResponse.json({ error: "Product is out of stock." }, { status: 400 });
+        }
       }
     }
 
@@ -109,11 +113,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Failed to process order." }, { status: 500 });
     }
 
-    if (isTracked && currentStock !== null) {
+    if (isTracked && currentStock !== null && productId) {
       const { error: updateError } = await supabase
         .from('products')
         .update({ stock: currentStock - 1 })
-        .eq('id', orderData.product_id);
+        .eq('id', productId);
         
       if (updateError) {
         console.error("Error updating stock:", updateError);

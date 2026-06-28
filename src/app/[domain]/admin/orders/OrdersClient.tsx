@@ -44,7 +44,7 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
       let query = supabase
         .from('orders')
         .select('*')
-        .order('id', { ascending: true });
+        .order('created_at', { ascending: true });
         
       if (storeId) {
         query = query.eq('store_id', storeId);
@@ -54,7 +54,7 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
         
       if (error) throw error;
       if (data) {
-        const formattedOrders = data.map((o: any) => {
+        const formattedOrders = data.map((o: any, index: number) => {
           let orderCurrency = '$';
           if (o.items && o.items.length > 0 && o.items[0].price) {
             const extracted = String(o.items[0].price).replace(/[0-9.,\s]/g, '');
@@ -62,7 +62,7 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
           }
           return {
           id: o.id,
-          ref: `#${o.id.toString().padStart(4, '0')}`,
+          ref: `#${(index + 1).toString().padStart(4, '0')}`,
           date: new Date(o.created_at || new Date()).toLocaleString(),
           customer: o.customer_name,
           total: `${parseFloat(o.total_amount).toFixed(2)} ${orderCurrency}`,
@@ -71,7 +71,7 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
           shipStatus: 'Unfulfilled',
           };
         });
-        setOrders(formattedOrders);
+        setOrders(formattedOrders.reverse());
       }
     } catch (error) {
       // Fallback to mock data if table doesn't exist yet for demo purposes

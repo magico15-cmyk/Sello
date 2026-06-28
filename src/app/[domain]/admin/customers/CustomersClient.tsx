@@ -10,10 +10,7 @@ import {
   EyeIcon,
   PhoneIcon,
   EnvelopeIcon,
-  ShoppingBagIcon,
-  CurrencyDollarIcon,
   UserGroupIcon,
-  ArrowTrendingUpIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
@@ -190,14 +187,7 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
     setCurrentPage(1);
   }, [searchTerm, filterBy]);
 
-  // --- Stats ---
-  const stats = useMemo(() => {
-    const total = customers.length;
-    const totalRevenue = customers.reduce((sum, c) => sum + c.totalSpent, 0);
-    const avgSpent = total > 0 ? totalRevenue / total : 0;
-    const highValue = customers.filter((c) => c.status === "High Value").length;
-    return { total, totalRevenue, avgSpent, highValue };
-  }, [customers]);
+
 
   const getInitials = (name: string) => {
     return name
@@ -222,53 +212,7 @@ export default function CustomersClient({ storeId, currency }: { storeId?: strin
         </p>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <div className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center">
-              <UserGroupIcon className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-500 font-medium">Total Customers</p>
-              <p className="text-xl font-bold text-gray-900">{stats.total}</p>
-            </div>
-          </div>
-        </div>
-        <div className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center">
-              <CurrencyDollarIcon className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-500 font-medium">Total Revenue</p>
-              <p className="text-xl font-bold text-gray-900">{formatCurrency(stats.totalRevenue)}</p>
-            </div>
-          </div>
-        </div>
-        <div className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center">
-              <ShoppingBagIcon className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-500 font-medium">Avg. Spent</p>
-              <p className="text-xl font-bold text-gray-900">{formatCurrency(stats.avgSpent)}</p>
-            </div>
-          </div>
-        </div>
-        <div className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center">
-              <ArrowTrendingUpIcon className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-500 font-medium">High Value</p>
-              <p className="text-xl font-bold text-gray-900">{stats.highValue}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       {/* Main Table Card */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col min-h-[500px]">

@@ -6,8 +6,6 @@ import {
   MagnifyingGlassIcon,
   BellIcon,
   UserIcon,
-  PlusCircleIcon,
-  ArrowPathIcon,
   BuildingStorefrontIcon,
   ArrowLeftOnRectangleIcon
 } from "@heroicons/react/24/outline";
@@ -104,6 +102,12 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   } else if (pathname.includes('/admin/store/footer')) {
     title = "Header & Footer";
     breadcrumb = "Home > Store > Header & Footer";
+  } else if (pathname.includes('/admin/store/homepage')) {
+    title = "Homepage";
+    breadcrumb = "Home > Store > Homepage";
+  } else if (pathname.includes('/admin/store/domains')) {
+    title = "Domains";
+    breadcrumb = "Home > Store > Domains";
   } else if (pathname.includes('/admin/store')) {
     title = "Store";
     breadcrumb = "Home > Store";
@@ -180,17 +184,6 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
 
               <div className="border-t border-gray-100 py-1">
                 <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2">
-                  <PlusCircleIcon className="w-4 h-4 text-gray-400" />
-                  <span>Create new store</span>
-                </button>
-                <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2">
-                  <ArrowPathIcon className="w-4 h-4 text-gray-400" />
-                  <span>Switch Store</span>
-                </button>
-              </div>
-
-              <div className="border-t border-gray-100 py-1">
-                <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2">
                   <BuildingStorefrontIcon className="w-4 h-4 text-gray-400" />
                   <span>Your store</span>
                 </button>
@@ -198,12 +191,6 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
                   <ArrowLeftOnRectangleIcon className="w-4 h-4 text-gray-400" />
                   <span>Log out</span>
                 </button>
-              </div>
-
-              <div className="border-t border-gray-100 py-1">
-                <button className="w-full text-left px-4 py-2 text-sm text-gray-500 hover:bg-gray-50">Sello Help</button>
-                <button className="w-full text-left px-4 py-2 text-sm text-gray-500 hover:bg-gray-50">Sello FAQ</button>
-                <button className="w-full text-left px-4 py-2 text-sm text-gray-500 hover:bg-gray-50">Sello Blog</button>
               </div>
             </div>
           )}

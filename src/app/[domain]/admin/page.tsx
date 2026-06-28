@@ -1,34 +1,138 @@
 "use client";
 import { useState, useEffect } from "react";
 import { CubeIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
+import { createClient } from "@/lib/supabase/client";
 
 export default function AdminDashboard() {
   const [storeName, setStoreName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const savedName = localStorage.getItem('sello_store_name');
-    if (savedName) {
-      setStoreName(savedName);
-    }
-  }, []);
-
-  const orderStats = [
+  const [orderStats, setOrderStats] = useState([
     { label: "Today", value: "0" },
     { label: "Yesterday", value: "0" },
     { label: "This week", value: "0" },
     { label: "This month", value: "0" },
     { label: "This year", value: "0" },
-    { label: "All time", value: "3" },
-  ];
+    { label: "All time", value: "0" },
+  ]);
 
-  const earningsStats = [
-    { label: "Today", value: "MAD 0.00" },
-    { label: "Yesterday", value: "MAD 0.00" },
-    { label: "This week", value: "MAD 0.00" },
-    { label: "This month", value: "MAD 0.00" },
-    { label: "This year", value: "MAD 0.00" },
-    { label: "All time", value: "MAD 31,136.00" },
-  ];
+  const [earningsStats, setEarningsStats] = useState([
+    { label: "Today", value: "0.00" },
+    { label: "Yesterday", value: "0.00" },
+    { label: "This week", value: "0.00" },
+    { label: "This month", value: "0.00" },
+    { label: "This year", value: "0.00" },
+    { label: "All time", value: "0.00" },
+  ]);
+
+  useEffect(() => {
+    async function fetchDashboardData() {
+      setIsLoading(true);
+      try {
+        // 1. Fetch store info
+        let storeId = "";
+        let currency = "MAD";
+        const res = await fetch("/api/store");
+        if (res.ok) {
+          const { store } = await res.json();
+          if (store) {
+            setStoreName(store.name || "");
+            storeId = store.id;
+            currency = store.currency || "MAD";
+            if (store.name) localStorage.setItem('sello_store_name', store.name);
+          }
+        }
+
+        // Fallback to local storage if API fails but we have it saved
+        if (!storeName) {
+          const savedName = localStorage.getItem('sello_store_name');
+          if (savedName) setStoreName(savedName);
+        }
+
+        // 2. Fetch orders
+        const supabase = createClient();
+        let query = supabase.from('orders').select('created_at, total_amount');
+        if (storeId) {
+          query = query.eq('store_id', storeId);
+        }
+
+        const { data, error } = await query;
+        if (error) throw error;
+
+        // 3. Calculate stats
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        
+        // Week starts on Monday
+        const day = now.getDay() || 7;
+        const startOfWeek = new Date(today);
+        startOfWeek.setDate(today.getDate() - day + 1);
+
+        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+        const startOfYear = new Date(now.getFullYear(), 0, 1);
+
+        const isSameDay = (d1: Date, d2: Date) => 
+          d1.getDate() === d2.getDate() && 
+          d1.getMonth() === d2.getMonth() && 
+          d1.getFullYear() === d2.getFullYear();
+
+        let counts = { today: 0, yesterday: 0, week: 0, month: 0, year: 0, all: 0 };
+        let sums = { today: 0, yesterday: 0, week: 0, month: 0, year: 0, all: 0 };
+
+        if (data) {
+          data.forEach((o: any) => {
+            const d = new Date(o.created_at);
+            const val = parseFloat(o.total_amount) || 0;
+            
+            counts.all++;
+            sums.all += val;
+
+            if (isSameDay(d, today)) {
+              counts.today++;
+              sums.today += val;
+            } else if (isSameDay(d, yesterday)) {
+              counts.yesterday++;
+              sums.yesterday += val;
+            }
+            
+            if (d >= startOfWeek) { counts.week++; sums.week += val; }
+            if (d >= startOfMonth) { counts.month++; sums.month += val; }
+            if (d >= startOfYear) { counts.year++; sums.year += val; }
+          });
+        }
+
+        const formatCurrency = (val: number) => `${currency} ${val.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+        setOrderStats([
+          { label: "Today", value: counts.today.toString() },
+          { label: "Yesterday", value: counts.yesterday.toString() },
+          { label: "This week", value: counts.week.toString() },
+          { label: "This month", value: counts.month.toString() },
+          { label: "This year", value: counts.year.toString() },
+          { label: "All time", value: counts.all.toString() },
+        ]);
+
+        setEarningsStats([
+          { label: "Today", value: formatCurrency(sums.today) },
+          { label: "Yesterday", value: formatCurrency(sums.yesterday) },
+          { label: "This week", value: formatCurrency(sums.week) },
+          { label: "This month", value: formatCurrency(sums.month) },
+          { label: "This year", value: formatCurrency(sums.year) },
+          { label: "All time", value: formatCurrency(sums.all) },
+        ]);
+
+      } catch (error) {
+        console.error("Failed to load dashboard data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchDashboardData();
+  }, []);
 
   return (
     <div className="p-4 md:p-8 w-full space-y-6 flex-1 min-w-0">
@@ -41,7 +145,13 @@ export default function AdminDashboard() {
       </div>
 
       {/* Main Container */}
-      <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden relative">
+        {isLoading && (
+          <div className="absolute inset-0 bg-white/60 backdrop-blur-sm z-10 flex items-center justify-center">
+            <div className="w-8 h-8 border-4 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
+        
         <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/30">
           <h2 className="text-lg font-bold text-gray-900">Overview dashboard</h2>
         </div>

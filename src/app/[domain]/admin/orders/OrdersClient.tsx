@@ -49,6 +49,10 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
   // Export Modal State
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
+  // Delete Modal State
+  const [orderToDelete, setOrderToDelete] = useState<number | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
   useEffect(() => {
     fetchOrders();
   }, [storeId]);
@@ -133,23 +137,31 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
     }
   };
 
-  const deleteOrder = async (id: number) => {
-    if (!window.confirm("Are you sure you want to delete this order?")) return;
+  const confirmDelete = (id: number) => {
+    setOrderToDelete(id);
+  };
+
+  const handleDeleteOrder = async () => {
+    if (orderToDelete === null) return;
+    setIsDeleting(true);
     
     // Optimistic delete
-    setOrders(orders.filter(o => o.id !== id));
+    setOrders(orders.filter(o => o.id !== orderToDelete));
     
     try {
       const { error } = await supabase
         .from('orders')
         .delete()
-        .eq('id', id);
+        .eq('id', orderToDelete);
         
       if (error) throw error;
+      setOrderToDelete(null);
     } catch (error) {
       console.error('Error deleting order:', error);
       alert("Failed to delete order.");
       fetchOrders();
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -293,7 +305,7 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
                         <PrinterIcon className="w-4 h-4" />
                       </button>
                       <button 
-                        onClick={() => deleteOrder(order.id)}
+                        onClick={() => confirmDelete(order.id)}
                         className="p-1.5 text-gray-400 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50 border border-transparent hover:border-red-100"
                         title="Delete order"
                       >
@@ -451,6 +463,40 @@ export default function OrdersClient({ storeId }: { storeId?: string }) {
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 ) : (
                   "Create Order"
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {orderToDelete !== null && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl w-full max-w-sm shadow-xl overflow-hidden flex flex-col">
+            <div className="p-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-2">Delete Order</h2>
+              <p className="text-sm text-gray-600">Are you sure you want to delete this order? This action cannot be undone.</p>
+            </div>
+            
+            <div className="p-6 pt-0 bg-white flex justify-end gap-3 rounded-b-2xl">
+              <button 
+                type="button"
+                onClick={() => setOrderToDelete(null)}
+                disabled={isDeleting}
+                className="px-5 py-2.5 text-sm font-bold text-gray-600 hover:text-gray-900 transition-colors disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleDeleteOrder}
+                disabled={isDeleting}
+                className="px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-xl transition-all shadow-sm flex items-center justify-center min-w-[100px] disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isDeleting ? (
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  "Delete"
                 )}
               </button>
             </div>

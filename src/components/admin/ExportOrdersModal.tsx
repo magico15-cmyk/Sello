@@ -169,18 +169,18 @@ export default function ExportOrdersModal({
           <div ref={statusRef} className="relative">
             <label className="block text-sm text-gray-600 mb-2">Orders status</label>
             <div 
-              className={`w-full pl-4 pr-10 py-2.5 bg-white border ${isStatusOpen ? 'border-[#b11f5e] ring-1 ring-[#b11f5e]' : 'border-gray-200'} rounded-lg text-sm cursor-pointer flex justify-between items-center`}
+              className={`w-full pl-4 pr-10 py-2.5 bg-white border ${isStatusOpen ? 'border-gray-900 ring-1 ring-gray-900' : 'border-gray-200'} rounded-lg text-sm cursor-pointer flex justify-between items-center`}
               onClick={() => setIsStatusOpen(!isStatusOpen)}
             >
               <span>{status}</span>
               <ChevronDownIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
             </div>
             {isStatusOpen && (
-              <div className="absolute z-20 w-full mt-1 bg-white border border-[#b11f5e] rounded-md shadow-lg overflow-hidden py-1">
+              <div className="absolute z-20 w-full mt-1 bg-white border border-gray-900 rounded-md shadow-lg overflow-hidden py-1">
                 {STATUS_OPTIONS.map((opt) => (
                   <div 
                     key={opt}
-                    className={`px-4 py-2 text-sm cursor-pointer ${status === opt ? 'bg-[#2563eb] text-white' : 'text-gray-900 hover:bg-[#2563eb] hover:text-white'}`}
+                    className={`px-4 py-2 text-sm cursor-pointer ${status === opt ? 'bg-gray-900 text-white' : 'text-gray-900 hover:bg-gray-100'}`}
                     onClick={() => { setStatus(opt); setIsStatusOpen(false); }}
                   >
                     {opt}
@@ -213,7 +213,7 @@ export default function ExportOrdersModal({
                     <button className="p-1 hover:bg-gray-100 rounded text-gray-500">
                       <ChevronLeftIcon className="w-4 h-4" />
                     </button>
-                    <span className="text-sm font-semibold text-[#1e3a8a]">June 2026</span>
+                    <span className="text-sm font-semibold text-gray-900">June 2026</span>
                     <button className="p-1 hover:bg-gray-100 rounded text-gray-500">
                       <ChevronRightIcon className="w-4 h-4" />
                     </button>
@@ -288,7 +288,7 @@ export default function ExportOrdersModal({
                   draggable
                   onDragStart={(e) => handleDragStart(e, field, "selected")}
                   onClick={() => moveField(field.id, "selected")}
-                  className="bg-[#fcf0f4] border border-[#f4d9e3] text-[#b11f5e] px-4 py-3 rounded-md text-sm font-medium cursor-grab active:cursor-grabbing hover:shadow-sm transition-shadow flex justify-between items-center"
+                  className="bg-gray-100 border border-gray-200 text-gray-900 px-4 py-3 rounded-md text-sm font-medium cursor-grab active:cursor-grabbing hover:shadow-sm transition-shadow flex justify-between items-center"
                 >
                   {field.label}
                 </div>
@@ -351,13 +351,13 @@ export default function ExportOrdersModal({
           <button 
             type="button"
             onClick={onClose}
-            className="px-6 py-2.5 text-sm font-semibold text-[#b11f5e] border border-[#b11f5e] rounded-lg hover:bg-[#fcf0f4] transition-colors"
+            className="px-6 py-2.5 text-sm font-semibold text-gray-900 border border-gray-900 rounded-lg hover:bg-gray-50 transition-colors"
           >
             Cancel
           </button>
           <button 
             onClick={handleExport}
-            className="px-6 py-2.5 bg-[#b11f5e] hover:bg-[#96184e] text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
+            className="px-6 py-2.5 bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
           >
             Export
           </button>
@@ -372,7 +372,7 @@ export default function ExportOrdersModal({
           background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background-color: #b11f5e;
+          background-color: #111827; /* gray-900 */
           border-radius: 20px;
         }
       `}</style>

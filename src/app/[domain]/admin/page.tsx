@@ -25,32 +25,40 @@ export default function AdminDashboard() {
     { label: "All time", value: "0.00" },
   ]);
 
+  // Instantly show cached data while fresh data loads in background
+  useEffect(() => {
+    const cached = localStorage.getItem('sello_store_name');
+    if (cached) setStoreName(cached);
+    
+    try {
+      const cachedOrders = localStorage.getItem('sello_dash_orders');
+      const cachedEarnings = localStorage.getItem('sello_dash_earnings');
+      if (cachedOrders) setOrderStats(JSON.parse(cachedOrders));
+      if (cachedEarnings) setEarningsStats(JSON.parse(cachedEarnings));
+    } catch {}
+  }, []);
+
   useEffect(() => {
     async function fetchDashboardData() {
       setIsLoading(true);
       try {
-        // 1. Fetch store info
-        let storeId = "";
-        let currency = "MAD";
-        const res = await fetch("/api/store");
-        if (res.ok) {
-          const { store } = await res.json();
-          if (store) {
-            setStoreName(store.name || "");
-            storeId = store.id;
-            currency = store.currency || "MAD";
-            if (store.name) localStorage.setItem('sello_store_name', store.name);
-          }
-        }
-
-        // Fallback to local storage if API fails but we have it saved
-        if (!storeName) {
-          const savedName = localStorage.getItem('sello_store_name');
-          if (savedName) setStoreName(savedName);
-        }
-
-        // 2. Fetch orders
         const supabase = createClient();
+
+        // Run store info and orders fetch IN PARALLEL
+        const storePromise = fetch("/api/store").then(r => r.ok ? r.json() : null);
+        
+        // We need store_id for the orders query, but we can start the store fetch immediately
+        const { store } = (await storePromise) || {};
+        
+        if (store) {
+          setStoreName(store.name || "");
+          if (store.name) localStorage.setItem('sello_store_name', store.name);
+        }
+
+        const storeId = store?.id || "";
+        const currency = store?.currency || "MAD";
+
+        // Fetch only the columns we need
         let query = supabase.from('orders').select('created_at, total_amount');
         if (storeId) {
           query = query.eq('store_id', storeId);
@@ -59,14 +67,13 @@ export default function AdminDashboard() {
         const { data, error } = await query;
         if (error) throw error;
 
-        // 3. Calculate stats
+        // Calculate stats
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         
         const yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1);
         
-        // Week starts on Monday
         const day = now.getDay() || 7;
         const startOfWeek = new Date(today);
         startOfWeek.setDate(today.getDate() - day + 1);
@@ -106,23 +113,30 @@ export default function AdminDashboard() {
 
         const formatCurrency = (val: number) => `${currency} ${val.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-        setOrderStats([
+        const newOrderStats = [
           { label: "Today", value: counts.today.toString() },
           { label: "Yesterday", value: counts.yesterday.toString() },
           { label: "This week", value: counts.week.toString() },
           { label: "This month", value: counts.month.toString() },
           { label: "This year", value: counts.year.toString() },
           { label: "All time", value: counts.all.toString() },
-        ]);
+        ];
 
-        setEarningsStats([
+        const newEarningsStats = [
           { label: "Today", value: formatCurrency(sums.today) },
           { label: "Yesterday", value: formatCurrency(sums.yesterday) },
           { label: "This week", value: formatCurrency(sums.week) },
           { label: "This month", value: formatCurrency(sums.month) },
           { label: "This year", value: formatCurrency(sums.year) },
           { label: "All time", value: formatCurrency(sums.all) },
-        ]);
+        ];
+
+        setOrderStats(newOrderStats);
+        setEarningsStats(newEarningsStats);
+
+        // Cache for instant loading on next visit
+        localStorage.setItem('sello_dash_orders', JSON.stringify(newOrderStats));
+        localStorage.setItem('sello_dash_earnings', JSON.stringify(newEarningsStats));
 
       } catch (error) {
         console.error("Failed to load dashboard data:", error);

@@ -27,36 +27,43 @@ export default function AdminDashboard() {
 
   // Instantly show cached data while fresh data loads in background
   useEffect(() => {
-    const cached = localStorage.getItem('sello_store_name');
-    if (cached) setStoreName(cached);
+    const cachedName = localStorage.getItem('sello_store_name');
+    if (cachedName) setStoreName(cachedName);
     
     try {
       const cachedOrders = localStorage.getItem('sello_dash_orders');
       const cachedEarnings = localStorage.getItem('sello_dash_earnings');
-      if (cachedOrders) setOrderStats(JSON.parse(cachedOrders));
-      if (cachedEarnings) setEarningsStats(JSON.parse(cachedEarnings));
+      if (cachedOrders && cachedEarnings) {
+        setOrderStats(JSON.parse(cachedOrders));
+        setEarningsStats(JSON.parse(cachedEarnings));
+        setIsLoading(false); // Hide spinner immediately if we have cached data
+      }
     } catch {}
   }, []);
 
   useEffect(() => {
     async function fetchDashboardData() {
-      setIsLoading(true);
+      // Only show spinner if we don't have cached data
+      if (!localStorage.getItem('sello_dash_orders')) {
+        setIsLoading(true);
+      }
+      
       try {
         const supabase = createClient();
 
-        // Run store info and orders fetch IN PARALLEL
+        // 1. Fetch store info
         const storePromise = fetch("/api/store").then(r => r.ok ? r.json() : null);
-        
-        // We need store_id for the orders query, but we can start the store fetch immediately
         const { store } = (await storePromise) || {};
         
         if (store) {
-          setStoreName(store.name || "");
-          if (store.name) localStorage.setItem('sello_store_name', store.name);
+          setStoreName(store.store_name || "");
+          if (store.store_name) localStorage.setItem('sello_store_name', store.store_name);
+          if (store.id) localStorage.setItem('sello_store_id', store.id);
+          if (store.currency) localStorage.setItem('sello_store_currency', store.currency);
         }
 
-        const storeId = store?.id || "";
-        const currency = store?.currency || "MAD";
+        const storeId = store?.id || localStorage.getItem('sello_store_id') || "";
+        const currency = store?.currency || localStorage.getItem('sello_store_currency') || "MAD";
 
         // Fetch only the columns we need
         let query = supabase.from('orders').select('created_at, total_amount');

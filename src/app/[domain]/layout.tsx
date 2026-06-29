@@ -3,6 +3,7 @@ import { getTenantFromHost } from "@/lib/tenant";
 import React from "react";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { GlobalFooter } from "@/components/GlobalFooter";
+import AsyncFontLoader from "@/components/AsyncFontLoader";
 
 export async function generateMetadata(
   props: { params: Promise<{ domain: string }> }
@@ -45,11 +46,7 @@ export default async function DomainLayout(props: {
 
   return (
     <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      {/* Preload and async load the Google Fonts to prevent render blocking */}
-      <link rel="preload" as="style" href={fontUrl} />
-      <link rel="stylesheet" href={fontUrl} />
+      <AsyncFontLoader href={fontUrl} />
 
       {store && (
         <style dangerouslySetInnerHTML={{ __html: `

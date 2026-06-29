@@ -42,49 +42,41 @@ export default function AdminDashboard() {
   }, []);
 
   useEffect(() => {
-    async function fetchDashboardData() {
-      // Only show spinner if we don't have cached data
-      if (!localStorage.getItem('sello_dash_orders')) {
-        setIsLoading(true);
+    async function fetchStoreInfo() {
+      try {
+        const res = await fetch("/api/store");
+        if (res.ok) {
+          const { store } = await res.json();
+          if (store) {
+            setStoreName(store.store_name || "");
+            if (store.store_name) localStorage.setItem('sello_store_name', store.store_name);
+            if (store.id) localStorage.setItem('sello_store_id', store.id);
+            if (store.currency) localStorage.setItem('sello_store_currency', store.currency);
+            return store;
+          }
+        }
+      } catch (e) {
+        console.error("Failed to load store info:", e);
       }
-      
+      return null;
+    }
+
+    async function fetchOrders(storeId: string, currency: string) {
+      if (!storeId) return;
       try {
         const supabase = createClient();
-
-        // 1. Fetch store info
-        const storePromise = fetch("/api/store").then(r => r.ok ? r.json() : null);
-        const { store } = (await storePromise) || {};
+        const { data, error } = await supabase.from('orders').select('created_at, total_amount').eq('store_id', storeId);
         
-        if (store) {
-          setStoreName(store.store_name || "");
-          if (store.store_name) localStorage.setItem('sello_store_name', store.store_name);
-          if (store.id) localStorage.setItem('sello_store_id', store.id);
-          if (store.currency) localStorage.setItem('sello_store_currency', store.currency);
-        }
-
-        const storeId = store?.id || localStorage.getItem('sello_store_id') || "";
-        const currency = store?.currency || localStorage.getItem('sello_store_currency') || "MAD";
-
-        // Fetch only the columns we need
-        let query = supabase.from('orders').select('created_at, total_amount');
-        if (storeId) {
-          query = query.eq('store_id', storeId);
-        }
-
-        const { data, error } = await query;
         if (error) throw error;
 
         // Calculate stats
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        
         const yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1);
-        
         const day = now.getDay() || 7;
         const startOfWeek = new Date(today);
         startOfWeek.setDate(today.getDate() - day + 1);
-
         const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
         const startOfYear = new Date(now.getFullYear(), 0, 1);
 
@@ -141,18 +133,43 @@ export default function AdminDashboard() {
         setOrderStats(newOrderStats);
         setEarningsStats(newEarningsStats);
 
-        // Cache for instant loading on next visit
         localStorage.setItem('sello_dash_orders', JSON.stringify(newOrderStats));
         localStorage.setItem('sello_dash_earnings', JSON.stringify(newEarningsStats));
 
       } catch (error) {
-        console.error("Failed to load dashboard data:", error);
+        console.error("Failed to load orders:", error);
       } finally {
         setIsLoading(false);
       }
     }
 
-    fetchDashboardData();
+    async function loadDashboard() {
+      // Only show spinner if we don't have cached data
+      if (!localStorage.getItem('sello_dash_orders')) {
+        setIsLoading(true);
+      }
+      
+      const cachedStoreId = localStorage.getItem('sello_store_id');
+      const cachedCurrency = localStorage.getItem('sello_store_currency') || "MAD";
+
+      // 1. Kick off store info fetch
+      const storePromise = fetchStoreInfo();
+
+      // 2. Fetch orders IMMEDIATELY if we have the cached store ID
+      if (cachedStoreId) {
+        fetchOrders(cachedStoreId, cachedCurrency);
+      } else {
+        // If we don't have the cached ID, we must wait for the store fetch
+        const store = await storePromise;
+        if (store?.id) {
+          fetchOrders(store.id, store.currency || "MAD");
+        } else {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    loadDashboard();
   }, []);
 
   return (

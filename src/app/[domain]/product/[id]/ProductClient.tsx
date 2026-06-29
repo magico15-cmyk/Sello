@@ -73,8 +73,10 @@ const TestimonialCarousel = ({ data, primaryColor }: { data: { quote: string, au
             }}
           >
             <div className="flex flex-col justify-between h-full">
-              <div className="testimonial-content">
-                {t.avatar && <img src={t.avatar} alt={t.author} className="testimonial-avatar object-cover" />}
+              <div key={idx} className="testimonial-card">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 mb-3">
+                  {t.avatar && <Image src={t.avatar} alt={t.author} fill sizes="48px" className="object-cover" />}
+                </div>
                 <div className="testimonial-text">"{t.quote}"</div>
               </div>
               <div className="testimonial-footer">
@@ -574,16 +576,19 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                   {images.length > 0 ? (
                     images.map((img, idx) => (
-                      <img
+                      <Image
                         key={img}
                         src={img}
                         alt={`Product image ${idx + 1}`}
+                        width={1000}
+                        height={1000}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        priority={idx === 0}
+                        className="w-full h-auto"
                         style={{
                           position: idx === 0 ? 'relative' : 'absolute',
                           top: 0,
                           left: 0,
-                          width: '100%',
-                          height: '100%',
                           objectFit: 'contain',
                           opacity: mainImage === img ? 1 : 0,
                           transition: 'opacity 0.3s ease-in-out',
@@ -608,11 +613,11 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
               <div className="thumbnails">
                 {images.map((img, idx) => (
                   <div 
-                    key={idx}
-                    className={`thumbnail ${mainImage === img ? 'active' : ''}`}
+                    key={idx} 
+                    className={`thumbnail ${mainImage === img ? 'active' : ''} relative overflow-hidden`}
                     onClick={() => changeImage(img)}
                   >
-                    <img src={img} alt={`Thumbnail ${idx + 1}`} />
+                    <Image src={img} alt={`Thumbnail ${idx + 1}`} fill sizes="80px" className="object-cover" />
                   </div>
                 ))}
               </div>
@@ -670,8 +675,9 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
                       </div>
                     </div>
                     {(pkg.img || pkg.image) ? (
-                      <img src={pkg.img || pkg.image} alt={pkg.title} className="pkg-img" />
-                    ) : (
+                    <div className="pkg-img-wrapper relative w-[60px] h-[60px] flex-shrink-0">
+                      <Image src={pkg.img || pkg.image} alt={pkg.title} fill sizes="60px" className="object-contain" />
+                    </div>) : (
                       <div className="pkg-img" style={{ backgroundColor: '#f3f4f6' }} />
                     )}
                   </div>
@@ -722,6 +728,11 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
                       );
                     }
                   case 'image':
+                    return (
+                      <div key={idx} className="relative w-[92%] mx-auto aspect-video rounded-2xl overflow-hidden mb-6">
+                        <Image src={block.content} alt="Product content" fill sizes="92vw" className="object-cover" />
+                      </div>
+                    );
                   case 'gif':
                     return <img key={idx} src={block.content} alt="Product content" className="w-[92%] mx-auto block rounded-2xl object-cover" />;
                   case 'features':

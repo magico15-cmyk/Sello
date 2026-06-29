@@ -45,10 +45,21 @@ export default async function DomainLayout(props: {
 
   return (
     <>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      {/* Preload and async load the Google Fonts to prevent render blocking */}
+      <link rel="preload" as="style" href={fontUrl} />
+      <link rel="stylesheet" href={fontUrl} media="print" id="dynamic-google-fonts" />
+      <script dangerouslySetInnerHTML={{ __html: `
+        // Non-blocking async CSS load
+        document.getElementById('dynamic-google-fonts').media = 'all';
+      `}} />
+      <noscript>
+        <link rel="stylesheet" href={fontUrl} />
+      </noscript>
+
       {store && (
         <style dangerouslySetInnerHTML={{ __html: `
-          @import url('${fontUrl}');
-          
           :root {
             --font-menu: '${menuFont}', sans-serif;
             --font-body: '${bodyFont}', sans-serif;

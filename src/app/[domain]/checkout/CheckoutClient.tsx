@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { X, CheckCircle, CheckCircle2, User, Phone, MapPin, Menu, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { supabase } from '@/lib/supabase';
@@ -102,12 +103,15 @@ export default function CheckoutClient({ product, selectedPkg, storeId, store }:
             <div className="relative">
               <div className="bg-white rounded-md border border-gray-200 flex items-center justify-center overflow-hidden shadow-sm" style={{ width: '65px', height: '65px', padding: '4px', border: '1px solid #e5e7eb' }}>
                 {selectedPkg.image ? (
-                  <img 
-                    src={selectedPkg.image} 
-                    alt={selectedPkg.title} 
-                    className="w-full h-full object-contain"
-                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                  />
+                  <div className="relative w-full h-full">
+                    <Image 
+                      src={selectedPkg.image} 
+                      alt={selectedPkg.title} 
+                      fill
+                      sizes="65px"
+                      className="object-contain"
+                    />
+                  </div>
                 ) : (
                   <div className="w-full h-full bg-gray-100 rounded-sm" />
                 )}

@@ -119,10 +119,12 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
                     <Image 
                       src={img} 
                       alt={`Hero Banner ${idx + 1}`} 
-                      width={1920}
-                      height={800}
+                      width={0}
+                      height={0}
                       sizes="100vw"
-                      className="w-full h-auto object-cover sm:max-h-[500px]"
+                      priority={idx === 0}
+                      style={{ width: '100%', height: 'auto' }}
+                      className="w-full object-cover sm:max-h-[500px]"
                     />
                   </div>
                 ))}
@@ -222,15 +224,13 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
                   {[...Array(8)].map((_, repeatIdx) => (
                     <div key={repeatIdx} className="flex items-center" style={{ gap: '80px' }}>
                       {tickerLogos.map((url: string, logoIdx: number) => (
-                        <div key={logoIdx} className="flex items-center justify-center h-8">
-                          <img 
+                        <div key={logoIdx} className="relative h-8 w-[150px]">
+                          <Image 
                             src={url} 
                             alt={`Brand ${logoIdx + 1}`} 
-                            className="h-full w-auto object-contain max-w-[150px]"
-                            onError={(e) => {
-                              // If image fails to load, hide it
-                              (e.target as HTMLImageElement).style.display = 'none';
-                            }}
+                            fill
+                            sizes="150px"
+                            className="object-contain"
                           />
                         </div>
                       ))}
@@ -369,7 +369,7 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
                         className="w-full relative overflow-hidden rounded-[12px] bg-gray-50 border border-gray-200 transition-all duration-500 group-hover:bg-gray-100 group-hover:border-gray-300" 
                         style={{ aspectRatio: '1/1', opacity: isOutOfStock ? 0.6 : 1 }}
                       >
-                        <img 
+                        <Image 
                           src={(() => {
                             try {
                               const parsed = JSON.parse(product.image);
@@ -379,7 +379,9 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
                             }
                           })()} 
                           alt={product.title} 
-                          className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105 p-2"
+                          fill
+                          sizes="(max-width: 768px) 50vw, 33vw"
+                          className="object-contain transition-transform duration-700 ease-out group-hover:scale-105 p-2"
                           style={{ mixBlendMode: 'multiply' }}
                         />
                         {/* Minimal Discount Badge */}
@@ -473,7 +475,7 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
                 >
                   {/* Image Container */}
                   <div className="relative w-full overflow-hidden" style={{ aspectRatio: '3/4', backgroundColor: '#fcfcfc' }}>
-                    <img 
+                    <Image 
                       src={(() => {
                         try {
                           const parsed = JSON.parse(product.image);
@@ -482,11 +484,11 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
                           return product.image;
                         }
                       })()} 
-                      alt={product.title} 
-                      className="w-full h-full object-contain transition-transform duration-700"
+                      alt={product.title}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 33vw" 
+                      className="object-contain transition-transform duration-700"
                       style={{ transition: 'transform 0.7s ease', backgroundColor: 'transparent' }}
-                      onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.06)'; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
                     />
                     
                     {/* Floating Discount Pill */}

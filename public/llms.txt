@@ -1,0 +1,20 @@
+# Sello
+
+> Sello is a multi-tenant e-commerce platform that allows merchants to create and manage their own online stores.
+
+## About
+
+Sello provides a complete e-commerce solution with customizable storefronts, product management, checkout, and order tracking. Each store operates on its own subdomain with unique branding, products, and settings.
+
+## Features
+
+- Multi-tenant architecture with custom domains
+- Customizable storefront themes and layouts
+- Product catalog with variants, bundles, and pricing
+- Secure checkout and payment processing
+- Order management and customer tracking
+- Admin dashboard for store owners
+
+## Links
+
+- [Homepage](https://sello-ashy.vercel.app)

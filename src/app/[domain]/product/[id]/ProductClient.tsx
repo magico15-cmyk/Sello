@@ -584,12 +584,15 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
                         height={1000}
                         sizes="(max-width: 768px) 100vw, 50vw"
                         priority={idx === 0}
-                        className="w-full h-auto"
                         style={{
+                          maxWidth: '100%',
+                          maxHeight: '100%',
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'contain',
                           position: idx === 0 ? 'relative' : 'absolute',
                           top: 0,
                           left: 0,
-                          objectFit: 'contain',
                           opacity: mainImage === img ? 1 : 0,
                           transition: 'opacity 0.3s ease-in-out',
                           pointerEvents: mainImage === img ? 'auto' : 'none',
@@ -675,8 +678,8 @@ export default function ProductClient({ initialProduct, store }: { initialProduc
                       </div>
                     </div>
                     {(pkg.img || pkg.image) ? (
-                    <div className="pkg-img-wrapper relative w-[60px] h-[60px] flex-shrink-0">
-                      <Image src={pkg.img || pkg.image} alt={pkg.title} fill sizes="60px" className="object-contain" />
+                    <div className="pkg-img-wrapper">
+                      <Image src={pkg.img || pkg.image} alt={pkg.title} width={60} height={50} className="pkg-img" />
                     </div>) : (
                       <div className="pkg-img" style={{ backgroundColor: '#f3f4f6' }} />
                     )}

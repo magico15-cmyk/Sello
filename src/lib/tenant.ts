@@ -16,7 +16,7 @@ export async function getTenantFromHost(hostname?: string) {
   // Clean hostname (remove port if present)
   const cleanHostname = hostname.split(':')[0];
 
-  const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'localhost';
+  const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'cosmuv.com';
   const defaultStore = process.env.DEFAULT_STORE_SUBDOMAIN || 'cosmuv';
 
   let subdomain = cleanHostname;
@@ -24,7 +24,13 @@ export async function getTenantFromHost(hostname?: string) {
   // --- Detect environment-specific hostnames and resolve to a subdomain ---
 
   // Explicitly recognize the new platform roots
-  if (cleanHostname === 'cosmuv.vercel.app' || cleanHostname === 'cosmuv' || cleanHostname === 'cosmuv.com') {
+  if (
+    cleanHostname === 'cosmuv.vercel.app' || 
+    cleanHostname === 'cosmuv.com' || 
+    cleanHostname === 'www.cosmuv.com' || 
+    cleanHostname === 'cosmuv' || 
+    cleanHostname === 'localhost'
+  ) {
     subdomain = 'cosmuv';
   }
   // Vercel preview/production URLs — middleware should have already rewritten these,
@@ -32,7 +38,11 @@ export async function getTenantFromHost(hostname?: string) {
   else if (cleanHostname.endsWith('.vercel.app')) {
     subdomain = defaultStore;
   }
-  // Standard subdomain routing (e.g., shop1.localhost or shop1.cosmuv.com)
+  // Explicit check for *.cosmuv.com subdomains
+  else if (cleanHostname.endsWith('.cosmuv.com')) {
+    subdomain = cleanHostname.replace('.cosmuv.com', '');
+  }
+  // Standard subdomain routing (e.g., shop1.localhost)
   else if (cleanHostname.endsWith(`.${rootDomain}`)) {
     subdomain = cleanHostname.replace(`.${rootDomain}`, '');
   }

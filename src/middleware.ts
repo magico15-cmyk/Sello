@@ -34,14 +34,20 @@ export default async function middleware(req: NextRequest) {
   // Get hostname, strip port for clean rewrite paths
   let hostname = req.headers.get('host')!.split(':')[0];
 
-  const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'localhost';
+  const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'cosmuv.com';
   const defaultStore = process.env.DEFAULT_STORE_SUBDOMAIN || 'cosmuv';
 
   // --- Determine the tenant key to use for the rewrite path ---
   let tenantKey = hostname; // Default: use the full hostname (for custom domains)
 
   // Explicitly recognize the new platform roots
-  if (hostname === 'cosmuv.vercel.app' || hostname === 'cosmuv' || hostname === 'cosmuv.com') {
+  if (
+    hostname === 'cosmuv.vercel.app' || 
+    hostname === 'cosmuv.com' || 
+    hostname === 'www.cosmuv.com' || 
+    hostname === 'cosmuv' || 
+    hostname === 'localhost'
+  ) {
     tenantKey = 'cosmuv';
   }
   // Case 1: Vercel preview/production URLs (e.g., my-app-abc123.vercel.app)
@@ -53,12 +59,17 @@ export default async function middleware(req: NextRequest) {
   // (e.g., feature---my-app.vercel.app)
   else if (
     hostname.includes('---') &&
+    process.env.NEXT_PUBLIC_VERCEL_DEPLOYMENT_SUFFIX &&
     hostname.endsWith(`.${process.env.NEXT_PUBLIC_VERCEL_DEPLOYMENT_SUFFIX}`)
   ) {
     // Extract the branch subdomain part before ---
     tenantKey = hostname.split('---')[0];
   }
-  // Case 3: Standard subdomain routing (e.g., shop1.localhost or shop1.cosmuv.com)
+  // Case 3: Explicit check for *.cosmuv.com subdomains
+  else if (hostname.endsWith('.cosmuv.com')) {
+    tenantKey = hostname.replace('.cosmuv.com', '');
+  }
+  // Case 4: Standard subdomain routing (e.g., shop1.localhost)
   else if (hostname.endsWith(`.${rootDomain}`)) {
     tenantKey = hostname.replace(`.${rootDomain}`, '');
   }

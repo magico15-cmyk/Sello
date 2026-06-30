@@ -177,22 +177,7 @@ export default function PlatformLandingPage() {
       </section>
 
 
-      {/* CTA Section */}
-      <section className="py-24 bg-white border-t border-slate-100 text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-slate-100 rounded-3xl mb-8">
-             <Globe className="w-8 h-8 text-slate-900" />
-          </div>
-          <h2 className="text-4xl lg:text-5xl font-black tracking-tight text-slate-950 mb-6">Empower Your Vision. Sell Global.</h2>
-          <p className="text-xl text-slate-500 font-normal mb-10">Join the platform redefining modern commerce.</p>
-          <Link
-            href="/login"
-            className="inline-flex items-center justify-center px-10 py-5 text-lg font-medium text-white transition-all bg-slate-950 rounded-2xl hover:bg-slate-900 shadow-2xl shadow-slate-900/30 hover:scale-105"
-          >
-            Start Your Journey Today
-          </Link>
-        </div>
-      </section>
+
     </div>
   );
 }

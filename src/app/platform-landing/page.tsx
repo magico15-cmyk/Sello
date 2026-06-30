@@ -10,8 +10,8 @@ export default function PlatformLandingPage() {
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              {/* Replace /cosmuv-logo.png with the actual path once you add it to the public folder */}
-              <img src="/cosmuv-logo.png" alt="Cosmuv" className="h-8 w-auto" />
+              {/* Added 'invert' class to make the white logo black */}
+              <img src="/cosmuv-logo.png" alt="Cosmuv" className="h-8 w-auto invert" />
             </Link>
 
             {/* Center Links */}

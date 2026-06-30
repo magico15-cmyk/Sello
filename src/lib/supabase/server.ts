@@ -24,6 +24,9 @@ export async function createClient() {
           }
         },
       },
+      cookieOptions: {
+        domain: process.env.NODE_ENV === 'development' ? '.localhost' : `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'cosmuv.com'}`,
+      }
     }
   );
 }

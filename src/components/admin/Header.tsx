@@ -18,6 +18,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [storeName, setStoreName] = useState("Cosmuv");
+  const [storeSubdomain, setStoreSubdomain] = useState("");
   const profileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -28,6 +29,9 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
           const { store } = await res.json();
           if (store && store.store_name) {
             setStoreName(store.store_name);
+            if (store.subdomain) {
+              setStoreSubdomain(store.subdomain);
+            }
           }
         }
       } catch (err) {
@@ -193,12 +197,11 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
                 <button 
                   onClick={() => {
                     setIsProfileOpen(false);
-                    const domain = pathname.split("/")[1];
-                    if (domain && domain !== 'admin') {
+                    if (storeSubdomain && storeSubdomain !== 'cosmuv') {
                       const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'cosmuv.com';
                       const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
                       const baseHost = process.env.NODE_ENV === 'development' ? 'localhost:3000' : rootDomain;
-                      window.open(`${protocol}://${domain}.${baseHost}`, '_blank');
+                      window.open(`${protocol}://${storeSubdomain}.${baseHost}`, '_blank');
                     } else {
                       window.open('/', '_blank');
                     }

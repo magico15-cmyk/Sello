@@ -35,14 +35,18 @@ export default async function middleware(req: NextRequest) {
   let hostname = req.headers.get('host')!.split(':')[0];
 
   const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'localhost';
-  const defaultStore = process.env.DEFAULT_STORE_SUBDOMAIN || 'sello';
+  const defaultStore = process.env.DEFAULT_STORE_SUBDOMAIN || 'cosmuv';
 
   // --- Determine the tenant key to use for the rewrite path ---
   let tenantKey = hostname; // Default: use the full hostname (for custom domains)
 
+  // Explicitly recognize the new platform roots
+  if (hostname === 'cosmuv.vercel.app' || hostname === 'cosmuv' || hostname === 'cosmuv.com') {
+    tenantKey = 'cosmuv';
+  }
   // Case 1: Vercel preview/production URLs (e.g., my-app-abc123.vercel.app)
   // These are NOT real tenant hostnames — fall back to default store.
-  if (hostname.endsWith('.vercel.app')) {
+  else if (hostname.endsWith('.vercel.app')) {
     tenantKey = defaultStore;
   }
   // Case 2: Vercel branch preview with --- separator

@@ -17,15 +17,19 @@ export async function getTenantFromHost(hostname?: string) {
   const cleanHostname = hostname.split(':')[0];
 
   const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'localhost';
-  const defaultStore = process.env.DEFAULT_STORE_SUBDOMAIN || 'sello';
+  const defaultStore = process.env.DEFAULT_STORE_SUBDOMAIN || 'cosmuv';
 
   let subdomain = cleanHostname;
 
   // --- Detect environment-specific hostnames and resolve to a subdomain ---
 
+  // Explicitly recognize the new platform roots
+  if (cleanHostname === 'cosmuv.vercel.app' || cleanHostname === 'cosmuv' || cleanHostname === 'cosmuv.com') {
+    subdomain = 'cosmuv';
+  }
   // Vercel preview/production URLs — middleware should have already rewritten these,
   // but as a safety net, fall back to the default store.
-  if (cleanHostname.endsWith('.vercel.app')) {
+  else if (cleanHostname.endsWith('.vercel.app')) {
     subdomain = defaultStore;
   }
   // Standard subdomain routing (e.g., shop1.localhost or shop1.cosmuv.com)

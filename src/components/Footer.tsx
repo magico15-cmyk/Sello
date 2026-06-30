@@ -27,7 +27,7 @@ export const Footer = ({ store }: { store?: any }) => {
         </svg>
       </div>
       
-      <div className="footer-content">
+      <div className="footer-content md:items-stretch">
         <div className="footer-subscribe flex flex-col self-stretch">
           <div>
             {showNewsletter && (
@@ -41,8 +41,8 @@ export const Footer = ({ store }: { store?: any }) => {
               </>
             )}
           </div>
-          <div className="hidden md:block mt-auto pb-2 text-center w-full">
-            <p className="text-xs text-white/50">
+          <div className="hidden md:block mt-auto text-center w-full">
+            <p className="text-xs text-white/50 !mb-0">
               Powered by <a href="https://cosmuv.com" className="font-semibold text-white/80 hover:text-white transition-colors">Cosmuv</a>
             </p>
           </div>

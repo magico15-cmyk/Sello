@@ -15,10 +15,10 @@ export default function PlatformLandingPage() {
 
             {/* Center Links */}
             <div className="hidden md:flex gap-10">
-              <Link href="#features" className="text-[15px] font-medium text-slate-600 hover:text-slate-950 transition-colors">
+              <Link href="#features" className="text-base font-normal text-slate-500 hover:text-slate-900 transition-colors">
                 Features
               </Link>
-              <Link href="#pricing" className="text-[15px] font-medium text-slate-600 hover:text-slate-950 transition-colors">
+              <Link href="#pricing" className="text-base font-normal text-slate-500 hover:text-slate-900 transition-colors">
                 Pricing
               </Link>
             </div>

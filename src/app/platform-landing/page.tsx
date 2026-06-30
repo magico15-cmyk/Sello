@@ -27,13 +27,13 @@ export default function PlatformLandingPage() {
             <div className="flex items-center gap-6">
               <Link
                 href="/login"
-                className="text-[15px] font-medium text-slate-700 hover:text-slate-950 transition-colors hidden sm:block"
+                className="text-base font-normal text-slate-600 hover:text-slate-900 transition-colors hidden sm:block"
               >
                 Log In
               </Link>
               <Link
                 href="/login"
-                className="group relative inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white transition-all bg-slate-950 rounded-full hover:bg-slate-800 shadow-[0_0_0_4px_rgba(15,23,42,0.05)] hover:shadow-[0_0_0_4px_rgba(15,23,42,0.1)]"
+                className="group relative inline-flex items-center justify-center px-6 py-2.5 text-sm font-normal text-white transition-all bg-slate-950 rounded-full hover:bg-slate-800 shadow-[0_0_0_4px_rgba(15,23,42,0.05)] hover:shadow-[0_0_0_4px_rgba(15,23,42,0.1)]"
               >
                 Get Started
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -53,7 +53,7 @@ export default function PlatformLandingPage() {
             
             {/* Left Content (Text) */}
             <div className="flex-1 w-full max-w-2xl lg:max-w-none pt-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 text-slate-800 text-xs font-bold tracking-wide uppercase mb-8 border border-slate-200/50">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-medium tracking-wide uppercase mb-8 border border-slate-200/50">
                 <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span>
                 Cosmuv OS 2.0 is live
               </div>
@@ -65,21 +65,21 @@ export default function PlatformLandingPage() {
                 </span>
               </h1>
               
-              <p className="text-lg lg:text-xl text-slate-500 mb-10 leading-relaxed font-medium max-w-xl">
+              <p className="text-lg lg:text-xl text-slate-500 mb-10 leading-relaxed font-normal max-w-xl">
                 Break free from rigid templates. Build, scale, and optimize your global storefront with unparalleled creative control and intelligent local delivery tools.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/login"
-                  className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all bg-slate-950 rounded-2xl hover:bg-slate-900 shadow-xl shadow-slate-900/20 hover:-translate-y-0.5"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white transition-all bg-slate-950 rounded-2xl hover:bg-slate-900 shadow-xl shadow-slate-900/20 hover:-translate-y-0.5"
                 >
                   Create Your Unique Store
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1.5 transition-transform" />
                 </Link>
                 <Link
                   href="#features"
-                  className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-700 transition-all bg-white border border-slate-200 rounded-2xl hover:border-slate-300 hover:bg-slate-50"
+                  className="inline-flex items-center justify-center px-8 py-4 text-base font-normal text-slate-600 transition-all bg-white border border-slate-200 rounded-2xl hover:border-slate-300 hover:bg-slate-50"
                 >
                   Explore Features
                 </Link>
@@ -94,8 +94,8 @@ export default function PlatformLandingPage() {
                     </div>
                   ))}
                 </div>
-                <div className="text-sm font-medium text-slate-500">
-                  Trusted by <span className="text-slate-950 font-bold">10,000+</span> ambitious brands
+                <div className="text-sm font-normal text-slate-500">
+                  Trusted by <span className="text-slate-900 font-medium">10,000+</span> ambitious brands
                 </div>
               </div>
             </div>
@@ -188,7 +188,7 @@ export default function PlatformLandingPage() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl lg:text-5xl font-black tracking-tight mb-6">How We Are Different</h2>
-            <p className="text-lg text-slate-400 font-medium">Cosmuv is built for scale, offering a meticulously crafted infrastructure that prioritizes aesthetics, analytics, and ultra-fast local fulfillment.</p>
+            <p className="text-lg text-slate-400 font-normal">Cosmuv is built for scale, offering a meticulously crafted infrastructure that prioritizes aesthetics, analytics, and ultra-fast local fulfillment.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
@@ -198,7 +198,7 @@ export default function PlatformLandingPage() {
                 <Wand2 className="w-6 h-6 text-blue-400" />
               </div>
               <h3 className="text-2xl font-bold mb-4">Creative Freedom</h3>
-              <p className="text-slate-400 leading-relaxed font-medium">
+              <p className="text-slate-400 leading-relaxed font-normal">
                 Design without limits. Our powerful engine lets you customize every pixel, ensuring your store is a true reflection of your premium brand identity.
               </p>
             </div>
@@ -209,7 +209,7 @@ export default function PlatformLandingPage() {
                 <LineChart className="w-6 h-6 text-emerald-400" />
               </div>
               <h3 className="text-2xl font-bold mb-4">Smart Growth Analytics</h3>
-              <p className="text-slate-400 leading-relaxed font-medium">
+              <p className="text-slate-400 leading-relaxed font-normal">
                 Stop guessing. Make data-driven decisions with real-time conversion metrics, customer journey tracking, and advanced funnel optimization.
               </p>
             </div>
@@ -220,7 +220,7 @@ export default function PlatformLandingPage() {
                 <Truck className="w-6 h-6 text-amber-400" />
               </div>
               <h3 className="text-2xl font-bold mb-4">Local Delivery Optimization</h3>
-              <p className="text-slate-400 leading-relaxed font-medium">
+              <p className="text-slate-400 leading-relaxed font-normal">
                 Engineered for Cash-on-Delivery and local logistics. Seamlessly manage couriers, track shipments, and optimize your last-mile delivery rates.
               </p>
             </div>
@@ -235,10 +235,10 @@ export default function PlatformLandingPage() {
              <Globe className="w-8 h-8 text-slate-900" />
           </div>
           <h2 className="text-4xl lg:text-5xl font-black tracking-tight text-slate-950 mb-6">Empower Your Vision. Sell Global.</h2>
-          <p className="text-xl text-slate-500 font-medium mb-10">Join the platform redefining modern commerce.</p>
+          <p className="text-xl text-slate-500 font-normal mb-10">Join the platform redefining modern commerce.</p>
           <Link
             href="/login"
-            className="inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-white transition-all bg-slate-950 rounded-2xl hover:bg-slate-900 shadow-2xl shadow-slate-900/30 hover:scale-105"
+            className="inline-flex items-center justify-center px-10 py-5 text-lg font-medium text-white transition-all bg-slate-950 rounded-2xl hover:bg-slate-900 shadow-2xl shadow-slate-900/30 hover:scale-105"
           >
             Start Your Journey Today
           </Link>

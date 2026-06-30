@@ -53,11 +53,6 @@ export default function PlatformLandingPage() {
             
             {/* Left Content (Text) */}
             <div className="flex-1 w-full max-w-2xl lg:max-w-none">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-medium tracking-wide uppercase mb-8 border border-slate-200/50">
-                <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span>
-                Cosmuv OS 2.0 is live
-              </div>
-              
               <h1 className="text-[3.5rem] lg:text-[5rem] font-black tracking-[-0.03em] text-slate-950 leading-[1.05] mb-8">
                 The Next Generation of <br className="hidden lg:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-950 via-slate-700 to-slate-950">

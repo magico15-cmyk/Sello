@@ -9,11 +9,9 @@ export default function PlatformLandingPage() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link href="/" className="text-2xl font-black tracking-tighter text-slate-950 flex items-center gap-2">
-              <div className="w-8 h-8 bg-slate-950 text-white rounded-lg flex items-center justify-center text-sm font-bold shadow-md">
-                C
-              </div>
-              Cosmuv.
+            <Link href="/" className="flex items-center">
+              {/* Replace /cosmuv-logo.png with the actual path once you add it to the public folder */}
+              <img src="/cosmuv-logo.png" alt="Cosmuv" className="h-8 w-auto" />
             </Link>
 
             {/* Center Links */}

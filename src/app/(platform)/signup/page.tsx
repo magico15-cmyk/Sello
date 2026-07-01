@@ -159,23 +159,20 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen bg-[#f8f9fa] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 selection:bg-slate-900 selection:text-white">
       <div className="mx-auto w-full max-w-[480px]">
-        {/* Brand Header */}
-        <div className="text-center mb-10">
-          <Link href="/" className="inline-block">
-            <h1 className="text-4xl font-black tracking-tight text-white mb-2">
-              Cosmuv<span className="text-cyan-400">.</span>
-            </h1>
-          </Link>
-          <p className="text-slate-400 text-lg">
-            {step === 1 ? "Create your account" : "Configure your store"}
-          </p>
-        </div>
-
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
-          <div className="p-8 sm:p-10">
+        <div className="bg-white py-10 px-6 sm:px-10 shadow-sm border border-gray-100 rounded-2xl">
+          {/* Brand Header Inside Card */}
+          <div className="mb-8">
+            <img src="/cosmuv-logo.png" alt="Cosmuv" className="h-10 w-auto mb-6 object-contain" />
+            <h2 className="text-[22px] font-semibold text-gray-900">
+              {step === 1 ? "Create your account" : "Configure your store"}
+            </h2>
+            <p className="mt-1.5 text-[13px] text-gray-500 font-medium">
+              Join the Cosmuv platform
+            </p>
+          </div>
             
             {/* Progress Indicator */}
             <div className="flex items-center justify-center space-x-4 mb-8">
@@ -344,11 +341,10 @@ export default function SignupPage() {
               </form>
             )}
             
-          </div>
-          <div className="bg-slate-50 p-6 text-center border-t border-slate-100">
-            <p className="text-slate-600 text-[14px]">
+          <div className="mt-6 text-center">
+            <p className="text-[14px] text-gray-500 font-medium">
               Already have an account?{" "}
-              <Link href="/login" className="font-semibold text-slate-900 hover:text-cyan-600 transition-colors">
+              <Link href="/login" className="font-semibold text-gray-900 hover:text-cyan-600 transition-colors">
                 Log in
               </Link>
             </p>

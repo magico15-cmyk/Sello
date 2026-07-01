@@ -91,6 +91,13 @@ export default function SignupPage() {
       setError("Please fill in all fields.");
       return;
     }
+
+    const normalizedEmail = email.toLowerCase().trim();
+    if (!normalizedEmail.endsWith("@gmail.com") && !normalizedEmail.endsWith("@googlemail.com")) {
+      setError("We currently only accept Google email addresses (@gmail.com).");
+      return;
+    }
+
     if (password.length < 6) {
       setError("Password must be at least 6 characters.");
       return;

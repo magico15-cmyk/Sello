@@ -180,7 +180,11 @@ export default function SignupPage() {
       window.location.href = redirectUrl;
     } catch (err: any) {
       console.error(err);
-      setError(err.message || "An error occurred during signup.");
+      let msg = err.message || "An error occurred during signup.";
+      if (msg.toLowerCase().includes("rate limit") || msg.toLowerCase().includes("over_email_send_rate_limit")) {
+        msg = "Supabase email rate limit exceeded! Please try using a different test email (or add +1 to your gmail, e.g. name+1@gmail.com) or temporarily turn off 'Confirm email' in your Supabase Auth dashboard.";
+      }
+      setError(msg);
       setIsLoading(false);
     }
   };

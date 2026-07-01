@@ -9,8 +9,8 @@ export default function PlatformLandingPage() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link href="/" className="text-3xl font-bold tracking-tight text-slate-950">
-              Cosmuv.
+            <Link href="/" className="flex items-center">
+              <img src="/cosmuv-logo.svg" alt="Cosmuv" className="h-8 w-auto" />
             </Link>
 
             {/* Center Links */}

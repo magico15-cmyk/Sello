@@ -53,7 +53,7 @@ export default function PlatformLandingPage() {
             
             {/* Left Content (Text) */}
             <div className="flex-1 min-w-0 w-full max-w-2xl lg:max-w-none">
-              <h1 className="text-[2.5rem] sm:text-[3rem] lg:text-[3.5rem] xl:text-[4rem] 2xl:text-[4.5rem] font-normal tracking-tight text-slate-900 leading-[1.1] mb-8 break-words">
+              <h1 className="text-[2rem] sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.25rem] 2xl:text-[3.5rem] font-normal tracking-tight text-slate-900 leading-[1.1] mb-8 break-words">
                 The Next Generation of <br className="hidden lg:block" />
                 E-Commerce Customization.
               </h1>

@@ -225,7 +225,7 @@ export default function PlatformLandingPage() {
 
       {/* FAQ Section */}
       <section className="py-24 bg-[#0a0a0a]">
-        <div className="max-w-4xl mx-auto px-6 lg:px-12">
+        <div className="max-w-6xl mx-auto px-6 lg:px-12">
           
           <div className="flex flex-col">
             {/* FAQ 1 */}

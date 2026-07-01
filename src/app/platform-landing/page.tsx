@@ -271,7 +271,7 @@ export default function PlatformLandingPage() {
               <div className="px-8 flex-1 flex flex-col">
                 <h3 className="text-xl font-semibold text-slate-900 mb-1">Basic</h3>
                 <p className="text-slate-500 text-sm mb-6">Perfect for testing the waters</p>
-                <div className="mb-8 flex items-baseline gap-1">
+                <div className="mb-8 flex items-center gap-1">
                   <span className="text-slate-500 text-lg font-medium">$</span>
                   <span className="text-[3.5rem] font-bold text-slate-800 tracking-tight leading-none">15</span>
                   <span className="text-slate-500 text-sm font-medium ml-1">per month</span>
@@ -295,7 +295,7 @@ export default function PlatformLandingPage() {
               <div className="px-8 flex-1 flex flex-col">
                 <h3 className="text-xl font-semibold text-slate-900 mb-1">Grow</h3>
                 <p className="text-slate-500 text-sm mb-6">For serious COD merchants</p>
-                <div className="mb-8 flex items-baseline gap-1">
+                <div className="mb-8 flex items-center gap-1">
                   <span className="text-slate-500 text-lg font-medium">$</span>
                   <span className="text-[3.5rem] font-bold text-slate-800 tracking-tight leading-none">25</span>
                   <span className="text-slate-500 text-sm font-medium ml-1">per month</span>
@@ -319,7 +319,7 @@ export default function PlatformLandingPage() {
               <div className="px-8 flex-1 flex flex-col">
                 <h3 className="text-xl font-semibold text-slate-900 mb-1">Advanced</h3>
                 <p className="text-slate-500 text-sm mb-6">For scaling operations</p>
-                <div className="mb-8 flex items-baseline gap-1">
+                <div className="mb-8 flex items-center gap-1">
                   <span className="text-slate-500 text-lg font-medium">$</span>
                   <span className="text-[3.5rem] font-bold text-slate-800 tracking-tight leading-none">39</span>
                   <span className="text-slate-500 text-sm font-medium ml-1">per month</span>

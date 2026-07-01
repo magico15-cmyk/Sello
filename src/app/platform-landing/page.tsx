@@ -265,70 +265,70 @@ export default function PlatformLandingPage() {
             <p className="text-slate-500 text-lg font-normal">Choose the plan that fits your business.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-slate-200 rounded-2xl overflow-hidden">
             {/* Basic Plan */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-200 flex flex-col">
-              <h3 className="text-xl font-semibold text-slate-900 mb-1">Basic</h3>
-              <p className="text-slate-400 text-sm mb-6">Perfect for testing the waters</p>
+            <div className="p-8 md:border-r border-b md:border-b-0 border-slate-200 flex flex-col">
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Basic</h3>
               <div className="mb-8">
-                <span className="text-4xl font-bold text-slate-900">$15</span>
-                <span className="text-slate-400 text-base font-normal">/month</span>
+                <span className="text-slate-400 text-sm align-top">$ </span>
+                <span className="text-5xl font-bold text-slate-900">15</span>
+                <span className="text-slate-400 text-sm font-normal ml-1">per month</span>
               </div>
-              <ul className="space-y-4 mb-8 flex-1">
-                {["1 Store", "50 Products", "Basic Customization", "COD Support", "Community Support", "Standard Analytics"].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-slate-900 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                    <span className="text-slate-600 text-[15px]">{item}</span>
+              <p className="text-sm font-semibold text-slate-900 mb-4">What&apos;s included</p>
+              <ul className="space-y-3 mb-8 flex-1">
+                {["Up to 1 Store", "50 Products", "1 user"].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5">
+                    <svg className="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                    <span className="text-slate-600 text-[14px]">{item}</span>
                   </li>
                 ))}
               </ul>
-              <Link href="/login" className="w-full py-3 px-4 border border-slate-200 text-slate-900 font-medium rounded-xl text-center hover:bg-slate-50 transition-colors text-sm">
-                Choose Plan
+              <Link href="/login" className="w-full py-3 px-4 bg-slate-100 text-slate-900 font-medium rounded-lg text-center hover:bg-slate-200 transition-colors text-sm">
+                Choose plan
               </Link>
             </div>
 
-            {/* Grow Plan (Most Popular) */}
-            <div className="bg-white rounded-2xl p-8 border-2 border-slate-900 flex flex-col relative">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-5 py-1.5 rounded-full text-xs font-bold tracking-wider">
-                Most Popular
-              </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-1">Grow</h3>
-              <p className="text-slate-400 text-sm mb-6">For serious COD merchants</p>
+            {/* Grow Plan */}
+            <div className="p-8 md:border-r border-b md:border-b-0 border-slate-200 flex flex-col">
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Grow</h3>
               <div className="mb-8">
-                <span className="text-4xl font-bold text-slate-900">$25</span>
-                <span className="text-slate-400 text-base font-normal">/month</span>
+                <span className="text-slate-400 text-sm align-top">$ </span>
+                <span className="text-5xl font-bold text-slate-900">25</span>
+                <span className="text-slate-400 text-sm font-normal ml-1">per month</span>
               </div>
-              <ul className="space-y-4 mb-8 flex-1">
-                {["5 Stores", "Unlimited Products", "Full Creative Freedom", "Advanced Analytics", "Priority Support", "Custom Domain"].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-slate-900 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                    <span className="text-slate-600 text-[15px]">{item}</span>
+              <p className="text-sm font-semibold text-slate-900 mb-4">What&apos;s included</p>
+              <ul className="space-y-3 mb-8 flex-1">
+                {["Up to 5 Stores", "Unlimited Products", "3 users"].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5">
+                    <svg className="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                    <span className="text-slate-600 text-[14px]">{item}</span>
                   </li>
                 ))}
               </ul>
-              <Link href="/login" className="w-full py-3 px-4 bg-slate-950 text-white font-medium rounded-xl text-center hover:bg-slate-800 transition-colors text-sm">
-                Choose Plan
+              <Link href="/login" className="w-full py-3 px-4 bg-slate-100 text-slate-900 font-medium rounded-lg text-center hover:bg-slate-200 transition-colors text-sm">
+                Choose plan
               </Link>
             </div>
 
             {/* Advanced Plan */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-200 flex flex-col">
-              <h3 className="text-xl font-semibold text-slate-900 mb-1">Advanced</h3>
-              <p className="text-slate-400 text-sm mb-6">For scaling operations</p>
+            <div className="p-8 flex flex-col">
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Advanced</h3>
               <div className="mb-8">
-                <span className="text-4xl font-bold text-slate-900">$39</span>
-                <span className="text-slate-400 text-base font-normal">/month</span>
+                <span className="text-slate-400 text-sm align-top">$ </span>
+                <span className="text-5xl font-bold text-slate-900">39</span>
+                <span className="text-slate-400 text-sm font-normal ml-1">per month</span>
               </div>
-              <ul className="space-y-4 mb-8 flex-1">
-                {["Unlimited Stores", "Unlimited Everything", "White Label", "Delivery Fleet Tools", "API Access", "SLA Guarantee"].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-slate-900 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                    <span className="text-slate-600 text-[15px]">{item}</span>
+              <p className="text-sm font-semibold text-slate-900 mb-4">What&apos;s included</p>
+              <ul className="space-y-3 mb-8 flex-1">
+                {["Unlimited Stores", "Unlimited Products", "19 users"].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5">
+                    <svg className="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                    <span className="text-slate-600 text-[14px]">{item}</span>
                   </li>
                 ))}
               </ul>
-              <Link href="/login" className="w-full py-3 px-4 border border-slate-200 text-slate-900 font-medium rounded-xl text-center hover:bg-slate-50 transition-colors text-sm">
-                Choose Plan
+              <Link href="/login" className="w-full py-3 px-4 bg-slate-100 text-slate-900 font-medium rounded-lg text-center hover:bg-slate-200 transition-colors text-sm">
+                Choose plan
               </Link>
             </div>
           </div>

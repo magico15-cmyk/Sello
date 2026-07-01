@@ -276,6 +276,8 @@ export default function PlatformLandingPage() {
                   <span className="text-[3.5rem] font-bold text-slate-800 tracking-tight leading-none">15</span>
                   <span className="text-slate-500 text-sm font-medium ml-1">per month</span>
                 </div>
+                <div className="h-px bg-slate-200 w-full mb-6"></div>
+                <p className="text-slate-900 font-medium text-[15px] mb-4">What's included</p>
                 <ul className="space-y-4 mb-8 flex-1">
                   {["1 Store", "50 Products", "Basic Customization", "COD Support", "Community Support", "Standard Analytics"].map((item) => (
                     <li key={item} className="flex items-center gap-3">
@@ -300,6 +302,8 @@ export default function PlatformLandingPage() {
                   <span className="text-[3.5rem] font-bold text-slate-800 tracking-tight leading-none">25</span>
                   <span className="text-slate-500 text-sm font-medium ml-1">per month</span>
                 </div>
+                <div className="h-px bg-slate-200 w-full mb-6"></div>
+                <p className="text-slate-900 font-medium text-[15px] mb-4">What's included</p>
                 <ul className="space-y-4 mb-8 flex-1">
                   {["2 Stores", "Unlimited Products", "Full Creative Freedom", "Advanced Analytics", "Priority Support", "Custom Domain"].map((item) => (
                     <li key={item} className="flex items-center gap-3">
@@ -324,6 +328,8 @@ export default function PlatformLandingPage() {
                   <span className="text-[3.5rem] font-bold text-slate-800 tracking-tight leading-none">39</span>
                   <span className="text-slate-500 text-sm font-medium ml-1">per month</span>
                 </div>
+                <div className="h-px bg-slate-200 w-full mb-6"></div>
+                <p className="text-slate-900 font-medium text-[15px] mb-4">What's included</p>
                 <ul className="space-y-4 mb-8 flex-1">
                   {["3 stores", "Unlimited Everything", "White Label", "Delivery Fleet Tools", "API Access", "SLA Guarantee"].map((item) => (
                     <li key={item} className="flex items-center gap-3">

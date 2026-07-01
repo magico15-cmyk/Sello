@@ -291,9 +291,6 @@ export default function PlatformLandingPage() {
 
             {/* Grow Plan (Most Popular) */}
             <div className="bg-slate-950 rounded-2xl border border-cyan-500/30 flex flex-col relative pt-8 h-full">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-5 py-1.5 rounded-full text-xs font-bold tracking-wider">
-                Most Popular
-              </div>
               <div className="px-8 flex-1 flex flex-col">
                 <h3 className="text-xl font-semibold text-white mb-1">Grow</h3>
                 <p className="text-slate-400 text-sm mb-6">For serious COD merchants</p>

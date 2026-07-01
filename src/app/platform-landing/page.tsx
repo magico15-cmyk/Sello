@@ -44,7 +44,7 @@ export default function PlatformLandingPage() {
       </nav>
 
       {/* Asymmetric Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+      <section className="relative pt-28 pb-16 lg:pt-32 lg:pb-20 overflow-hidden">
         {/* Subtle Background Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-br from-slate-100 to-transparent rounded-[100%] blur-3xl opacity-50 -z-10" />
 

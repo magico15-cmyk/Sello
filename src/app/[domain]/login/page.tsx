@@ -20,16 +20,48 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
-    if (error) {
-      setError(error.message);
+    if (authError) {
+      setError(authError.message);
       setLoading(false);
-    } else {
-      window.location.href = "/admin";
+      return;
+    }
+
+    if (authData?.user) {
+      // Fetch the merchant's store
+      const { data: store, error: storeError } = await supabase
+        .from('stores')
+        .select('subdomain, status')
+        .eq('user_id', authData.user.id)
+        .single();
+
+      if (storeError || !store) {
+        setError("No store found for this account.");
+        setLoading(false);
+        return;
+      }
+
+      const isDev = process.env.NODE_ENV === 'development';
+      const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'cosmuv.com';
+
+      if (store.status === 'pending') {
+        const holdingUrl = isDev 
+          ? `http://localhost:3000/holding-page`
+          : `https://${rootDomain}/holding-page`;
+        window.location.href = holdingUrl;
+        return;
+      }
+
+      // If approved or other status, go to their admin dashboard
+      const dashboardUrl = isDev 
+        ? `http://${store.subdomain}.localhost:3000/admin`
+        : `https://${store.subdomain}.${rootDomain}/admin`;
+      
+      window.location.href = dashboardUrl;
     }
   };
 

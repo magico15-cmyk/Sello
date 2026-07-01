@@ -271,9 +271,10 @@ export default function PlatformLandingPage() {
               <div className="px-8 flex-1 flex flex-col">
                 <h3 className="text-xl font-semibold text-slate-900 mb-1">Basic</h3>
                 <p className="text-slate-500 text-sm mb-6">Perfect for testing the waters</p>
-                <div className="mb-8">
-                  <span className="text-4xl font-bold text-slate-900">$15</span>
-                  <span className="text-slate-500 text-base font-normal">/month</span>
+                <div className="mb-8 flex items-baseline gap-1">
+                  <span className="text-slate-500 text-lg font-medium">$</span>
+                  <span className="text-[3.5rem] font-bold text-slate-800 tracking-tight leading-none">15</span>
+                  <span className="text-slate-500 text-sm font-medium ml-1">per month</span>
                 </div>
                 <ul className="space-y-4 mb-8 flex-1">
                   {["1 Store", "50 Products", "Basic Customization", "COD Support", "Community Support", "Standard Analytics"].map((item) => (
@@ -294,9 +295,10 @@ export default function PlatformLandingPage() {
               <div className="px-8 flex-1 flex flex-col">
                 <h3 className="text-xl font-semibold text-slate-900 mb-1">Grow</h3>
                 <p className="text-slate-500 text-sm mb-6">For serious COD merchants</p>
-                <div className="mb-8">
-                  <span className="text-4xl font-bold text-slate-900">$25</span>
-                  <span className="text-slate-500 text-base font-normal">/month</span>
+                <div className="mb-8 flex items-baseline gap-1">
+                  <span className="text-slate-500 text-lg font-medium">$</span>
+                  <span className="text-[3.5rem] font-bold text-slate-800 tracking-tight leading-none">25</span>
+                  <span className="text-slate-500 text-sm font-medium ml-1">per month</span>
                 </div>
                 <ul className="space-y-4 mb-8 flex-1">
                   {["5 Stores", "Unlimited Products", "Full Creative Freedom", "Advanced Analytics", "Priority Support", "Custom Domain"].map((item) => (
@@ -317,9 +319,10 @@ export default function PlatformLandingPage() {
               <div className="px-8 flex-1 flex flex-col">
                 <h3 className="text-xl font-semibold text-slate-900 mb-1">Advanced</h3>
                 <p className="text-slate-500 text-sm mb-6">For scaling operations</p>
-                <div className="mb-8">
-                  <span className="text-4xl font-bold text-slate-900">$39</span>
-                  <span className="text-slate-500 text-base font-normal">/month</span>
+                <div className="mb-8 flex items-baseline gap-1">
+                  <span className="text-slate-500 text-lg font-medium">$</span>
+                  <span className="text-[3.5rem] font-bold text-slate-800 tracking-tight leading-none">39</span>
+                  <span className="text-slate-500 text-sm font-medium ml-1">per month</span>
                 </div>
                 <ul className="space-y-4 mb-8 flex-1">
                   {["Unlimited Stores", "Unlimited Everything", "White Label", "Delivery Fleet Tools", "API Access", "SLA Guarantee"].map((item) => (

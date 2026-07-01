@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Wand2, LineChart, Truck, Globe, Zap, LayoutTemplate, Headphones, Blocks, Wrench, Users, Plus, Banknote } from "lucide-react";
+import { ArrowRight, Wand2, LineChart, Truck, Globe, Zap, LayoutTemplate, Headphones, Blocks, Wrench, Users, Plus, Banknote, CreditCard, Sliders, TrendingUp, Search, Target, ShoppingCart } from "lucide-react";
 
 export default function PlatformLandingPage() {
   return (
@@ -172,46 +172,64 @@ export default function PlatformLandingPage() {
         </div>
       </section>
 
-      {/* General Features Section */}
+      {/* High-Converting Features Section */}
       <section className="py-24 bg-white border-t border-slate-100">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <h2 className="text-3xl lg:text-[2.5rem] font-normal text-slate-900 mb-16 tracking-tight">Everything you need to scale</h2>
+          <h2 className="text-3xl lg:text-[2.5rem] font-normal text-center text-slate-900 mb-16 tracking-tight">Everything you need to scale</h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
             {/* Item 1 */}
-            <div className="flex flex-col">
-              <Banknote className="w-8 h-8 text-slate-800 mb-6" strokeWidth={1.5} />
-              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Cash on Delivery</h3>
+            <div className="flex flex-col items-center text-center p-8 bg-white border border-slate-200/60 hover:border-slate-300 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+              <CreditCard className="w-8 h-8 text-[#0a0a0a] mb-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Frictionless Checkout</h3>
               <p className="text-slate-500 font-normal leading-relaxed text-[15px]">
-                Offer flexible payment options with full support for seamless Cash on Delivery (COD) orders.
+                Enable customers to purchase seamlessly, reducing steps and boosting your overall conversion rates.
               </p>
             </div>
 
             {/* Item 2 */}
-            <div className="flex flex-col">
-              <Zap className="w-8 h-8 text-slate-800 mb-6" strokeWidth={1.5} />
-              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Lightning Fast</h3>
+            <div className="flex flex-col items-center text-center p-8 bg-white border border-slate-200/60 hover:border-slate-300 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+              <Sliders className="w-8 h-8 text-[#0a0a0a] mb-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Tailored Experience</h3>
               <p className="text-slate-500 font-normal leading-relaxed text-[15px]">
-                Optimized infrastructure ensures your storefront loads instantly for every customer.
+                Customize every input field to gather only what's necessary, streamlining the path to purchase.
               </p>
             </div>
 
             {/* Item 3 */}
-            <div className="flex flex-col">
-              <LineChart className="w-8 h-8 text-slate-800 mb-6" strokeWidth={1.5} />
-              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Advanced Analytics</h3>
+            <div className="flex flex-col items-center text-center p-8 bg-white border border-slate-200/60 hover:border-slate-300 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+              <TrendingUp className="w-8 h-8 text-[#0a0a0a] mb-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Instant Upsells</h3>
               <p className="text-slate-500 font-normal leading-relaxed text-[15px]">
-                Track sales, monitor traffic, and understand your audience with real-time data.
+                Maximize average order value by presenting irresistible add-on offers immediately after checkout.
               </p>
             </div>
 
             {/* Item 4 */}
-            <div className="flex flex-col">
-              <LayoutTemplate className="w-8 h-8 text-slate-800 mb-6" strokeWidth={1.5} />
-              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Customizable Themes</h3>
+            <div className="flex flex-col items-center text-center p-8 bg-white border border-slate-200/60 hover:border-slate-300 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+              <Search className="w-8 h-8 text-[#0a0a0a] mb-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">SEO Optimization</h3>
               <p className="text-slate-500 font-normal leading-relaxed text-[15px]">
-                Easily adapt your brand's look and feel with flexible, easy-to-edit storefront designs.
+                Climb the search rankings and drive consistent, free organic traffic with built-in tools.
+              </p>
+            </div>
+
+            {/* Item 5 */}
+            <div className="flex flex-col items-center text-center p-8 bg-white border border-slate-200/60 hover:border-slate-300 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+              <Target className="w-8 h-8 text-[#0a0a0a] mb-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Seamless Tracking</h3>
+              <p className="text-slate-500 font-normal leading-relaxed text-[15px]">
+                Connect your favorite ad platforms instantly to track campaigns and generate quality leads.
+              </p>
+            </div>
+
+            {/* Item 6 */}
+            <div className="flex flex-col items-center text-center p-8 bg-white border border-slate-200/60 hover:border-slate-300 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+              <ShoppingCart className="w-8 h-8 text-[#0a0a0a] mb-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Cart Recovery</h3>
+              <p className="text-slate-500 font-normal leading-relaxed text-[15px]">
+                Automatically re-engage shoppers who left items behind with targeted, high-converting sequences.
               </p>
             </div>
 

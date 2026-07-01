@@ -43,7 +43,7 @@ export default function PlatformLandingPage() {
       </nav>
 
       {/* Asymmetric Hero Section */}
-      <section className="relative pt-28 pb-16 lg:pt-32 lg:pb-20 overflow-hidden">
+      <section className="relative pt-24 pb-12 lg:pt-28 lg:pb-16 overflow-hidden">
         {/* Subtle Background Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-br from-slate-100 to-transparent rounded-[100%] blur-3xl opacity-50 -z-10" />
 
@@ -182,7 +182,7 @@ export default function PlatformLandingPage() {
       </section>
 
       {/* High-Converting Features Section */}
-      <section id="features" className="py-24 bg-white border-t border-slate-100">
+      <section id="features" className="py-16 bg-white border-t border-slate-100">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <h2 className="text-3xl lg:text-[2.5rem] font-normal text-slate-900 mb-16 tracking-tight">Everything you need to scale</h2>
           
@@ -267,7 +267,7 @@ export default function PlatformLandingPage() {
 
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 bg-white border-t border-slate-100">
+      <section id="pricing" className="py-16 bg-white border-t border-slate-100">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-[2.5rem] font-normal text-slate-900 mb-4 tracking-tight">Pricing</h2>
@@ -357,7 +357,7 @@ export default function PlatformLandingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 bg-[#0a0a0a]">
+      <section className="py-16 bg-[#0a0a0a]">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           
           <div className="flex flex-col">
@@ -425,7 +425,7 @@ export default function PlatformLandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-white border-t border-slate-100">
+      <section className="py-16 bg-white border-t border-slate-100">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
           <h2 className="text-3xl lg:text-[2.5rem] font-normal text-slate-900 mb-6 tracking-tight">
             Ready to build your unique brand?

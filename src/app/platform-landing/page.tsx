@@ -97,7 +97,7 @@ export default function PlatformLandingPage() {
 
             {/* Right Content (Abstract Dashboard Mockup) */}
             <div className="flex-1 min-w-0 w-full max-w-2xl lg:max-w-none relative perspective-[2000px] mt-12 lg:mt-0 mx-auto">
-              <div className="relative w-full aspect-[4/3] transform-gpu rotate-y-[-10deg] rotate-x-[5deg] scale-100 lg:scale-105 hover:rotate-y-0 hover:rotate-x-0 transition-transform duration-700 ease-out">
+              <div className="relative w-[90%] mx-auto aspect-[4/3] transform-gpu rotate-y-[-10deg] rotate-x-[5deg] scale-95 hover:rotate-y-0 hover:rotate-x-0 transition-transform duration-700 ease-out">
                 
                 {/* Main Abstract Panel */}
                 <div className="absolute inset-0 bg-white rounded-3xl border border-slate-100 shadow-[0_20px_50px_-12px_rgba(15,23,42,0.1)] overflow-hidden flex flex-col">

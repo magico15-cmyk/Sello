@@ -299,7 +299,7 @@ export default function PlatformLandingPage() {
                 <span className="text-slate-400 text-base font-normal">/month</span>
               </div>
               <ul className="space-y-4 mb-8 flex-1">
-                {["5 Stores", "Unlimited Products", "Full Creative Freedom", "AI Fraud Detection", "Advanced Analytics", "Priority Support", "Sales Funnels", "Custom Domain"].map((item) => (
+                {["5 Stores", "Unlimited Products", "Full Creative Freedom", "Advanced Analytics", "Priority Support", "Custom Domain"].map((item) => (
                   <li key={item} className="flex items-center gap-3">
                     <svg className="w-4 h-4 text-slate-900 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                     <span className="text-slate-600 text-[15px]">{item}</span>
@@ -320,7 +320,7 @@ export default function PlatformLandingPage() {
                 <span className="text-slate-400 text-base font-normal">/month</span>
               </div>
               <ul className="space-y-4 mb-8 flex-1">
-                {["Unlimited Stores", "Unlimited Everything", "White Label", "Delivery Fleet Tools", "API Access", "Dedicated Account Manager", "Custom Integrations", "SLA Guarantee"].map((item) => (
+                {["Unlimited Stores", "Unlimited Everything", "White Label", "Delivery Fleet Tools", "API Access", "SLA Guarantee"].map((item) => (
                   <li key={item} className="flex items-center gap-3">
                     <svg className="w-4 h-4 text-slate-900 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                     <span className="text-slate-600 text-[15px]">{item}</span>

@@ -10,7 +10,7 @@ export default function PlatformLandingPage() {
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <img src="/cosmuv-logo.svg" alt="Cosmuv" className="h-8 w-auto" />
+              <img src="/cosmuv-logo.png" alt="Cosmuv" className="h-8 w-auto object-contain" />
             </Link>
 
             {/* Center Links */}

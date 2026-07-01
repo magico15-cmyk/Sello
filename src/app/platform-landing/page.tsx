@@ -217,10 +217,10 @@ export default function PlatformLandingPage() {
 
             {/* Item 5 */}
             <div className="flex flex-col">
-              <CreditCard className="w-8 h-8 text-slate-800 mb-6" strokeWidth={1.5} />
-              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Frictionless Checkout</h3>
+              <Globe className="w-8 h-8 text-slate-800 mb-6" strokeWidth={1.5} />
+              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Omnichannel Selling</h3>
               <p className="text-slate-500 font-normal leading-relaxed text-[15px]">
-                Enable customers to purchase seamlessly, reducing steps and boosting overall conversion rates.
+                Connect and sell your products seamlessly across all major social media platforms and marketplaces.
               </p>
             </div>
 

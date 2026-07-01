@@ -325,6 +325,58 @@ export default function PlatformLandingPage() {
         </div>
       </section>
 
+      {/* Footer */}
+      <footer className="bg-[#0a0a0a] border-t border-white/10 pt-20 pb-12">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
+            <div className="col-span-2 lg:col-span-2">
+              <span className="text-2xl font-bold text-white tracking-tight mb-4 block">Sello.</span>
+              <p className="text-slate-400 font-normal leading-relaxed text-[15px] max-w-sm">
+                The next generation of e-commerce customization. Build, scale, and manage your online store with ease.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-white font-medium mb-6">Product</h4>
+              <ul className="space-y-4 text-[15px] text-slate-400">
+                <li><Link href="#" className="hover:text-white transition-colors">Features</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">Pricing</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">Integrations</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">Changelog</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-medium mb-6">Resources</h4>
+              <ul className="space-y-4 text-[15px] text-slate-400">
+                <li><Link href="#" className="hover:text-white transition-colors">Help Center</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">Community</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">Blog</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">Developers</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-medium mb-6">Company</h4>
+              <ul className="space-y-4 text-[15px] text-slate-400">
+                <li><Link href="#" className="hover:text-white transition-colors">About Us</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">Careers</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">Contact</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">Partners</Link></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-slate-500 text-[14px]">
+            <p>© {new Date().getFullYear()} Sello. All rights reserved.</p>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+              <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+
     </div>
   );
 }

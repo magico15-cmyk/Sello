@@ -1,6 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@/lib/supabase/client';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Re-export a singleton instance using our globalThis SSR client factory
+// to ensure no duplicate GoTrueClient instances are ever created across the app.
+export const supabase = createClient();

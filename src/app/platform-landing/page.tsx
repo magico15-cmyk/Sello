@@ -267,68 +267,74 @@ export default function PlatformLandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             {/* Basic Plan */}
-            <div className="bg-slate-950 rounded-2xl p-8 border border-white/5 flex flex-col">
-              <h3 className="text-xl font-semibold text-white mb-1">Basic</h3>
-              <p className="text-slate-400 text-sm mb-6">Perfect for testing the waters</p>
-              <div className="mb-8">
-                <span className="text-4xl font-bold text-white">$15</span>
-                <span className="text-slate-400 text-base font-normal">/month</span>
+            <div className="bg-slate-950 rounded-2xl border border-white/5 flex flex-col pt-8 h-full">
+              <div className="px-8 flex-1 flex flex-col">
+                <h3 className="text-xl font-semibold text-white mb-1">Basic</h3>
+                <p className="text-slate-400 text-sm mb-6">Perfect for testing the waters</p>
+                <div className="mb-8">
+                  <span className="text-4xl font-bold text-white">$15</span>
+                  <span className="text-slate-400 text-base font-normal">/month</span>
+                </div>
+                <ul className="space-y-4 mb-8 flex-1">
+                  {["1 Store", "50 Products", "Basic Customization", "COD Support", "Community Support", "Standard Analytics"].map((item) => (
+                    <li key={item} className="flex items-center gap-3">
+                      <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+                      <span className="text-slate-300 text-[15px]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="space-y-4 mb-8 flex-1">
-                {["1 Store", "50 Products", "Basic Customization", "COD Support", "Community Support", "Standard Analytics"].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
-                    <span className="text-slate-300 text-[15px]">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/login" className="w-full py-3 px-4 border border-white/20 text-white font-medium rounded-xl text-center hover:bg-white/5 transition-colors text-sm">
-                Get Started Free →
+              <Link href="/login" className="w-full py-4 px-4 bg-white/5 hover:bg-white/10 transition-colors text-white font-medium text-center text-sm border-t border-white/5 rounded-b-2xl mt-auto">
+                Choose plan
               </Link>
             </div>
 
             {/* Grow Plan (Most Popular) */}
-            <div className="bg-slate-950 rounded-2xl p-8 border border-cyan-500/30 flex flex-col relative">
+            <div className="bg-slate-950 rounded-2xl border border-cyan-500/30 flex flex-col relative pt-8 h-full">
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-5 py-1.5 rounded-full text-xs font-bold tracking-wider">
                 Most Popular
               </div>
-              <h3 className="text-xl font-semibold text-white mb-1">Grow</h3>
-              <p className="text-slate-400 text-sm mb-6">For serious COD merchants</p>
-              <div className="mb-8">
-                <span className="text-4xl font-bold text-white">$25</span>
-                <span className="text-slate-400 text-base font-normal">/month</span>
+              <div className="px-8 flex-1 flex flex-col">
+                <h3 className="text-xl font-semibold text-white mb-1">Grow</h3>
+                <p className="text-slate-400 text-sm mb-6">For serious COD merchants</p>
+                <div className="mb-8">
+                  <span className="text-4xl font-bold text-white">$25</span>
+                  <span className="text-slate-400 text-base font-normal">/month</span>
+                </div>
+                <ul className="space-y-4 mb-8 flex-1">
+                  {["5 Stores", "Unlimited Products", "Full Creative Freedom", "Advanced Analytics", "Priority Support", "Custom Domain"].map((item) => (
+                    <li key={item} className="flex items-center gap-3">
+                      <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+                      <span className="text-slate-300 text-[15px]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="space-y-4 mb-8 flex-1">
-                {["5 Stores", "Unlimited Products", "Full Creative Freedom", "Advanced Analytics", "Priority Support", "Custom Domain"].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
-                    <span className="text-slate-300 text-[15px]">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/login" className="w-full py-3 px-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-medium rounded-xl text-center hover:from-cyan-400 hover:to-blue-400 transition-all text-sm shadow-lg shadow-cyan-500/20">
-                Start Pro Trial →
+              <Link href="/login" className="w-full py-4 px-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 transition-all text-white font-medium text-center text-sm rounded-b-2xl mt-auto shadow-[0_-10px_20px_rgba(6,182,212,0.1)]">
+                Choose plan
               </Link>
             </div>
 
             {/* Advanced Plan */}
-            <div className="bg-slate-950 rounded-2xl p-8 border border-white/5 flex flex-col">
-              <h3 className="text-xl font-semibold text-white mb-1">Advanced</h3>
-              <p className="text-slate-400 text-sm mb-6">For scaling operations</p>
-              <div className="mb-8">
-                <span className="text-4xl font-bold text-white">$39</span>
-                <span className="text-slate-400 text-base font-normal">/month</span>
+            <div className="bg-slate-950 rounded-2xl border border-white/5 flex flex-col pt-8 h-full">
+              <div className="px-8 flex-1 flex flex-col">
+                <h3 className="text-xl font-semibold text-white mb-1">Advanced</h3>
+                <p className="text-slate-400 text-sm mb-6">For scaling operations</p>
+                <div className="mb-8">
+                  <span className="text-4xl font-bold text-white">$39</span>
+                  <span className="text-slate-400 text-base font-normal">/month</span>
+                </div>
+                <ul className="space-y-4 mb-8 flex-1">
+                  {["Unlimited Stores", "Unlimited Everything", "White Label", "Delivery Fleet Tools", "API Access", "SLA Guarantee"].map((item) => (
+                    <li key={item} className="flex items-center gap-3">
+                      <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+                      <span className="text-slate-300 text-[15px]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="space-y-4 mb-8 flex-1">
-                {["Unlimited Stores", "Unlimited Everything", "White Label", "Delivery Fleet Tools", "API Access", "SLA Guarantee"].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
-                    <span className="text-slate-300 text-[15px]">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/login" className="w-full py-3 px-4 border border-white/20 text-white font-medium rounded-xl text-center hover:bg-white/5 transition-colors text-sm">
-                Contact Sales →
+              <Link href="/login" className="w-full py-4 px-4 bg-white/5 hover:bg-white/10 transition-colors text-white font-medium text-center text-sm border-t border-white/5 rounded-b-2xl mt-auto">
+                Choose plan
               </Link>
             </div>
           </div>

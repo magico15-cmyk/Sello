@@ -45,7 +45,7 @@ export default function PlatformLandingPage() {
                 Log In
               </Link>
               <Link
-                href="/login"
+                href="/signup"
                 className="group relative inline-flex items-center justify-center px-6 py-2.5 text-sm font-normal text-white transition-all bg-slate-950 rounded-full hover:bg-slate-800 shadow-[0_0_0_4px_rgba(15,23,42,0.05)] hover:shadow-[0_0_0_4px_rgba(15,23,42,0.1)]"
               >
                 Get Started
@@ -76,7 +76,7 @@ export default function PlatformLandingPage() {
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="/login"
+                  href="/signup"
                   className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white transition-all bg-slate-950 rounded-2xl hover:bg-slate-900 shadow-xl shadow-slate-900/20 hover:-translate-y-0.5"
                 >
                   Create Your Unique Store

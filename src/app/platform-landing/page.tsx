@@ -267,7 +267,7 @@ export default function PlatformLandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             {/* Basic Plan */}
-            <div className="bg-[#111827] rounded-2xl p-8 border border-white/5 flex flex-col">
+            <div className="bg-slate-950 rounded-2xl p-8 border border-white/5 flex flex-col">
               <h3 className="text-xl font-semibold text-white mb-1">Basic</h3>
               <p className="text-slate-400 text-sm mb-6">Perfect for testing the waters</p>
               <div className="mb-8">
@@ -288,7 +288,7 @@ export default function PlatformLandingPage() {
             </div>
 
             {/* Grow Plan (Most Popular) */}
-            <div className="bg-[#111827] rounded-2xl p-8 border border-cyan-500/30 flex flex-col relative">
+            <div className="bg-slate-950 rounded-2xl p-8 border border-cyan-500/30 flex flex-col relative">
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-5 py-1.5 rounded-full text-xs font-bold tracking-wider">
                 Most Popular
               </div>
@@ -312,7 +312,7 @@ export default function PlatformLandingPage() {
             </div>
 
             {/* Advanced Plan */}
-            <div className="bg-[#111827] rounded-2xl p-8 border border-white/5 flex flex-col">
+            <div className="bg-slate-950 rounded-2xl p-8 border border-white/5 flex flex-col">
               <h3 className="text-xl font-semibold text-white mb-1">Advanced</h3>
               <p className="text-slate-400 text-sm mb-6">For scaling operations</p>
               <div className="mb-8">

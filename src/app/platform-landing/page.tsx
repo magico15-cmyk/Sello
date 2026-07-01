@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Wand2, LineChart, Truck, Globe, Zap, LayoutTemplate, Headphones, Blocks, Wrench, Users, Plus } from "lucide-react";
+import { ArrowRight, Wand2, LineChart, Truck, Globe, Zap, LayoutTemplate, Headphones, Blocks, Wrench, Users, Plus, Banknote } from "lucide-react";
 
 export default function PlatformLandingPage() {
   return (
@@ -181,10 +181,10 @@ export default function PlatformLandingPage() {
             
             {/* Item 1 */}
             <div className="flex flex-col">
-              <Globe className="w-8 h-8 text-slate-800 mb-6" strokeWidth={1.5} />
-              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Global Payments</h3>
+              <Banknote className="w-8 h-8 text-slate-800 mb-6" strokeWidth={1.5} />
+              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">Cash on Delivery</h3>
               <p className="text-slate-500 font-normal leading-relaxed text-[15px]">
-                Accept secure payments worldwide with seamless multi-currency checkout options.
+                Offer flexible payment options with full support for seamless Cash on Delivery (COD) orders.
               </p>
             </div>
 

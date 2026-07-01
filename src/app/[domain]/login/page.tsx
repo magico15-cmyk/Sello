@@ -42,9 +42,8 @@ export default function LoginPage() {
       const store = stores?.[0];
 
       if (storeError || !store) {
-        console.error("Store lookup warning:", storeError);
-        // Fallback: If query failed or returned empty (e.g. RLS latency or multiple test rows),
-        // we still proceed to /admin since authentication succeeded!
+        // Fallback: If query returned empty (e.g. RLS latency or multiple test rows),
+        // we still proceed directly to /admin since authentication succeeded!
         window.location.href = '/admin';
         return;
       }

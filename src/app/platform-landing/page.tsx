@@ -235,10 +235,10 @@ export default function PlatformLandingPage() {
 
             {/* Item 7 */}
             <div className="flex flex-col">
-              <Search className="w-8 h-8 text-slate-800 mb-6" strokeWidth={1.5} />
-              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">SEO Optimization</h3>
+              <Headphones className="w-8 h-8 text-slate-800 mb-6" strokeWidth={1.5} />
+              <h3 className="text-xl font-medium text-slate-900 mb-3 tracking-tight">24/7 support</h3>
               <p className="text-slate-500 font-normal leading-relaxed text-[15px]">
-                Climb the search rankings and drive consistent, free organic traffic with built-in tools.
+                Our support staff and virtual help assistant are here to help.
               </p>
             </div>
 

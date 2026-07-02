@@ -102,6 +102,15 @@ export default function HomepageClient({ store }: { store: any }) {
       : (typeof store?.homepage_layout_order === 'string' ? JSON.parse(store.homepage_layout_order || '["ticker", "features", "products"]') : defaultLayout)
   );
 
+  useEffect(() => {
+    if (store) {
+      const dbImages = Array.isArray(store.slider_images) 
+        ? store.slider_images 
+        : (typeof store.slider_images === 'string' ? JSON.parse(store.slider_images || '[]') : []);
+      setImages(dbImages);
+    }
+  }, [store?.slider_images]);
+
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })

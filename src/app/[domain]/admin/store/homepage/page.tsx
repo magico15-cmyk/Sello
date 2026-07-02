@@ -1,6 +1,9 @@
 import { getTenantFromHost } from "@/lib/tenant";
 import HomepageClient from "./HomepageClient";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function HomepageSettingsPage(props: {
   params: Promise<{ domain: string }>;
 }) {

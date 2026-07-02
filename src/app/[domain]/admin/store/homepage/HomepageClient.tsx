@@ -185,7 +185,12 @@ export default function HomepageClient({ store }: { store: any }) {
       const data = await res.json();
       if (!data.success) throw new Error(data.error || 'Upload failed');
       
-      setImages(prev => [...prev, data.url]);
+      const newImages = [...images, data.url];
+      setImages(newImages);
+      if (store?.id) {
+        await supabase.from('stores').update({ slider_images: newImages }).eq('id', store.id);
+        router.refresh();
+      }
     } catch (error: any) {
       showToast('Error uploading image: ' + error.message, 'error');
     } finally {
@@ -197,9 +202,10 @@ export default function HomepageClient({ store }: { store: any }) {
 
   const removeImage = async (indexToRemove: number) => {
     const urlToRemove = images[indexToRemove];
+    const newImages = images.filter((_, idx) => idx !== indexToRemove);
     
     // Optimistically update UI
-    setImages(prev => prev.filter((_, idx) => idx !== indexToRemove));
+    setImages(newImages);
 
     // Delete from storage if it's an R2 URL
     if (urlToRemove && urlToRemove.includes('.r2.dev/')) {
@@ -212,6 +218,12 @@ export default function HomepageClient({ store }: { store: any }) {
       } catch (e) {
         console.error('Failed to delete image', e);
       }
+    }
+
+    // Immediately save updated array to database
+    if (store?.id) {
+      await supabase.from('stores').update({ slider_images: newImages }).eq('id', store.id);
+      router.refresh();
     }
   };
 

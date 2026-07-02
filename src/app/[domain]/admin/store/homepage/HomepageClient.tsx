@@ -391,22 +391,29 @@ export default function HomepageClient({ store }: { store: any }) {
                     <p className="text-xs text-gray-500">Upload brand/partner logo images (PNG, JPG). They will scroll across the banner.</p>
                     
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                      {tickerItems.map((url, index) => (
-                        <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 bg-gray-50 flex items-center justify-center p-3 h-20">
-                          <img src={url} alt={`Logo ${index + 1}`} className="max-h-full max-w-full object-contain" />
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const newItems = [...tickerItems];
-                              newItems.splice(index, 1);
-                              setTickerItems(newItems);
-                            }}
-                            className="absolute top-1.5 right-1.5 p-1 bg-white/90 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 hover:text-red-600"
-                          >
-                            <TrashIcon className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      ))}
+                      {tickerItems.map((url, index) => {
+                        const isImage = url.startsWith('http://') || url.startsWith('https://') || url.startsWith('/') || url.startsWith('data:image/') || url.startsWith('blob:');
+                        return (
+                          <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 bg-gray-50 flex items-center justify-center p-3 h-20 text-center">
+                            {isImage ? (
+                              <img src={url} alt={`Logo ${index + 1}`} className="max-h-full max-w-full object-contain" />
+                            ) : (
+                              <span className="text-xs font-semibold text-gray-700 line-clamp-2 px-1">{url}</span>
+                            )}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const newItems = [...tickerItems];
+                                newItems.splice(index, 1);
+                                setTickerItems(newItems);
+                              }}
+                              className="absolute top-1.5 right-1.5 p-1 bg-white/90 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 hover:text-red-600"
+                            >
+                              <TrashIcon className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        );
+                      })}
                       
                       <label className="relative rounded-xl border-2 border-dashed border-gray-300 hover:border-gray-400 bg-gray-50 hover:bg-gray-100 transition-colors flex flex-col items-center justify-center cursor-pointer h-20">
                         <input

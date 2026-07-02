@@ -223,24 +223,17 @@ export function StoreClient({ store, initialProducts = [] }: { store: any; initi
                 <div className="scroll-track items-center" style={{ gap: '80px', paddingRight: '80px', animationDuration: '20s' }}>
                   {[...Array(8)].map((_, repeatIdx) => (
                     <div key={repeatIdx} className="flex items-center" style={{ gap: '80px' }}>
-                      {tickerLogos.map((url: string, logoIdx: number) => {
-                        const isImage = url.startsWith('http://') || url.startsWith('https://') || url.startsWith('/') || url.startsWith('data:image/') || url.startsWith('blob:');
-                        return isImage ? (
-                          <div key={logoIdx} className="relative h-8 w-[150px]">
-                            <Image 
-                              src={url} 
-                              alt={`Brand ${logoIdx + 1}`} 
-                              fill
-                              sizes="150px"
-                              className="object-contain"
-                            />
-                          </div>
-                        ) : (
-                          <span key={logoIdx} className="text-white font-bold tracking-wider uppercase text-sm px-4 drop-shadow-sm">
-                            ★ {url}
-                          </span>
-                        );
-                      })}
+                      {tickerLogos.map((url: string, logoIdx: number) => (
+                        <div key={logoIdx} className="relative h-8 w-[150px]">
+                          <Image 
+                            src={url} 
+                            alt={`Brand ${logoIdx + 1}`} 
+                            fill
+                            sizes="150px"
+                            className="object-contain"
+                          />
+                        </div>
+                      ))}
                     </div>
                   ))}
                 </div>

@@ -154,47 +154,24 @@ export default function SignupPage() {
         throw new Error("This email is already registered. Please log in instead.");
       }
 
-      // 2. Execute Database Insert into stores table
+      // 2. Execute Database Insert into stores table via template cloning generator endpoint
       const exactStoreName = storeName.trim();
       const exactSubdomain = subdomain.trim().toLowerCase();
 
-      let insertSuccess = false;
-
-      // Attempt direct client-side insert first
-      const { error: storeError } = await supabase
-        .from('stores')
-        .insert({
-          store_name: exactStoreName,
+      const res = await fetch('/api/store/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: authData.user.id,
           subdomain: exactSubdomain,
-          user_id: authData.user.id,
+          storeName: exactStoreName,
           status: 'approved',
-        });
+        }),
+      });
 
-      if (!storeError) {
-        insertSuccess = true;
-      } else {
-        // Fallback: If RLS blocks client insert or email is unconfirmed, use server endpoint
-        const res = await fetch('/api/store/create', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userId: authData.user.id,
-            subdomain: exactSubdomain,
-            storeName: exactStoreName,
-            status: 'approved',
-          }),
-        });
-
-        const resData = await res.json();
-        if (res.ok) {
-          insertSuccess = true;
-        } else {
-          throw new Error(resData.error || storeError.message || "Failed to create store entry.");
-        }
-      }
-
-      if (!insertSuccess) {
-        throw new Error("Failed to insert store into database.");
+      const resData = await res.json();
+      if (!res.ok || !resData.success) {
+        throw new Error(resData.error || "Failed to create store entry.");
       }
 
       // 3. Check if Supabase requires email verification (no active session returned)

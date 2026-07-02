@@ -207,10 +207,6 @@ export default function SignupPage() {
       // 4. Clean Route Navigation directly to their new admin path
       const isLocalHost = window.location.hostname.includes('localhost') || window.location.hostname === '127.0.0.1';
       const isVercelApp = window.location.hostname.endsWith('.vercel.app');
-      const rawRoot = (process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'cosmuv.com')
-        .replace(/^https?:\/\//, '')
-        .replace(/\/$/, '')
-        .trim();
       const isMainLandingDomain = window.location.hostname === rawRoot || window.location.hostname === `www.${rawRoot}`;
 
       let redirectUrl = `https://${exactSubdomain}.${rawRoot}/admin`;
